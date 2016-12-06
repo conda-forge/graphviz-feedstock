@@ -20,7 +20,7 @@ source:
     - gvconfig_libdir.patch  # [unix]
 
 build:
-  number: 1
+  number: 2
   detect_binary_files_with_prefix: True  # [unix]
 
 requirements:
