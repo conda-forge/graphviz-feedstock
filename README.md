@@ -14,6 +14,18 @@ is a way of representing structural information as diagrams of abstract
 graphs and networks.
 
 
+Current build status
+====================
+
+Linux: [![Circle CI](https://circleci.com/gh/conda-forge/graphviz-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/graphviz-feedstock)
+OSX: [![TravisCI](https://travis-ci.org/conda-forge/graphviz-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/graphviz-feedstock)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/graphviz-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/graphviz-feedstock/branch/master)
+
+Current release info
+====================
+Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/version.svg)](https://anaconda.org/conda-forge/graphviz)
+Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/downloads.svg)](https://anaconda.org/conda-forge/graphviz)
+
 Installing graphviz
 ===================
 
@@ -34,7 +46,6 @@ It is possible to list all of the versions of `graphviz` available on your platf
 ```
 conda search graphviz --channel conda-forge
 ```
-
 
 
 About conda-forge
@@ -70,18 +81,6 @@ Terminology
 
 **conda-forge** - the place where the feedstock and smithy live and work to
                   produce the finished article (built conda distributions)
-
-Current build status
-====================
-
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/graphviz-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/graphviz-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/graphviz-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/graphviz-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/graphviz-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/graphviz-feedstock/branch/master)
-
-Current release info
-====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/version.svg)](https://anaconda.org/conda-forge/graphviz)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/downloads.svg)](https://anaconda.org/conda-forge/graphviz)
 
 
 Updating graphviz-feedstock
