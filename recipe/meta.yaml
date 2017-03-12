@@ -20,17 +20,17 @@ source:
     - gvconfig_libdir.patch  # [unix]
 
 build:
-  number: 3
+  number: 4
   detect_binary_files_with_prefix: True  # [unix]
 
 requirements:
   build:
     - cairo  # [linux]
     - expat  # [linux]
-    - libpng >=1.6.21,<1.7  # [unix]
+    - libpng >=1.6.28,<1.7  # [unix]
     - libtiff 4.0.*  # [unix]
     - libtool  # [linux]
-    - freetype 2.6.*  # [unix]
+    - freetype 2.7|2.7.*  # [unix]
     - jpeg 9*  # [unix]
     - pango  # [linux]
     - pkg-config  # [osx]
@@ -38,10 +38,10 @@ requirements:
   run:
     - cairo  # [linux]
     - expat  # [linux]
-    - libpng >=1.6.21,<1.7  # [unix]
+    - libpng >=1.6.28,<1.7  # [unix]
     - libtiff 4.0.*  # [unix]
     - libtool  # [linux]
-    - freetype 2.6.*  # [unix]
+    - freetype 2.7|2.7.*  # [unix]
     - jpeg 9*  # [unix]
     - pango  # [linux]
     - zlib 1.2.*  # [unix]
@@ -69,3 +69,4 @@ extra:
   recipe-maintainers:
     - jakirkham
     - ccordoba12
+    - ocefpaf
