@@ -57,6 +57,7 @@ about:
   home: http://www.graphviz.org/
   license: EPL v1.0
   license_family: Other
+  license_file: COPYING
   summary: Open Source graph visualization software.
   description: |
     Graphviz is an open source graph visualization software. Graph visualization
