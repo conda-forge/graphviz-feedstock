@@ -30,3 +30,7 @@ for /r "%LIBRARY_BIN%\graphviz" %%f in (*.exe) do (
     echo %%~dp0.\graphviz\%%~nf.exe %%* >> %%~nf.bat
     if errorlevel 1 exit 1
 )
+
+:: Place license somewhere conda-build can find it easily
+copy %LIBRARY_PREFIX%\share\doc\graphviz\doc\COPYING %SRC_DIR%
+if errorlevel 1 exit 1
