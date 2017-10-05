@@ -20,31 +20,31 @@ source:
     - gvconfig_libdir.patch  # [unix]
 
 build:
-  number: 4
+  number: 5
   detect_binary_files_with_prefix: True  # [unix]
 
 requirements:
   build:
-    - cairo  # [linux]
-    - expat  # [linux]
-    - libpng >=1.6.28,<1.7  # [unix]
-    - libtiff 4.0.*  # [unix]
-    - libtool  # [linux]
-    - freetype 2.7|2.7.*  # [unix]
-    - jpeg 9*  # [unix]
-    - pango  # [linux]
-    - pkg-config  # [osx]
-    - zlib 1.2.*  # [unix]
+    - cairo 1.14.*             # [linux]
+    - expat                    # [linux]
+    - libpng >=1.6.22,<1.6.31  # [unix]
+    - libtiff >=4.0.3,<4.0.8   # [unix]
+    - libtool                  # [linux]
+    - freetype 2.7             # [unix]
+    - jpeg 9*                  # [unix]
+    - pango 1.40.*             # [linux]
+    - pkg-config               # [osx]
+    - zlib 1.2.8               # [unix]
   run:
-    - cairo  # [linux]
-    - expat  # [linux]
-    - libpng >=1.6.28,<1.7  # [unix]
-    - libtiff 4.0.*  # [unix]
-    - libtool  # [linux]
-    - freetype 2.7|2.7.*  # [unix]
-    - jpeg 9*  # [unix]
-    - pango  # [linux]
-    - zlib 1.2.*  # [unix]
+    - cairo 1.14.*             # [linux]
+    - expat                    # [linux]
+    - libpng >=1.6.22,<1.6.31  # [unix]
+    - libtiff >=4.0.3,<4.0.8   # [unix]
+    - libtool                  # [linux]
+    - freetype 2.7             # [unix]
+    - jpeg 9*                  # [unix]
+    - pango 1.40.*             # [linux]
+    - zlib 1.2.8               # [unix]
 
 test:
   commands:
@@ -57,6 +57,7 @@ about:
   home: http://www.graphviz.org/
   license: EPL v1.0
   license_family: Other
+  license_file: COPYING
   summary: Open Source graph visualization software.
   description: |
     Graphviz is an open source graph visualization software. Graph visualization
