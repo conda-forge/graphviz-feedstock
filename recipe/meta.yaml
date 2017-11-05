@@ -20,7 +20,7 @@ source:
     - gvconfig_libdir.patch  # [unix]
 
 build:
-  number: 5
+  number: 6
   detect_binary_files_with_prefix: True  # [unix]
 
 requirements:
@@ -34,7 +34,7 @@ requirements:
     - jpeg 9*                  # [unix]
     - pango 1.40.*             # [linux]
     - pkg-config               # [osx]
-    - zlib 1.2.8               # [unix]
+    - zlib 1.2.11               # [unix]
   run:
     - cairo 1.14.*             # [linux]
     - expat                    # [linux]
@@ -44,12 +44,14 @@ requirements:
     - freetype 2.7             # [unix]
     - jpeg 9*                  # [unix]
     - pango 1.40.*             # [linux]
-    - zlib 1.2.8               # [unix]
+    - zlib 1.2.11               # [unix]
 
 test:
   commands:
     - dot -V
     - neato -?  # [unix]
+    - conda inspect linkages $PKG_NAME  # [not win]
+    - conda inspect objects $PKG_NAME  # [osx]
   files:
     - sample.dot
 
