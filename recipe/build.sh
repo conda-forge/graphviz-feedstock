@@ -1,32 +1,39 @@
-#!/bin/bash
+set -e
+env | sort
 
+./configure --help || true
 if [ `uname` == Darwin ]; then
-    ./configure --prefix=$PREFIX \
-                --with-quartz \
-                --disable-debug \
-                --disable-java \
-                --disable-php \
-                --disable-perl \
-                --disable-tcl \
-                --without-x \
-                --without-qt \
-                --without-gtk
+    autoreconf -vfi
+    ./configure \
+        --with-quartz \
+        --disable-silent-rules \
+        --disable-dependency-tracking \
+        --prefix=$PREFIX \
+        --disable-debug \
+        --disable-java \
+        --disable-php \
+        --disable-perl \
+        --disable-tcl \
+        --without-x \
+        --without-qt \
+        --without-gtk
 else
-    ./configure --prefix=$PREFIX \
-                --disable-debug \
-                --disable-java \
-                --disable-php \
-                --disable-perl \
-                --disable-tcl \
-                --without-x \
-                --without-qt \
-                --without-gtk
+    ./configure \
+        --disable-silent-rules \
+        --disable-dependency-tracking \
+        --prefix=$PREFIX \
+        --disable-debug \
+        --disable-java \
+        --disable-php \
+        --disable-perl \
+        --disable-tcl \
+        --without-x \
+        --without-qt \
+        --without-gtk
 fi
 
-make
-# This is failing for rtest.
-# Doesn't do anything for the rest
-# make check
+make -j${CPU_COUNT}
 make install
 
+# configure plugins
 dot -c

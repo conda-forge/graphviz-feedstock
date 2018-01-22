@@ -1,0 +1,13 @@
+diff --git a/plugin/quartz/Makefile.am b/plugin/quartz/Makefile.am
+index a1dd12265..0acbc4626 100644
+--- a/plugin/quartz/Makefile.am
++++ b/plugin/quartz/Makefile.am
+@@ -37,7 +37,5 @@ if WITH_WIN32
+ libgvplugin_quartz_la_LDFLAGS += -no-undefined
+ endif
+
+-if WITH_DARWIN9
+ libgvplugin_quartz_la_LDFLAGS += -Wl,-exported_symbol,_gvplugin_quartz_LTX_library
+-AM_LIBTOOLSFLAGS = --tag=CC
+-endif
++AM_LIBTOOLFLAGS = --tag=CC
