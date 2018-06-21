@@ -45,6 +45,9 @@ requirements:
     - jpeg 9*                  # [unix]
     - pango 1.40.*             # [linux]
     - zlib 1.2.11               # [unix]
+    # needed to solve issue #18
+    - xorg-libxrender
+    - xorg-libxpm
 
 test:
   commands:
