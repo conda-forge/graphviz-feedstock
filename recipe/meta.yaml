@@ -34,6 +34,9 @@ requirements:
     - jpeg                     # [unix]
     - pango                    # [linux]
     - zlib                     # [unix]
+    - libxcb                   # [unix]
+    - xorg-libxrender          # [unix]
+    - xorg-libxpm              # [unix]
   run:
     - cairo                    # [linux]
     - expat                    # [linux]
@@ -44,9 +47,9 @@ requirements:
     - jpeg                     # [unix]
     - pango                    # [linux]
     - zlib                     # [unix]
-    # needed to solve issue #18
-    - xorg-libxrender
-    - xorg-libxpm
+    - libxcb                   # [unix]
+    - xorg-libxrender          # [unix]
+    - xorg-libxpm              # [unix]
 
 test:
   commands:
