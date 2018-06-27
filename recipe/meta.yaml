@@ -22,7 +22,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}    # [linux]
+    - {{ compiler('cxx') }}    # [not osx]
     - pkg-config               # [osx]
   host:
     - cairo                    # [linux]
