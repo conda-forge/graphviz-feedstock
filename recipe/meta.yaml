@@ -5,10 +5,10 @@ package:
   version: {{ version }}
 
 source:
-  url: http://pkgs.fedoraproject.org/repo/pkgs/graphviz/graphviz-2.38.0.tar.gz/5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-2.38.0.tar.gz  # [unix]
+  url: http://pkgs.fedoraproject.org/repo/pkgs/graphviz/graphviz-{{ version }}.tar.gz/5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-{{ version }}.tar.gz  # [unix]
   md5: 5b6a829b2ac94efcd5fa3c223ed6d3ae  # [unix]
 
-  url: https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.zip  # [win]
+  url: https://graphviz.gitlab.io/_pages/Download/windows/graphviz-{{ version[:-2] }}.zip  # [win]
   md5: d028f49e047e2a25fdb7c0aa323a3945  # [win]
 
   patches:
@@ -58,7 +58,6 @@ test:
     - neato -?  # [unix]
     - conda inspect linkages $PKG_NAME  # [not win]
     - conda inspect objects $PKG_NAME  # [osx]
-    - dot -Tsvg sample.dot
   files:
     - sample.dot
 
@@ -80,3 +79,4 @@ extra:
     - jakirkham
     - ccordoba12
     - ocefpaf
+    - johanneskoester
