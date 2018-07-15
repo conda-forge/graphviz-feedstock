@@ -1,6 +1,8 @@
 #!/bin/bash
 
 if [ `uname` == Darwin ]; then
+    export OBJC="${CC}"
+
     ./configure --prefix=$PREFIX \
                 --with-quartz \
                 --disable-debug \

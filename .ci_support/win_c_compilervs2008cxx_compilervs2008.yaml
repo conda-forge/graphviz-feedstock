@@ -1,0 +1,40 @@
+c_compiler:
+- vs2008
+cairo:
+- '1.14'
+cxx_compiler:
+- vs2008
+expat:
+- '2.2'
+freetype:
+- 2.8.1
+jpeg:
+- '9'
+libpng:
+- 1.6.34
+libtiff:
+- 4.0.9
+pango:
+- '1.40'
+pin_run_as_build:
+  cairo:
+    max_pin: x.x
+  expat:
+    max_pin: x.x
+  freetype:
+    max_pin: x.x
+  jpeg:
+    max_pin: x
+  libpng:
+    max_pin: x.x
+  libtiff:
+    max_pin: x
+  pango:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+zip_keys:
+- - c_compiler
+  - cxx_compiler
+zlib:
+- '1.2'

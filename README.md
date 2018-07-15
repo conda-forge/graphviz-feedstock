@@ -17,14 +17,16 @@ graphs and networks.
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/graphviz-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/graphviz-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/graphviz-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/graphviz-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/graphviz-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/graphviz-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/graphviz-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/graphviz-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/graphviz-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/graphviz-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/graphviz-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/graphviz-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/version.svg)](https://anaconda.org/conda-forge/graphviz)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/graphviz/badges/downloads.svg)](https://anaconda.org/conda-forge/graphviz)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-graphviz-green.svg)](https://anaconda.org/conda-forge/graphviz) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/graphviz.svg)](https://anaconda.org/conda-forge/graphviz) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/graphviz.svg)](https://anaconda.org/conda-forge/graphviz) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/graphviz.svg)](https://anaconda.org/conda-forge/graphviz) |
 
 Installing graphviz
 ===================
