@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# remove libtool files
+find $PREFIX -name '*.la' -delete
+
 if [ `uname` == Darwin ]; then
     export OBJC="${CC}"
 
