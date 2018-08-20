@@ -2,14 +2,14 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 c_compiler:
 - toolchain_c
-cairo:
-- '1.14'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
 cxx_compiler:
 - toolchain_cxx
-expat:
-- '2.2'
 freetype:
-- 2.8.1
+- 2.9.1
 jpeg:
 - '9'
 libpng:
@@ -20,23 +20,15 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
 - '10.9'
-pango:
-- '1.40'
 pin_run_as_build:
-  cairo:
-    max_pin: x.x
-  expat:
-    max_pin: x.x
   freetype:
-    max_pin: x.x
+    max_pin: x
   jpeg:
     max_pin: x
   libpng:
     max_pin: x.x
   libtiff:
     max_pin: x
-  pango:
-    max_pin: x.x
   zlib:
     max_pin: x.x
 zlib:
