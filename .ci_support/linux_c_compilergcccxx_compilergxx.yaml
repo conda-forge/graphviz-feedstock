@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 docker_image:
-- conda/c3i-linux-64
+- condaforge/linux-anvil-comp7
 expat:
 - '2.2'
 freetype:
@@ -19,7 +19,7 @@ freetype:
 jpeg:
 - '9'
 libpng:
-- 1.6.34
+- 1.6.35
 libtiff:
 - 4.0.9
 pango:
