@@ -17,7 +17,7 @@ source:
     - gvconfig_libdir.patch  # [unix]
 
 build:
-  number: 1010
+  number: 1011
   detect_binary_files_with_prefix: True  # [unix]
 
 requirements:
