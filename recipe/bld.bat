@@ -1,6 +1,6 @@
 :: Move needed library files
 mkdir %LIBRARY_LIB%\graphviz
-xcopy /S %SRC_DIR%\lib\release\dll  %LIBRARY_LIB%\graphviz
+xcopy /S %SRC_DIR%\lib\release\lib  %LIBRARY_LIB%\graphviz
 mkdir %LIBRARY_INC%\graphviz
 xcopy /S %SRC_DIR%\include\graphviz  %LIBRARY_INC%\graphviz
 if errorlevel 1 exit 1
