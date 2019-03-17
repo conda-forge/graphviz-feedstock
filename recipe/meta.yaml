@@ -1,24 +1,17 @@
-{% set version = "2.38.0" %}
+{% set version = "2.40.1" %}
 
 package:
   name: graphviz
   version: {{ version }}
 
 source:
-  url: http://pkgs.fedoraproject.org/repo/pkgs/graphviz/graphviz-{{ version }}.tar.gz/5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-{{ version }}.tar.gz  # [unix]
-  md5: 5b6a829b2ac94efcd5fa3c223ed6d3ae  # [unix]
-
-  url: https://graphviz.gitlab.io/_pages/Download/windows/graphviz-{{ version[:-2] }}.zip  # [win]
-  md5: d028f49e047e2a25fdb7c0aa323a3945  # [win]
-
-  patches:
-    # This patch was submitted upstream:
-    # http://www.graphviz.org/mantisbt/view.php?id=2448
-    - gvconfig_libdir.patch  # [unix]
+  url : https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz  # [unix]
+  md5: 4ea6fd64603536406166600bcc296fc8  # [unix]
 
 build:
-  number: 1011
+  number: 0
   detect_binary_files_with_prefix: True  # [unix]
+  skip: True  # [win]
 
 requirements:
   build:
