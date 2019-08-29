@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '7'
+- '8'
 cairo:
 - '1.16'
 channel_sources:
@@ -11,9 +11,9 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '7'
+- '8'
 docker_image:
-- condaforge/linux-anvil-comp7
+- condaforge/linux-anvil-ppc64le
 expat:
 - '2.2'
 freetype:
