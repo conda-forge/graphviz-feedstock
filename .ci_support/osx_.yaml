@@ -17,9 +17,9 @@ freetype:
 jpeg:
 - '9'
 libpng:
-- 1.6.35
+- '1.6'
 libtiff:
-- 4.0.9
+- 4.0.10
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:

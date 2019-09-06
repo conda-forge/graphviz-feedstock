@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - pkg-config               # [osx]
+    - make                     # [unix]
   host:
     - cairo                    # [linux]
     - expat                    # [linux]
@@ -56,7 +57,7 @@ test:
 
 about:
   home: http://www.graphviz.org/
-  license: EPL v1.0
+  license: EPL-1.0
   license_family: Other
   license_file: COPYING
   summary: Open Source graph visualization software.
