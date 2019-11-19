@@ -3,7 +3,7 @@ About graphviz
 
 Home: http://www.graphviz.org/
 
-Package license: EPL v1.0
+Package license: EPL-1.0
 
 Feedstock license: BSD 3-Clause
 
@@ -23,6 +23,13 @@ Current build status
     <td>
       <a href="https://travis-ci.org/conda-forge/graphviz-feedstock">
         <img alt="macOS" src="https://img.shields.io/travis/conda-forge/graphviz-feedstock/master.svg?label=macOS">
+      </a>
+    </td>
+  </tr><tr>
+    <td>Drone</td>
+    <td>
+      <a href="https://cloud.drone.io/conda-forge/graphviz-feedstock">
+        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/master.svg?label=Linux">
       </a>
     </td>
   </tr>
