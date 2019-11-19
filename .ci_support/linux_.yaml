@@ -23,7 +23,7 @@ jpeg:
 libpng:
 - '1.6'
 libtiff:
-- 4.0.10
+- 4.1.0
 pango:
 - '1.42'
 pin_run_as_build:
