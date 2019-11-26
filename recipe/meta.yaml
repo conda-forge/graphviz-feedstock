@@ -1,15 +1,15 @@
-{% set version = "2.40.1" %}
+{% set version = "2.42.3" %}
 
 package:
   name: graphviz
   version: {{ version }}
 
 source:
-  url : https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz  # [unix]
-  md5: 4ea6fd64603536406166600bcc296fc8  # [unix]
+  url : https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{version}}.tar.gz  # [unix]
+  md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
-  number: 2
+  number: 0
   detect_binary_files_with_prefix: True  # [unix]
   skip: True  # [win]
 
@@ -65,8 +65,8 @@ about:
     Graphviz is an open source graph visualization software. Graph visualization
     is a way of representing structural information as diagrams of abstract
     graphs and networks.
-  doc_url: http://www.graphviz.org/Documentation.php
-  dev_url: https://github.com/ellson/graphviz
+  doc_url: https://graphviz.gitlab.io/documentation/
+  dev_url: https://gitlab.com/graphviz/graphviz/
 
 extra:
   recipe-maintainers:
