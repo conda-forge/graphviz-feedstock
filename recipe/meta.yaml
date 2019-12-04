@@ -9,7 +9,7 @@ source:
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: True  # [unix]
   skip: True  # [win]
 
@@ -42,6 +42,7 @@ requirements:
     - jpeg                     # [unix]
     - pango                    # [linux]
     - zlib                     # [unix]
+    - fonts-conda-ecosystem    # [unix]
     - libxcb                   # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
