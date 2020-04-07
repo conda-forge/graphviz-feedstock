@@ -1,17 +1,17 @@
-{% set version = "2.42.3" %}
+{% set version = "2.42.4" %}
 
 package:
   name: graphviz
   version: {{ version }}
 
 source:
-  url : https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{version}}.tar.gz  # [unix]
-  md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
+  url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{ version }}.tar.gz # [unix]
+  md5: 15f8d0ec561fa5ca437c403368b62b98  # [unix]
 
 build:
   number: 0
-  detect_binary_files_with_prefix: True  # [unix]
-  skip: True  # [win]
+  detect_binary_files_with_prefix: true  # [unix]
+  skip: true  # [win]
 
 requirements:
   build:
