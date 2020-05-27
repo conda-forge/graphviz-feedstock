@@ -7,8 +7,6 @@ package:
 source:
   url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{ version }}.tar.gz  # [unix]
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
-  patches:
-    - gd_png.patch  # [ppc64le]
 
 build:
   number: 1
@@ -26,7 +24,6 @@ requirements:
     - cairo                    # [linux]
     - expat                    # [linux]
     - libpng                   # [unix]
-    - libgd                    # [ppc64le]
     - libtiff                  # [unix]
     - libtool                  # [linux]
     - freetype                 # [unix]
@@ -37,14 +34,13 @@ requirements:
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [unix]
-    - gtk2                     # [unix]
-    - libwebp                  # [unix]
+    - gdk-pixbuf               # [not ppc64le]
+    - gtk2                     # [not ppc64le]
+    - libwebp                  # [not ppc64le]
   run:
     - cairo                    # [linux]
     - expat                    # [linux]
     - libpng                   # [unix]
-    - libgd                    # [ppc64le]
     - libtiff                  # [unix]
     - libtool                  # [linux]
     - freetype                 # [unix]
@@ -55,10 +51,10 @@ requirements:
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [unix]
-    - gtk2                     # [unix]
-    - libwebp                  # [unix]
-    - fonts-conda-ecosystem    # [unix]
+    - gdk-pixbuf               # [not ppc64le]
+    - gtk2                     # [not ppc64le]
+    - libwebp                  # [not ppc64le]
+    - fonts-conda-ecosystem    # [not ppc64le]
 
 test:
   commands:
