@@ -5,18 +5,19 @@ package:
   version: {{ version }}
 
 source:
-  url : https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{version}}.tar.gz  # [unix]
+  url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{version}}.tar.gz  # [unix]
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
-  number: 0
-  detect_binary_files_with_prefix: True  # [unix]
-  skip: True  # [win]
+  number: 1
+  detect_binary_files_with_prefix: true  # [unix]
+  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ cdt('libxau') }}      # [linux]
     - pkg-config               # [osx]
     - make                     # [unix]
   host:
@@ -32,6 +33,10 @@ requirements:
     - libxcb                   # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
+    - gts                      # [unix]
+    - gdk-pixbuf               # [unix]
+    - gtk2                     # [unix]
+    - libwebp                  # [unix]
   run:
     - cairo                    # [linux]
     - expat                    # [linux]
@@ -45,6 +50,11 @@ requirements:
     - libxcb                   # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
+    - gts                      # [unix]
+    - gdk-pixbuf               # [unix]
+    - gtk2                     # [unix]
+    - libwebp                  # [unix]
+    - fonts-conda-ecosystem    # [unix]
 
 test:
   commands:
