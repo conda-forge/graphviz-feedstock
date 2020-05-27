@@ -33,7 +33,7 @@ requirements:
     - libxcb                   # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
-    - gts                      # [unix]
+    - gts                      # [not ppc64le and not aarch64]
     - gdk-pixbuf               # [unix]
     - gtk2                     # [unix]
     - libwebp                  # [unix]
