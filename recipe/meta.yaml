@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{version}}.tar.gz  # [unix]
+  url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{ version }}.tar.gz  # [unix]
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
