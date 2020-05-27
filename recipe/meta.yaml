@@ -62,6 +62,7 @@ requirements:
 
 test:
   commands:
+    - dot -c
     - dot -V
     - neato -?  # [unix]
     - conda inspect linkages $PKG_NAME  # [not win]
