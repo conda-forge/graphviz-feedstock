@@ -1,0 +1,11 @@
+--- config.h.in	2019-10-11 03:51:16.000000000 +1000
++++ config.h.in.new	2020-05-27 17:55:53.247253811 +1000
+@@ -173,7 +173,7 @@
+ #undef HAVE_GD_OPENPOLYGON
+ 
+ /* Define if the GD library supports PNG */
+-#undef HAVE_GD_PNG
++#define HAVE_GD_PNG
+ 
+ /* Define if the GD library supports XPM */
+ #undef HAVE_GD_XPM
