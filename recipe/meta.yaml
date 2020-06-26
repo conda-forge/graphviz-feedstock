@@ -34,9 +34,9 @@ requirements:
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [not ppc64le]
-    - gtk2                     # [not ppc64le]
-    - libwebp                  # [not ppc64le]
+    - gdk-pixbuf               # [unix]
+    - gtk2                     # [unix]
+    - libwebp                  # [unix]
   run:
     - cairo                    # [linux]
     - expat                    # [linux]
@@ -51,10 +51,10 @@ requirements:
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [not ppc64le]
-    - gtk2                     # [not ppc64le]
-    - libwebp                  # [not ppc64le]
-    - fonts-conda-ecosystem    # [not ppc64le]
+    - gdk-pixbuf               # [unix]
+    - gtk2                     # [unix]
+    - libwebp                  # [unix]
+    - fonts-conda-ecosystem    # [unix]
 
 test:
   commands:
