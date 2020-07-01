@@ -24,12 +24,16 @@ expat:
 - '2.2'
 freetype:
 - 2.9.1
+gdk_pixbuf:
+- 2.36.12
 jpeg:
 - '9'
 libpng:
 - '1.6'
 libtiff:
 - 4.1.0
+libwebp:
+- '1.1'
 pango:
 - '1.42'
 pin_run_as_build:
@@ -39,6 +43,8 @@ pin_run_as_build:
     max_pin: x.x
   freetype:
     max_pin: x
+  gdk_pixbuf:
+    max_pin: x.x.x
   jpeg:
     max_pin: x
   libpng:
