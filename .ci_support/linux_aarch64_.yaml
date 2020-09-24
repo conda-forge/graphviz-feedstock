@@ -3,7 +3,7 @@ BUILD:
 c_compiler:
 - gcc
 c_compiler_version:
-- '7'
+- '7.5'
 cairo:
 - '1.16'
 cdt_arch:
@@ -17,7 +17,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '7'
+- '7.5'
 docker_image:
 - condaforge/linux-anvil-aarch64
 expat:
@@ -30,6 +30,8 @@ jpeg:
 - '9'
 libpng:
 - '1.6'
+librsvg:
+- '2'
 libtiff:
 - 4.1.0
 libwebp:
@@ -49,11 +51,15 @@ pin_run_as_build:
     max_pin: x
   libpng:
     max_pin: x.x
+  librsvg:
+    max_pin: x
   libtiff:
     max_pin: x
   pango:
     max_pin: x.x
   zlib:
     max_pin: x.x
+target_platform:
+- linux-aarch64
 zlib:
 - '1.2'
