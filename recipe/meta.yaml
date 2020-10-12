@@ -45,7 +45,7 @@ requirements:
     - libtool                  # [linux]
     - freetype                 # [unix]
     - jpeg                     # [unix]
-    - pango                    # [linux]
+    - pango                    # [unix]
     - zlib                     # [unix]
     - libxcb                   # [linux]
     - xorg-libxrender          # [linux]
