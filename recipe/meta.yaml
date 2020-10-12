@@ -9,7 +9,7 @@ source:
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
-  number: 1
+  number: 2
   detect_binary_files_with_prefix: true  # [unix]
   skip: true  # [win]
 
@@ -17,7 +17,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ cdt('libxau') }}      # [linux]
     - pkg-config               # [osx]
     - make                     # [unix]
   host:
@@ -31,6 +30,7 @@ requirements:
     - pango                    # [linux]
     - zlib                     # [unix]
     - libxcb                   # [linux]
+    - xorg-libxau              # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
@@ -45,9 +45,10 @@ requirements:
     - libtool                  # [linux]
     - freetype                 # [unix]
     - jpeg                     # [unix]
-    - pango                    # [linux]
+    - pango                    # [unix]
     - zlib                     # [unix]
     - libxcb                   # [linux]
+    - xorg-libxau              # [linux]
     - xorg-libxrender          # [linux]
     - xorg-libxpm              # [linux]
     - gts                      # [not ppc64le and not aarch64]
@@ -60,6 +61,7 @@ test:
   commands:
     - dot -c
     - dot -V
+    - fdp -V
     - neato -?  # [unix]
     - conda inspect linkages $PKG_NAME  # [not win]
     - conda inspect objects $PKG_NAME  # [osx]
