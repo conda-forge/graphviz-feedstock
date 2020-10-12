@@ -9,7 +9,7 @@ source:
   md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
 
 build:
-  number: 1
+  number: 2
   detect_binary_files_with_prefix: true  # [unix]
   skip: true  # [win]
 
