@@ -60,6 +60,7 @@ test:
   commands:
     - dot -c
     - dot -V
+    - fdp -V
     - neato -?  # [unix]
     - conda inspect linkages $PKG_NAME  # [not win]
     - conda inspect objects $PKG_NAME  # [osx]
