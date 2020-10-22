@@ -1,17 +1,23 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '9'
+- '7'
+cairo:
+- '1.16'
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '9'
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
+expat:
+- '2.2'
 freetype:
 - 2.9.1
 gdk_pixbuf:
@@ -24,11 +30,13 @@ libtiff:
 - 4.1.0
 libwebp:
 - '1.1'
-macos_machine:
-- x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
+pango:
+- '1.42'
 pin_run_as_build:
+  cairo:
+    max_pin: x.x
+  expat:
+    max_pin: x.x
   freetype:
     max_pin: x
   gdk_pixbuf:
@@ -39,7 +47,14 @@ pin_run_as_build:
     max_pin: x.x
   libtiff:
     max_pin: x
+  pango:
+    max_pin: x.x
   zlib:
     max_pin: x.x
+target_platform:
+- linux-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1.2'
