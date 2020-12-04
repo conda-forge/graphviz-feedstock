@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '9'
+- '11'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -11,11 +11,11 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '9'
+- '11'
 freetype:
-- 2.9.1
+- '2'
 gdk_pixbuf:
-- 2.36.12
+- '2'
 jpeg:
 - '9'
 libpng:
@@ -26,13 +26,9 @@ libwebp:
 - '1.1'
 macos_machine:
 - x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
 pin_run_as_build:
   freetype:
     max_pin: x
-  gdk_pixbuf:
-    max_pin: x.x.x
   jpeg:
     max_pin: x
   libpng:
@@ -41,5 +37,10 @@ pin_run_as_build:
     max_pin: x
   zlib:
     max_pin: x.x
+target_platform:
+- osx-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1.2'
