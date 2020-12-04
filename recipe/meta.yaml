@@ -1,4 +1,4 @@
-{% set version = "2.42.3" %}
+{% set version = "2.44.1" %}
 
 package:
   name: graphviz
@@ -6,7 +6,10 @@ package:
 
 source:
   url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{ version }}.tar.gz  # [unix]
-  md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
+  md5: 96792adafea5cc6879060c400da31ea3  # [unix]
+
+  url: https://www2.graphviz.org/Packages/stable/windows/10/cmake/Release/x64/graphviz-{{ version }}-win64.exe  # [win]
+  md5: ff2f81e20c1982f5f97fbf7166ecf751  # [win]
 
 build:
   number: 3
