@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - pkg-config               # [osx]
@@ -63,8 +64,6 @@ test:
     - dot -V
     - fdp -V
     - neato -?  # [unix]
-    - conda inspect linkages $PKG_NAME  # [not win]
-    - conda inspect objects $PKG_NAME  # [osx]
   files:
     - sample.dot
 
