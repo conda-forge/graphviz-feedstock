@@ -5,9 +5,13 @@ Home: http://www.graphviz.org/
 
 Package license: EPL-1.0
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/graphviz-feedstock/blob/master/LICENSE.txt)
 
 Summary: Open Source graph visualization software.
+
+Development: https://gitlab.com/graphviz/graphviz/
+
+Documentation: https://graphviz.gitlab.io/documentation/
 
 Graphviz is an open source graph visualization software. Graph visualization
 is a way of representing structural information as diagrams of abstract
