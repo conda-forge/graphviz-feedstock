@@ -1,70 +1,99 @@
-{% set version = "2.42.3" %}
+{% set version = "2.46.1" %}
 
 package:
   name: graphviz
   version: {{ version }}
 
 source:
-  url: https://www2.graphviz.org/Packages/stable/portable_source/graphviz-{{ version }}.tar.gz  # [unix]
-  md5: 9f61dc85517957793c6bb24f0611eac1  # [unix]
+  - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
+    sha256: 931ed197bc833aec8501d66194b01620dd395130c380e350a6ec1b31e4866eac
+    patches:
+      - patches/0001-Rename-vpsc-block.h-vpsc-v_block.h.patch
+      - patches/0002-Add-CMake-option-INSTALL_DEPENDENCY_DLLS-default-off.patch
+      - patches/0003-Specify-dependency-on-expat-for-lib-common.patch
+      - patches/0004-Specify-PATH_SUFFIX-for-rxspencer-include-dirs.patch
+      - patches/0005-Use-version-agnostic-python-binary.patch
+      - patches/0006-Always-link-to-getopt-on-Windows.patch
+      - patches/0007-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
+    # Prefer header only compat layer, even though m2-libtool might work
+  - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
+    sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
+    folder: ltdl_compat
 
 build:
-  number: 2
+  number: 0
   detect_binary_files_with_prefix: true  # [unix]
-  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - pkg-config               # [osx]
-    - make                     # [unix]
+    - pkg-config                                          # [unix]
+    - make                                                # [unix]
+    - bison                                               # [unix]
+    - libtool                                             # [unix]
+    - automake                                            # [unix]
+    - autoconf                                            # [unix]
+    - cmake                                               # [win]
+    - ninja                                               # [win]
+    - python >=3                                          # [win]
+    - m2-gawk                                             # [win]
+    - m2-flex                                             # [win]
+    - m2-bison                                            # [win]
+    - perl                                                # [win]
   host:
-    - cairo                    # [linux]
-    - expat                    # [linux]
-    - libpng                   # [unix]
-    - libtiff                  # [unix]
-    - libtool                  # [linux]
-    - freetype                 # [unix]
-    - jpeg                     # [unix]
-    - pango                    # [linux]
-    - zlib                     # [unix]
-    - libxcb                   # [linux]
-    - xorg-libxau              # [linux]
-    - xorg-libxrender          # [linux]
-    - xorg-libxpm              # [linux]
-    - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [unix]
-    - gtk2                     # [unix]
-    - libwebp                  # [unix]
+    # --with-pangocairo=yes
+    - cairo
+    # --with-expat=yes
+    - expat
+    # --with-freetype2
+    - freetype                                            # [unix]
+    # --with-fontconfig=yes
+    - fontconfig                                          # [unix]
+    # --with-gts=yes
+    - gts                                                 # [not ppc64le and not aarch64 and not win]
+    # --with-gdk-pixbuf=yes
+    - gdk-pixbuf                                          # [unix]
+    # pangocairo requires glib
+    - glib
+    - libglib
+    # --with-libgd=yes
+    - libgd
+    # --with-rsvg=yes
+    - librsvg                                             # [unix]
+    # --enable-ltdl
+    - libtool                                             # [unix]
+    # --with-webp=yes
+    - libwebp-base                                        # [unix]
+    # --with-pangocairo=yes
+    - pango
+    # default requirement
+    - zlib                                                # [unix]
+    # Windows only deps
+    - rxspencer                                           # [win]
+    - getopt-win32                                        # [win]
+
   run:
-    - cairo                    # [linux]
-    - expat                    # [linux]
-    - libpng                   # [unix]
-    - libtiff                  # [unix]
-    - libtool                  # [linux]
-    - freetype                 # [unix]
-    - jpeg                     # [unix]
-    - pango                    # [unix]
-    - zlib                     # [unix]
-    - libxcb                   # [linux]
-    - xorg-libxau              # [linux]
-    - xorg-libxrender          # [linux]
-    - xorg-libxpm              # [linux]
-    - gts                      # [not ppc64le and not aarch64]
-    - gdk-pixbuf               # [unix]
-    - gtk2                     # [unix]
-    - libwebp                  # [unix]
-    - fonts-conda-ecosystem    # [unix]
+    # A few satisfy needs via run_exports, rest rely on pin_run_as_build
+    # Add all of them anyway ¯\_(ツ)_/¯
+    - cairo
+    - expat                                               # [unix]
+    - gts                                                 # [unix]
+    - libgd
+    - libglib
+    - librsvg                                             # [unix]
+    - libtool                                             # [unix]
+    - libwebp-base                                        # [unix]
+    - pango
+    - zlib                                                # [unix]
+    - fonts-conda-ecosystem                               # [unix]
+    - {{ pin_compatible('rxspencer', max_pin='x.x.x') }}  # [win]
+    # Not linked in directly, likely interface deps? add 'em anyway!
+    - gdk-pixbuf                                          # [unix]
+    - fontconfig                                          # [unix]
+    - freetype                                            # [unix]
 
 test:
-  commands:
-    - dot -c
-    - dot -V
-    - fdp -V
-    - neato -?  # [unix]
-    - conda inspect linkages $PKG_NAME  # [not win]
-    - conda inspect objects $PKG_NAME  # [osx]
   files:
     - sample.dot
 

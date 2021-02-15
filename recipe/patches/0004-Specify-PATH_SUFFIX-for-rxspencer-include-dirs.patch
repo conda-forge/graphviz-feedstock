@@ -1,0 +1,22 @@
+From a04e2df79dd9859cdac20dc36205c32803154ade Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 15:19:58 -0500
+Subject: [PATCH 4/7] Specify PATH_SUFFIX for rxspencer include dirs
+
+---
+ cmake/FindRxSpencer.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/FindRxSpencer.cmake b/cmake/FindRxSpencer.cmake
+index 20f7962a1..3328e6b2a 100644
+--- a/cmake/FindRxSpencer.cmake
++++ b/cmake/FindRxSpencer.cmake
+@@ -1,4 +1,4 @@
+-find_path(RxSpencer_INCLUDE_DIR regex.h)
++find_path(RxSpencer_INCLUDE_DIR regex.h PATH_SUFFIXES rxspencer)
+ find_library(RxSpencer_LIBRARY NAMES rxspencer)
+ 
+ include(FindPackageHandleStandardArgs)
+-- 
+2.30.1
+
