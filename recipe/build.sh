@@ -50,14 +50,6 @@ make
 make install
 
 # Configure plugins
-if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
-    mv $PREFIX/bin/dot $PREFIX/bin/dot.orig
-    cat <<EOF > $PREFIX/bin/dot
-#!/bin/bash
-$PREFIX/bin/dot.orig -c || true
-$PREFIX/bin/dot.orig \$@
-EOF
-    chmod +x $PREFIX/bin/dot
-else
+if [ $CONDA_BUILD_CROSS_COMPILATION != 1 ]; then
     $PREFIX/bin/dot -c
 fi
