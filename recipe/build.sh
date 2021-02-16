@@ -38,6 +38,11 @@ fi
             --with-gdk-pixbuf=yes \
             "${_xtra_config_flags[@]}"
 
+if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
+    sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' $SRC_DIR/lib/gvpr/Makefile.am
+    sed -i.bak '/dot$(EXEEXT) -c/d' $SRC_DIR/cmd/dot/Makefile.am
+fi
+
 make
 # This is failing for rtest.
 # Doesn't do anything for the rest
@@ -45,4 +50,14 @@ make
 make install
 
 # Configure plugins
-$PREFIX/bin/dot -c
+if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
+    mv $PREFIX/bin/dot $PREFIX/bin/dot.orig
+    cat <<EOF > $PREFIX/bin/dot
+#!/bin/bash
+$PREFIX/bin/dot.orig -c || true
+$PREFIX/bin/dot.orig \$@
+EOF
+    chmod +x $PREFIX/bin/dot
+else
+    $PREFIX/bin/dot -c
+fi
