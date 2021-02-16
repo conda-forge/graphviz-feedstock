@@ -5,6 +5,7 @@ dot -c
 dot -V
 echo | dot -v
 fdp -V
+sfdp -V
 neato -?
 
 dot -T? || true
@@ -14,3 +15,4 @@ dot -Tpdf -o sample.pdf sample.dot
 dot -Tsvg -o sample.svg sample.dot
 dot -Ttiff -o sample.tiff sample.dot
 dot -Tjpeg -o sample.jpeg sample.dot
+sfdp -Tpdf -o sample.pdf sample.dot
