@@ -36,7 +36,7 @@ requirements:
     - autoconf                                            # [unix]
     - cmake                                               # [win]
     - ninja                                               # [win]
-    - python >=3                                          # [win]
+    - python >=3
     - m2-gawk                                             # [win]
     - m2-flex                                             # [win]
     - m2-bison                                            # [win]
