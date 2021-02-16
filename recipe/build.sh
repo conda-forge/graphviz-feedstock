@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 ./autogen.sh
 
@@ -43,4 +44,4 @@ make
 make install
 
 # Configure plugins
-dot -c
+$PREFIX/bin/dot -c
