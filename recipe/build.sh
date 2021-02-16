@@ -8,7 +8,7 @@ find $PREFIX -name '*.la' -delete
 
 declare -a _xtra_config_flags
 
-if [ "${target_platform}" = "osx-64" ]; then
+if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
     _xtra_config_flags+=(--with-quartz)
 fi
