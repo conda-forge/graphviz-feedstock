@@ -1,0 +1,113 @@
+From b56c047190db20a76e79895dd4202ba8722b88e1 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 15:17:59 -0500
+Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
+
+---
+ CMakeLists.txt              |  7 ++++++-
+ cmd/tools/CMakeLists.txt    |  4 ++--
+ lib/gvc/CMakeLists.txt      |  2 +-
+ plugin/gd/CMakeLists.txt    |  2 +-
+ plugin/pango/CMakeLists.txt | 14 +++++++-------
+ 5 files changed, 17 insertions(+), 12 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a67cf784a..171e38e54 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,6 +10,9 @@ option(with_ipsepcola  "IPSEPCOLA features in neato layout engine (disabled by d
+ option(with_ortho      "ORTHO features in neato layout engine." ON )
+ option(with_sfdp       "sfdp layout engine." ON )
+ option(with_smyrna     "SMYRNA large graph viewer (disabled by default - experimental)" OFF)
++if (WIN32)
++	option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
++endif (WIN32)
+ 
+ if (enable_ltdl)
+         add_definitions(-DENABLE_LTDL)
+@@ -197,7 +200,9 @@ else()
+ endif()
+ 
+ # ============================ Packaging information ===========================
+-include(InstallRequiredSystemLibraries)
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
++	include(InstallRequiredSystemLibraries)
++endif()
+ include(package_info)
+ include(CPack)
+ 
+diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
+index 087bf15cf..d9516e560 100644
+--- a/cmd/tools/CMakeLists.txt
++++ b/cmd/tools/CMakeLists.txt
+@@ -396,14 +396,14 @@ endif(EXPAT_FOUND)
+ 
+ # ===================== Install third party DLLs on Windows ====================
+ 
+-if (WIN32 AND EXPAT_FOUND)
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS AND EXPAT_FOUND)
+     install(
+         FILES ${EXPAT_RUNTIME_LIBRARIES}
+         DESTINATION ${BINARY_INSTALL_DIR}
+     )
+ endif(WIN32 AND EXPAT_FOUND)
+ 
+-if (WIN32)
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
+     install(
+         FILES ${Getopt_RUNTIME_LIBRARIES}
+         DESTINATION ${BINARY_INSTALL_DIR}
+diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
+index 1db89a0ab..4ea9e675d 100644
+--- a/lib/gvc/CMakeLists.txt
++++ b/lib/gvc/CMakeLists.txt
+@@ -112,7 +112,7 @@ set_target_properties(gvc PROPERTIES
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32)
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
+     install(
+         FILES
+             ${EXPAT_RUNTIME_LIBRARIES}
+diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
+index 0beeccd82..f4cc96018 100644
+--- a/plugin/gd/CMakeLists.txt
++++ b/plugin/gd/CMakeLists.txt
+@@ -37,7 +37,7 @@ install(
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32)
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
+     install(
+         FILES
+             ${GD_RUNTIME_LIBRARIES}
+diff --git a/plugin/pango/CMakeLists.txt b/plugin/pango/CMakeLists.txt
+index e2a4a3845..dbf2f041e 100644
+--- a/plugin/pango/CMakeLists.txt
++++ b/plugin/pango/CMakeLists.txt
+@@ -41,13 +41,13 @@ install(
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32)
+-    install(
+-        FILES
+-            ${Cairo_RUNTIME_LIBRARIES}
+-            ${PangoCairo_RUNTIME_LIBRARIES}
+-        DESTINATION ${BINARY_INSTALL_DIR}
+-    )
++if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
++   install(
++       FILES
++           ${Cairo_RUNTIME_LIBRARIES}
++          ${PangoCairo_RUNTIME_LIBRARIES}
++       DESTINATION ${BINARY_INSTALL_DIR}
++   )
+ endif()
+ 
+ # Specify library version and soversion
+-- 
+2.30.1
+
