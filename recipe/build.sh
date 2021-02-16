@@ -11,11 +11,6 @@ declare -a _xtra_config_flags
 if [ "${target_platform}" = "osx-64" ]; then
     export OBJC="${CC}"
     _xtra_config_flags+=(--with-quartz)
-    _xtra_config_flags+=(--with-gts=yes)
-fi
-
-if [ "${target_platform}" = "linux-64" ]; then
-    _xtra_config_flags+=(--with-gts=yes)
 fi
 
 ./configure --prefix=$PREFIX \
@@ -28,6 +23,7 @@ fi
             --without-x \
             --without-qt \
             --without-gtk \
+            --with-gts=yes \
             --with-gdk=yes \
             --with-rsvg=yes \
             --with-expat=yes \
