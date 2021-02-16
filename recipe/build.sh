@@ -28,6 +28,7 @@ fi
             --without-x \
             --without-qt \
             --without-gtk \
+            --with-gdk=yes \
             --with-rsvg=yes \
             --with-expat=yes \
             --with-libgd=yes \

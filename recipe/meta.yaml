@@ -54,6 +54,8 @@ requirements:
     - gts                                                 # [not ppc64le and not aarch64 and not win]
     # --with-gdk-pixbuf=yes
     - gdk-pixbuf                                          # [unix]
+    # --with-gdk=yes
+    - gtk2                                                # [unix]
     # pangocairo requires glib
     - glib
     - libglib
@@ -79,6 +81,7 @@ requirements:
     - cairo
     - expat                                               # [unix]
     - gts                                                 # [unix]
+    - gtk2                                                # [unix]
     - libgd
     - libglib
     - librsvg                                             # [unix]
