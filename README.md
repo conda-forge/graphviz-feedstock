@@ -187,5 +187,6 @@ Feedstock Maintainers
 * [@ccordoba12](https://github.com/ccordoba12/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@johanneskoester](https://github.com/johanneskoester/)
+* [@nehaljwani](https://github.com/nehaljwani/)
 * [@ocefpaf](https://github.com/ocefpaf/)
 
