@@ -4,6 +4,9 @@ if errorlevel 1 exit 1
 dot -V
 if errorlevel 1 exit 1
 
+dot.bat -V
+if errorlevel 1 exit 1
+
 echo: | dot -v
 if errorlevel 1 exit 1
 
