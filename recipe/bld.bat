@@ -27,6 +27,6 @@ if not exist "%PREFIX%\Scripts" mkdir %PREFIX%\Scripts
 cd %PREFIX%\Scripts
 for /r "%_gz_installdir%\bin" %%f in (*.exe) do (
     echo @echo off > %%~nf.bat
-    echo %%~dp0.\..\Library\bin\%%~nf.exe %%* >> %%~nf.bat
+    echo "%%~dp0.\..\Library\bin\%%~nf.exe" %%* >> %%~nf.bat
     if errorlevel 1 exit 1
 )
