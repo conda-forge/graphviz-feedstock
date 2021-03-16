@@ -1,4 +1,4 @@
-{% set version = "2.46.1" %}
+{% set version = "2.47.0" %}
 
 package:
   name: graphviz
@@ -6,12 +6,11 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: 931ed197bc833aec8501d66194b01620dd395130c380e350a6ec1b31e4866eac
+    sha256: 4b7f61c7c04f39b67b2c87977633d61d9f72ee6f93ff4376acdce140128431d4
     patches:
       - patches/0001-Rename-vpsc-block.h-vpsc-v_block.h.patch
       - patches/0002-Add-CMake-option-INSTALL_DEPENDENCY_DLLS-default-off.patch
       - patches/0003-Specify-dependency-on-expat-for-lib-common.patch
-      - patches/0004-Specify-PATH_SUFFIX-for-rxspencer-include-dirs.patch
       - patches/0005-Use-version-agnostic-python-binary.patch
       - patches/0006-Always-link-to-getopt-on-Windows.patch
       - patches/0007-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
@@ -22,7 +21,7 @@ source:
     folder: ltdl_compat
 
 build:
-  number: 4
+  number: 0
   detect_binary_files_with_prefix: true  # [unix]
 
 requirements:
@@ -73,7 +72,6 @@ requirements:
     # default requirement
     - zlib                                                # [unix]
     # Windows only deps
-    - rxspencer                                           # [win]
     - getopt-win32                                        # [win]
 
   run:
@@ -91,7 +89,6 @@ requirements:
     - pango
     - zlib                                                # [unix]
     - fonts-conda-ecosystem                               # [unix]
-    - {{ pin_compatible('rxspencer', max_pin='x.x.x') }}  # [win]
     # Not linked in directly, likely interface deps? add 'em anyway!
     - gdk-pixbuf                                          # [unix]
     - fontconfig                                          # [unix]
