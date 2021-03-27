@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2017
 expat:
-- '2.2'
+- '2.3'
 glib:
 - '2'
 pango:
