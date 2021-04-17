@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '11'
 expat:
-- '2.3'
+- '2'
 fontconfig:
 - '2.13'
 freetype:
@@ -27,15 +27,13 @@ glib:
 librsvg:
 - '2'
 libwebp_base:
-- '1.1'
+- '1'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pango:
 - '1.42'
 pin_run_as_build:
   cairo:
-    max_pin: x.x
-  expat:
     max_pin: x.x
   fontconfig:
     max_pin: x
