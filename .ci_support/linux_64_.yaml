@@ -17,7 +17,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 expat:
-- '2.2'
+- '2'
 fontconfig:
 - '2.13'
 freetype:
@@ -29,13 +29,11 @@ glib:
 librsvg:
 - '2'
 libwebp_base:
-- '1.1'
+- '1'
 pango:
 - '1.48'
 pin_run_as_build:
   cairo:
-    max_pin: x.x
-  expat:
     max_pin: x.x
   fontconfig:
     max_pin: x
