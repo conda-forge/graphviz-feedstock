@@ -15,13 +15,14 @@ source:
       - patches/0006-Always-link-to-getopt-on-Windows.patch
       - patches/0007-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0008-Add-support-for-GTS-in-CMake-builds.patch
+      - patches/0009-Fix-logic-for-finding-harfbuzz.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
     folder: ltdl_compat
 
 build:
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: true  # [unix]
 
 requirements:
