@@ -11,7 +11,6 @@ source:
       - patches/0001-Rename-vpsc-block.h-vpsc-v_block.h.patch
       - patches/0002-Add-CMake-option-INSTALL_DEPENDENCY_DLLS-default-off.patch
       - patches/0003-Specify-dependency-on-expat-for-lib-common.patch
-      - patches/0005-Use-version-agnostic-python-binary.patch
       - patches/0006-Always-link-to-getopt-on-Windows.patch
       - patches/0007-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0008-Add-support-for-GTS-in-CMake-builds.patch
