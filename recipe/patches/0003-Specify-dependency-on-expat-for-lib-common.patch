@@ -1,4 +1,4 @@
-From 6c49f3860caa1ed275089f3329e6df1b3e663d53 Mon Sep 17 00:00:00 2001
+From e5ba637a169f1d1034d0da3768b6a523d9d39c26 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:19:14 -0500
 Subject: [PATCH 3/7] Specify dependency on expat for lib/common
@@ -20,5 +20,5 @@ index 2620f1867..51c539f6f 100644
  
  if (WIN32)
 -- 
-2.30.1
+2.30.2
 

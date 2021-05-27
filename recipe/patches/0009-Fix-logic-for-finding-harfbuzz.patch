@@ -1,7 +1,7 @@
-From d2f16817c83c04fa7f26afd4c9eb6571bb470dd2 Mon Sep 17 00:00:00 2001
+From cbde5d6562928837b3b0243d929ab2351bafd0f0 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 10 May 2021 20:19:04 -0400
-Subject: [PATCH 9/9] Fix logic for finding harfbuzz
+Subject: [PATCH 7/7] Fix logic for finding harfbuzz
 
 Pango >=1.44.1 changed the way harfbuzz is included
 
@@ -58,5 +58,5 @@ index 69d82045b..23a9d8b50 100644
  
      set(PangoCairo_RUNTIME_LIBRARIES
 -- 
-2.30.1
+2.30.2
 

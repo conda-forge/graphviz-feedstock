@@ -1,7 +1,7 @@
-From 4eec63c60bd8051bbd239c36dea04808d9cdcebd Mon Sep 17 00:00:00 2001
+From 21c340c34a9d2cc7b0a6f3383db0851643e31ee7 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
-Subject: [PATCH 8/8] Add support for GTS in CMake builds
+Subject: [PATCH 6/7] Add support for GTS in CMake builds
 
 ---
  CMakeLists.txt              |  1 +
@@ -15,10 +15,10 @@ Subject: [PATCH 8/8] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e30e912b3..4abacdb9a 100644
+index 69c1e1206..e023d0247 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -87,6 +87,7 @@ find_package(ANN)
+@@ -89,6 +89,7 @@ find_package(ANN)
  find_package(Cairo)
  find_package(EXPAT)
  find_package(GD)
@@ -51,10 +51,10 @@ index 000000000..b10b29dfc
 +set(GTS_LIBRARIES ${GTS_LIBRARY})
 +set(GTS_RUNTIME_LIBRARIES ${GTS_RUNTIME_LIBRARY})
 diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
-index 98d67f86a..be4c5d9b1 100644
+index 8c653038c..99acf1856 100644
 --- a/cmake/config_checks.cmake
 +++ b/cmake/config_checks.cmake
-@@ -48,6 +48,7 @@ check_type_size( intptr_t    INTPTR_T    )
+@@ -45,6 +45,7 @@ check_type_size( intptr_t    INTPTR_T    )
  set( HAVE_ANN       ${ANN_FOUND}        )
  set( HAVE_EXPAT     ${EXPAT_FOUND}      )
  set( HAVE_LIBGD     ${GD_FOUND}         )
@@ -63,10 +63,10 @@ index 98d67f86a..be4c5d9b1 100644
  
  if (LTDL_FOUND)
 diff --git a/config-cmake.h.in b/config-cmake.h.in
-index 0e3229e9b..bbb746650 100644
+index 996497b54..3d678432d 100644
 --- a/config-cmake.h.in
 +++ b/config-cmake.h.in
-@@ -47,6 +47,7 @@ typedef int ssize_t;
+@@ -43,6 +43,7 @@ typedef int ssize_t;
  #cmakedefine HAVE_EXPAT
  #cmakedefine HAVE_LIBGD
  #cmakedefine HAVE_ZLIB
@@ -98,10 +98,10 @@ index 412b71d10..64bb473e0 100644
 +    ${GLIBCONFIG_INCLUDE_DIR}
  )
 diff --git a/lib/neatogen/delaunay.c b/lib/neatogen/delaunay.c
-index 7b4278145..224f9904a 100644
+index 61f8ea6c3..266619096 100644
 --- a/lib/neatogen/delaunay.c
 +++ b/lib/neatogen/delaunay.c
-@@ -21,7 +21,7 @@
+@@ -19,7 +19,7 @@
  #include <common/memory.h>
  #include <common/logic.h>
  
@@ -111,10 +111,10 @@ index 7b4278145..224f9904a 100644
  
  static gboolean triangle_is_hole(GtsTriangle * t)
 diff --git a/lib/sfdpgen/sfdpinit.c b/lib/sfdpgen/sfdpinit.c
-index 97ecbff46..c4e1f6cac 100644
+index ac7d9026d..099992848 100644
 --- a/lib/sfdpgen/sfdpinit.c
 +++ b/lib/sfdpgen/sfdpinit.c
-@@ -210,7 +210,7 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+@@ -208,7 +208,7 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
      if (!sym) return dflt;
      s = agxget (g, sym);
      if (isdigit(*s)) {
@@ -123,7 +123,7 @@ index 97ecbff46..c4e1f6cac 100644
  	if ((v = atoi (s)) <= SMOOTHING_RNG)
  #else
  	if ((v = atoi (s)) <= SMOOTHING_SPRING)
-@@ -228,13 +228,13 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+@@ -226,13 +226,13 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
  	    rv = SMOOTHING_NONE;
  	else if (!strcasecmp(s, "power_dist"))
  	    rv = SMOOTHING_STRESS_MAJORIZATION_POWER_DIST;
@@ -139,7 +139,7 @@ index 97ecbff46..c4e1f6cac 100644
  	else if (!strcasecmp(s, "triangle"))
  	    rv = SMOOTHING_TRIANGLE;
  #endif
-@@ -332,7 +332,7 @@ void sfdp_layout(graph_t * g)
+@@ -330,7 +330,7 @@ void sfdp_layout(graph_t * g)
  	spring_electrical_control ctrl = spring_electrical_control_new();
  
  	tuneControl (g, ctrl);
@@ -149,5 +149,5 @@ index 97ecbff46..c4e1f6cac 100644
  #else
  	graphAdjustMode(g, &am, 0);
 -- 
-2.30.1
+2.30.2
 

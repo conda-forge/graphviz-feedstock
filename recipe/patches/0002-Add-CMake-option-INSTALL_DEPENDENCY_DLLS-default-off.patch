@@ -1,31 +1,32 @@
-From b56c047190db20a76e79895dd4202ba8722b88e1 Mon Sep 17 00:00:00 2001
+From c735bcfe7b28fa6eae8af6b085e17bd6020d9c3f Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
 
 ---
- CMakeLists.txt              |  7 ++++++-
+ CMakeLists.txt              |  8 +++++++-
  cmd/tools/CMakeLists.txt    |  4 ++--
  lib/gvc/CMakeLists.txt      |  2 +-
  plugin/gd/CMakeLists.txt    |  2 +-
  plugin/pango/CMakeLists.txt | 14 +++++++-------
- 5 files changed, 17 insertions(+), 12 deletions(-)
+ 5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a67cf784a..171e38e54 100644
+index 2af7cbba5..9a9365b23 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -10,6 +10,9 @@ option(with_ipsepcola  "IPSEPCOLA features in neato layout engine (disabled by d
- option(with_ortho      "ORTHO features in neato layout engine." ON )
- option(with_sfdp       "sfdp layout engine." ON )
+@@ -12,6 +12,10 @@ option(with_sfdp       "sfdp layout engine." ON )
  option(with_smyrna     "SMYRNA large graph viewer (disabled by default - experimental)" OFF)
+ option(use_sanitizers  "enables using address and undefined behavior sanitizer" OFF)
+ 
 +if (WIN32)
 +	option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
 +endif (WIN32)
- 
++
  if (enable_ltdl)
          add_definitions(-DENABLE_LTDL)
-@@ -197,7 +200,9 @@ else()
+ endif (enable_ltdl)
+@@ -221,7 +225,9 @@ if (use_sanitizers)
  endif()
  
  # ============================ Packaging information ===========================
@@ -58,10 +59,10 @@ index 087bf15cf..d9516e560 100644
          FILES ${Getopt_RUNTIME_LIBRARIES}
          DESTINATION ${BINARY_INSTALL_DIR}
 diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
-index 1db89a0ab..4ea9e675d 100644
+index da70b122c..adccbfee5 100644
 --- a/lib/gvc/CMakeLists.txt
 +++ b/lib/gvc/CMakeLists.txt
-@@ -112,7 +112,7 @@ set_target_properties(gvc PROPERTIES
+@@ -111,7 +111,7 @@ set_target_properties(gvc PROPERTIES
  )
  
  # Include DLLs with this library on Windows
@@ -109,5 +110,5 @@ index e2a4a3845..dbf2f041e 100644
  
  # Specify library version and soversion
 -- 
-2.30.1
+2.30.2
 

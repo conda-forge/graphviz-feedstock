@@ -1,7 +1,7 @@
-From 907dd20bd03b0c0dc6de603b2ee40c8d4811dd00 Mon Sep 17 00:00:00 2001
+From c910b27c1a56ab530b45c08811170b46fca96f15 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
-Subject: [PATCH 6/8] Always link to getopt on Windows
+Subject: [PATCH 4/7] Always link to getopt on Windows
 
 ---
  CMakeLists.txt           | 2 +-
@@ -10,10 +10,10 @@ Subject: [PATCH 6/8] Always link to getopt on Windows
  3 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a1f5107d3..75f21ba55 100644
+index 9a9365b23..69c1e1206 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -161,7 +161,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
+@@ -175,7 +175,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
  message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
  
  include(config_checks)
@@ -52,5 +52,5 @@ index 0796c86ef..92cd7da1d 100644
 -endif(NOT HAVE_GETOPT_H)
 +endif()
 -- 
-2.30.1
+2.30.2
 
