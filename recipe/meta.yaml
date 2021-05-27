@@ -1,4 +1,4 @@
-{% set version = "2.47.1" %}
+{% set version = "2.47.2" %}
 
 package:
   name: graphviz
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: b7f4d6819e4dc17c15e7e07bd1ea5e081ef6569b63f8427117dac32f0e3837b4
+    sha256: 0f55cc79326fc1ff37aacf1e26ac0cd0e8eb5656035a470c8fb8b103fb4d4af3
     patches:
       - patches/0001-Rename-vpsc-block.h-vpsc-v_block.h.patch
       - patches/0002-Add-CMake-option-INSTALL_DEPENDENCY_DLLS-default-off.patch
@@ -22,7 +22,7 @@ source:
     folder: ltdl_compat
 
 build:
-  number: 1
+  number: 0
   detect_binary_files_with_prefix: true  # [unix]
 
 requirements:
