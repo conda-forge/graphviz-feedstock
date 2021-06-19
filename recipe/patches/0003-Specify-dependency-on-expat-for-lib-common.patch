@@ -1,4 +1,4 @@
-From e5ba637a169f1d1034d0da3768b6a523d9d39c26 Mon Sep 17 00:00:00 2001
+From 11bf3f6deefb0b2db4af8e633765cb0a3b07161a Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:19:14 -0500
 Subject: [PATCH 3/7] Specify dependency on expat for lib/common
@@ -8,10 +8,10 @@ Subject: [PATCH 3/7] Specify dependency on expat for lib/common
  1 file changed, 1 insertion(+)
 
 diff --git a/lib/common/CMakeLists.txt b/lib/common/CMakeLists.txt
-index 2620f1867..51c539f6f 100644
+index de233fd8b..39f31cc37 100644
 --- a/lib/common/CMakeLists.txt
 +++ b/lib/common/CMakeLists.txt
-@@ -115,6 +115,7 @@ target_include_directories(common_obj PRIVATE
+@@ -99,6 +99,7 @@ target_include_directories(common_obj PRIVATE
      ${GRAPHVIZ_LIB_DIR}/pack
      ${GRAPHVIZ_LIB_DIR}/pathplan
      ${GRAPHVIZ_LIB_DIR}/xdot
