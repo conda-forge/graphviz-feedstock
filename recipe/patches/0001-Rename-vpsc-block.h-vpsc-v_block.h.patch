@@ -1,4 +1,4 @@
-From 9737d363ed3b6d81496c99ba1decd79d1214e0d9 Mon Sep 17 00:00:00 2001
+From b5416beb4e9865c46292135e99b785cbcb1ae8c8 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 01:28:25 -0500
 Subject: [PATCH 1/7] Rename vpsc/block.h -> vpsc/v_block.h
@@ -19,7 +19,7 @@ On case insensitive file systems, block.h conflicts with
  create mode 100644 lib/vpsc/v_block.h
 
 diff --git a/lib/vpsc/Makefile.am b/lib/vpsc/Makefile.am
-index b40ba4bd8..607bbb003 100644
+index fd2a469f3..ad0595fd4 100644
 --- a/lib/vpsc/Makefile.am
 +++ b/lib/vpsc/Makefile.am
 @@ -7,7 +7,7 @@ noinst_LTLIBRARIES = libvpsc_C.la
@@ -28,7 +28,7 @@ index b40ba4bd8..607bbb003 100644
  noinst_HEADERS = \
 -	solve_VPSC.h block.h blocks.h variable.h constraint.h \
 +	solve_VPSC.h v_block.h blocks.h variable.h constraint.h \
- 	generate-constraints.h remove_rectangle_overlap.h \
+ 	generate-constraints.h \
  	solve_VPSC.h csolve_VPSC.h pairingheap/PairingHeap.h \
  	pairingheap/dsexceptions.h
 diff --git a/lib/vpsc/block.cpp b/lib/vpsc/block.cpp

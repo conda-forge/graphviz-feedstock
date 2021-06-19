@@ -1,4 +1,4 @@
-From c735bcfe7b28fa6eae8af6b085e17bd6020d9c3f Mon Sep 17 00:00:00 2001
+From 93ab7c67d3d7546840e2e061c0b899e3abc156b1 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
@@ -12,7 +12,7 @@ Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
  5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2af7cbba5..9a9365b23 100644
+index 90c0ca52c..5ac46687a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -12,6 +12,10 @@ option(with_sfdp       "sfdp layout engine." ON )
@@ -26,7 +26,7 @@ index 2af7cbba5..9a9365b23 100644
  if (enable_ltdl)
          add_definitions(-DENABLE_LTDL)
  endif (enable_ltdl)
-@@ -221,7 +225,9 @@ if (use_sanitizers)
+@@ -220,7 +224,9 @@ if (use_sanitizers)
  endif()
  
  # ============================ Packaging information ===========================
@@ -38,10 +38,10 @@ index 2af7cbba5..9a9365b23 100644
  include(CPack)
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index 087bf15cf..d9516e560 100644
+index c4d07c4b8..aecc5fb83 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
-@@ -396,14 +396,14 @@ endif(EXPAT_FOUND)
+@@ -395,14 +395,14 @@ endif(EXPAT_FOUND)
  
  # ===================== Install third party DLLs on Windows ====================
  

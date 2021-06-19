@@ -1,0 +1,153 @@
+From 04b56a89a1ced9eb334ebb11c8d237c62899fe42 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Tue, 16 Feb 2021 18:38:18 -0500
+Subject: [PATCH 6/7] Add support for GTS in CMake builds
+
+---
+ CMakeLists.txt              |  1 +
+ cmake/FindGTS.cmake         | 18 ++++++++++++++++++
+ cmake/config_checks.cmake   |  1 +
+ config-cmake.h.in           |  1 +
+ lib/neatogen/CMakeLists.txt |  7 +++++++
+ lib/neatogen/delaunay.c     |  2 +-
+ lib/sfdpgen/sfdpinit.c      |  8 ++++----
+ 7 files changed, 33 insertions(+), 5 deletions(-)
+ create mode 100644 cmake/FindGTS.cmake
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 739e10d89..61314cf49 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -88,6 +88,7 @@ find_package(ANN)
+ find_package(Cairo)
+ find_package(EXPAT)
+ find_package(GD)
++find_package(GTS)
+ find_package(LTDL)
+ find_package(PangoCairo)
+ find_package(ZLIB)
+diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
+new file mode 100644
+index 000000000..b10b29dfc
+--- /dev/null
++++ b/cmake/FindGTS.cmake
+@@ -0,0 +1,18 @@
++find_path(GTS_INCLUDE_DIR gts.h)
++find_library(GTS_LIBRARY NAMES gts)
++find_program(GTS_RUNTIME_LIBRARY gts.dll)
++
++include(FindPackageHandleStandardArgs)
++if (WIN32)
++    find_package_handle_standard_args(GTS DEFAULT_MSG
++                                      GTS_LIBRARY GTS_INCLUDE_DIR GTS_RUNTIME_LIBRARY)
++else()
++    find_package_handle_standard_args(GTS DEFAULT_MSG
++                                      GTS_LIBRARY GTS_INCLUDE_DIR)
++endif()
++
++mark_as_advanced(GTS_INCLUDE_DIR GTS_LIBRARY GTS_RUNTIME_LIBRARY)
++
++set(GTS_INCLUDE_DIRS ${GTS_INCLUDE_DIR})
++set(GTS_LIBRARIES ${GTS_LIBRARY})
++set(GTS_RUNTIME_LIBRARIES ${GTS_RUNTIME_LIBRARY})
+diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
+index dc7cec3a3..5ed94bcb7 100644
+--- a/cmake/config_checks.cmake
++++ b/cmake/config_checks.cmake
+@@ -44,6 +44,7 @@ check_type_size( intptr_t    INTPTR_T    )
+ set( HAVE_ANN       ${ANN_FOUND}        )
+ set( HAVE_EXPAT     ${EXPAT_FOUND}      )
+ set( HAVE_LIBGD     ${GD_FOUND}         )
++set( HAVE_GTS       ${GTS_FOUND}        )
+ set( HAVE_ZLIB      ${ZLIB_FOUND}       )
+ 
+ if (LTDL_FOUND)
+diff --git a/config-cmake.h.in b/config-cmake.h.in
+index 1b73f11d8..b473a43eb 100644
+--- a/config-cmake.h.in
++++ b/config-cmake.h.in
+@@ -42,6 +42,7 @@ typedef int ssize_t;
+ #cmakedefine HAVE_EXPAT
+ #cmakedefine HAVE_LIBGD
+ #cmakedefine HAVE_ZLIB
++#cmakedefine HAVE_GTS
+ 
+ // Values
+ #define BROWSER "@BROWSER@"
+diff --git a/lib/neatogen/CMakeLists.txt b/lib/neatogen/CMakeLists.txt
+index 412b71d10..64bb473e0 100644
+--- a/lib/neatogen/CMakeLists.txt
++++ b/lib/neatogen/CMakeLists.txt
+@@ -91,6 +91,10 @@ add_library(neatogen STATIC
+     ${sources}
+ )
+ 
++target_link_libraries(neatogen PRIVATE
++    ${GTS_LIBRARY}
++    ${GLIB_LIBRARY})
++
+ target_include_directories(neatogen PRIVATE
+     ${GRAPHVIZ_LIB_DIR}
+     ${GRAPHVIZ_LIB_DIR}/cdt
+@@ -99,4 +103,7 @@ target_include_directories(neatogen PRIVATE
+     ${GRAPHVIZ_LIB_DIR}/gvc
+     ${GRAPHVIZ_LIB_DIR}/pack
+     ${GRAPHVIZ_LIB_DIR}/pathplan
++    ${GTS_INCLUDE_DIR}
++    ${GLIB_INCLUDE_DIR}
++    ${GLIBCONFIG_INCLUDE_DIR}
+ )
+diff --git a/lib/neatogen/delaunay.c b/lib/neatogen/delaunay.c
+index 61f8ea6c3..266619096 100644
+--- a/lib/neatogen/delaunay.c
++++ b/lib/neatogen/delaunay.c
+@@ -19,7 +19,7 @@
+ #include <common/memory.h>
+ #include <common/logic.h>
+ 
+-#if HAVE_GTS
++#ifdef HAVE_GTS
+ #include <gts.h>
+ 
+ static gboolean triangle_is_hole(GtsTriangle * t)
+diff --git a/lib/sfdpgen/sfdpinit.c b/lib/sfdpgen/sfdpinit.c
+index ac7d9026d..099992848 100644
+--- a/lib/sfdpgen/sfdpinit.c
++++ b/lib/sfdpgen/sfdpinit.c
+@@ -208,7 +208,7 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+     if (!sym) return dflt;
+     s = agxget (g, sym);
+     if (isdigit(*s)) {
+-#if (HAVE_GTS || HAVE_TRIANGLE)
++#if (defined(HAVE_GTS) || defined(HAVE_TRIANGLE))
+ 	if ((v = atoi (s)) <= SMOOTHING_RNG)
+ #else
+ 	if ((v = atoi (s)) <= SMOOTHING_SPRING)
+@@ -226,13 +226,13 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+ 	    rv = SMOOTHING_NONE;
+ 	else if (!strcasecmp(s, "power_dist"))
+ 	    rv = SMOOTHING_STRESS_MAJORIZATION_POWER_DIST;
+-#if (HAVE_GTS || HAVE_TRIANGLE)
++#if (defined(HAVE_GTS) || defined(HAVE_TRIANGLE))
+ 	else if (!strcasecmp(s, "rng"))
+ 	    rv = SMOOTHING_RNG;
+ #endif
+ 	else if (!strcasecmp(s, "spring"))
+ 	    rv = SMOOTHING_SPRING;
+-#if (HAVE_GTS || HAVE_TRIANGLE)
++#if (defined(HAVE_GTS) || defined(HAVE_TRIANGLE))
+ 	else if (!strcasecmp(s, "triangle"))
+ 	    rv = SMOOTHING_TRIANGLE;
+ #endif
+@@ -330,7 +330,7 @@ void sfdp_layout(graph_t * g)
+ 	spring_electrical_control ctrl = spring_electrical_control_new();
+ 
+ 	tuneControl (g, ctrl);
+-#if (HAVE_GTS || HAVE_TRIANGLE)
++#if (defined(HAVE_GTS) || defined(HAVE_TRIANGLE))
+ 	graphAdjustMode(g, &am, "prism0");
+ #else
+ 	graphAdjustMode(g, &am, 0);
+-- 
+2.30.2
+
