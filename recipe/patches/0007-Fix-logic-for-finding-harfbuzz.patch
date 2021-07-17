@@ -1,4 +1,4 @@
-From f4e3164d1424d8aefeca62750682d0eca9af2410 Mon Sep 17 00:00:00 2001
+From 901a4b1332bef2333caa8008c1d176d3a87351c1 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 10 May 2021 20:19:04 -0400
 Subject: [PATCH 7/7] Fix logic for finding harfbuzz
@@ -58,5 +58,5 @@ index 69d82045b..23a9d8b50 100644
  
      set(PangoCairo_RUNTIME_LIBRARIES
 -- 
-2.30.2
+2.31.1
 
