@@ -1,4 +1,4 @@
-From 04b56a89a1ced9eb334ebb11c8d237c62899fe42 Mon Sep 17 00:00:00 2001
+From ad974e7e26b146bc3d19e56ab9f329625a56e51d Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 6/7] Add support for GTS in CMake builds
@@ -15,10 +15,10 @@ Subject: [PATCH 6/7] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 739e10d89..61314cf49 100644
+index cf6850f74..741ecde0b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -88,6 +88,7 @@ find_package(ANN)
+@@ -90,6 +90,7 @@ find_package(ANN)
  find_package(Cairo)
  find_package(EXPAT)
  find_package(GD)
@@ -51,10 +51,10 @@ index 000000000..b10b29dfc
 +set(GTS_LIBRARIES ${GTS_LIBRARY})
 +set(GTS_RUNTIME_LIBRARIES ${GTS_RUNTIME_LIBRARY})
 diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
-index dc7cec3a3..5ed94bcb7 100644
+index 36327368c..f4e0e1920 100644
 --- a/cmake/config_checks.cmake
 +++ b/cmake/config_checks.cmake
-@@ -44,6 +44,7 @@ check_type_size( intptr_t    INTPTR_T    )
+@@ -42,6 +42,7 @@ check_type_size( intptr_t    INTPTR_T    )
  set( HAVE_ANN       ${ANN_FOUND}        )
  set( HAVE_EXPAT     ${EXPAT_FOUND}      )
  set( HAVE_LIBGD     ${GD_FOUND}         )
@@ -63,10 +63,10 @@ index dc7cec3a3..5ed94bcb7 100644
  
  if (LTDL_FOUND)
 diff --git a/config-cmake.h.in b/config-cmake.h.in
-index 1b73f11d8..b473a43eb 100644
+index e0ab0a71c..26a960cde 100644
 --- a/config-cmake.h.in
 +++ b/config-cmake.h.in
-@@ -42,6 +42,7 @@ typedef int ssize_t;
+@@ -40,6 +40,7 @@ typedef int ssize_t;
  #cmakedefine HAVE_EXPAT
  #cmakedefine HAVE_LIBGD
  #cmakedefine HAVE_ZLIB
@@ -111,10 +111,10 @@ index 61f8ea6c3..266619096 100644
  
  static gboolean triangle_is_hole(GtsTriangle * t)
 diff --git a/lib/sfdpgen/sfdpinit.c b/lib/sfdpgen/sfdpinit.c
-index ac7d9026d..099992848 100644
+index 9be012383..3eb0fd9ea 100644
 --- a/lib/sfdpgen/sfdpinit.c
 +++ b/lib/sfdpgen/sfdpinit.c
-@@ -208,7 +208,7 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+@@ -164,7 +164,7 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
      if (!sym) return dflt;
      s = agxget (g, sym);
      if (isdigit(*s)) {
@@ -123,7 +123,7 @@ index ac7d9026d..099992848 100644
  	if ((v = atoi (s)) <= SMOOTHING_RNG)
  #else
  	if ((v = atoi (s)) <= SMOOTHING_SPRING)
-@@ -226,13 +226,13 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
+@@ -182,13 +182,13 @@ late_smooth (graph_t* g, Agsym_t* sym, int dflt)
  	    rv = SMOOTHING_NONE;
  	else if (!strcasecmp(s, "power_dist"))
  	    rv = SMOOTHING_STRESS_MAJORIZATION_POWER_DIST;
@@ -139,7 +139,7 @@ index ac7d9026d..099992848 100644
  	else if (!strcasecmp(s, "triangle"))
  	    rv = SMOOTHING_TRIANGLE;
  #endif
-@@ -330,7 +330,7 @@ void sfdp_layout(graph_t * g)
+@@ -285,7 +285,7 @@ void sfdp_layout(graph_t * g)
  	spring_electrical_control ctrl = spring_electrical_control_new();
  
  	tuneControl (g, ctrl);
@@ -149,5 +149,5 @@ index ac7d9026d..099992848 100644
  #else
  	graphAdjustMode(g, &am, 0);
 -- 
-2.30.2
+2.31.1
 

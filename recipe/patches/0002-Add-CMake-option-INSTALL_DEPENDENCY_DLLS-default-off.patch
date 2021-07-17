@@ -1,4 +1,4 @@
-From 93ab7c67d3d7546840e2e061c0b899e3abc156b1 Mon Sep 17 00:00:00 2001
+From 2cc884d541db37a529fe753efa19e7780c093fd0 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
@@ -12,12 +12,12 @@ Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
  5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 90c0ca52c..5ac46687a 100644
+index ab611fcfe..78081f45d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -12,6 +12,10 @@ option(with_sfdp       "sfdp layout engine." ON )
- option(with_smyrna     "SMYRNA large graph viewer (disabled by default - experimental)" OFF)
- option(use_sanitizers  "enables using address and undefined behavior sanitizer" OFF)
+@@ -14,6 +14,10 @@ option(use_sanitizers  "enables using address and undefined behavior sanitizer"
+ option(use_coverage    "enables analyzing code coverage" OFF)
+ option(with_cxx_tests  "enables building the C++ tests" OFF)
  
 +if (WIN32)
 +	option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
@@ -26,7 +26,7 @@ index 90c0ca52c..5ac46687a 100644
  if (enable_ltdl)
          add_definitions(-DENABLE_LTDL)
  endif (enable_ltdl)
-@@ -220,7 +224,9 @@ if (use_sanitizers)
+@@ -231,7 +235,9 @@ if (use_coverage)
  endif()
  
  # ============================ Packaging information ===========================
@@ -38,7 +38,7 @@ index 90c0ca52c..5ac46687a 100644
  include(CPack)
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index c4d07c4b8..aecc5fb83 100644
+index 2d937b525..068a7b838 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
 @@ -395,14 +395,14 @@ endif(EXPAT_FOUND)
@@ -59,10 +59,10 @@ index c4d07c4b8..aecc5fb83 100644
          FILES ${Getopt_RUNTIME_LIBRARIES}
          DESTINATION ${BINARY_INSTALL_DIR}
 diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
-index da70b122c..adccbfee5 100644
+index 1b00d78a4..6cc69d00a 100644
 --- a/lib/gvc/CMakeLists.txt
 +++ b/lib/gvc/CMakeLists.txt
-@@ -111,7 +111,7 @@ set_target_properties(gvc PROPERTIES
+@@ -114,7 +114,7 @@ set_target_properties(gvc PROPERTIES
  )
  
  # Include DLLs with this library on Windows
@@ -110,5 +110,5 @@ index e2a4a3845..dbf2f041e 100644
  
  # Specify library version and soversion
 -- 
-2.30.2
+2.31.1
 

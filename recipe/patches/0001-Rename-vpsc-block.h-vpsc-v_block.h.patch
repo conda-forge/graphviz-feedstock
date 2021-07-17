@@ -1,4 +1,4 @@
-From b5416beb4e9865c46292135e99b785cbcb1ae8c8 Mon Sep 17 00:00:00 2001
+From ebb07714e0942b5d46b5cdac1ffe910d1ae5e853 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 01:28:25 -0500
 Subject: [PATCH 1/7] Rename vpsc/block.h -> vpsc/v_block.h
@@ -8,35 +8,35 @@ On case insensitive file systems, block.h conflicts with
 ---
  lib/vpsc/Makefile.am    |  2 +-
  lib/vpsc/block.cpp      |  2 +-
- lib/vpsc/block.h        | 70 -----------------------------------------
+ lib/vpsc/block.h        | 71 -----------------------------------------
  lib/vpsc/blocks.cpp     |  2 +-
  lib/vpsc/constraint.h   |  2 +-
  lib/vpsc/solve_VPSC.cpp |  2 +-
- lib/vpsc/v_block.h      | 70 +++++++++++++++++++++++++++++++++++++++++
+ lib/vpsc/v_block.h      | 71 +++++++++++++++++++++++++++++++++++++++++
  lib/vpsc/variable.h     |  2 +-
- 8 files changed, 76 insertions(+), 76 deletions(-)
+ 8 files changed, 77 insertions(+), 77 deletions(-)
  delete mode 100644 lib/vpsc/block.h
  create mode 100644 lib/vpsc/v_block.h
 
 diff --git a/lib/vpsc/Makefile.am b/lib/vpsc/Makefile.am
-index fd2a469f3..ad0595fd4 100644
+index f00b70604..760bbb145 100644
 --- a/lib/vpsc/Makefile.am
 +++ b/lib/vpsc/Makefile.am
 @@ -7,7 +7,7 @@ noinst_LTLIBRARIES = libvpsc_C.la
  endif
  
  noinst_HEADERS = \
--	solve_VPSC.h block.h blocks.h variable.h constraint.h \
-+	solve_VPSC.h v_block.h blocks.h variable.h constraint.h \
+-	block.h blocks.h variable.h constraint.h \
++	v_block.h blocks.h variable.h constraint.h \
  	generate-constraints.h \
  	solve_VPSC.h csolve_VPSC.h pairingheap/PairingHeap.h \
  	pairingheap/dsexceptions.h
 diff --git a/lib/vpsc/block.cpp b/lib/vpsc/block.cpp
-index 2b5ab1ade..aa213e37c 100644
+index aabc252db..715ba0019 100644
 --- a/lib/vpsc/block.cpp
 +++ b/lib/vpsc/block.cpp
-@@ -19,7 +19,7 @@
- #include <cassert>
+@@ -20,7 +20,7 @@
+ #include <memory>
  #include <vpsc/pairingheap/PairingHeap.h>
  #include <vpsc/constraint.h>
 -#include <vpsc/block.h>
@@ -46,10 +46,10 @@ index 2b5ab1ade..aa213e37c 100644
  using std::ios;
 diff --git a/lib/vpsc/block.h b/lib/vpsc/block.h
 deleted file mode 100644
-index 8b969ba5a..000000000
+index e15a87758..000000000
 --- a/lib/vpsc/block.h
 +++ /dev/null
-@@ -1,70 +0,0 @@
+@@ -1,71 +0,0 @@
 -/**
 - * \brief A block is a group of variables that must be moved together to improve
 - * the goal function without violating already active constraints.
@@ -71,22 +71,23 @@ index 8b969ba5a..000000000
 -
 -#pragma once
 -
+-#include <memory>
 -#include <vector>
 -#include <iostream>
+-#include <vpsc/pairingheap/PairingHeap.h>
 -struct Variable;
 -struct Constraint;
--template <class T> class PairingHeap;
 -
 -class Block
 -{
 -	friend std::ostream& operator <<(std::ostream &os,const Block &b);
 -public:
--	std::vector<Variable*> *vars;
+-	std::vector<Variable*> vars;
 -	double posn;
 -	double weight;
 -	double wposn;
 -	Block(Variable *v=nullptr);
--	~Block();
+-	Block(const Block &) = delete;
 -	Constraint* findMinLM();
 -	Constraint* findMinLMBetween(Variable* lv, Variable* rv);
 -	Constraint* findMinInConstraint();
@@ -105,8 +106,8 @@ index 8b969ba5a..000000000
 -	double cost();
 -	bool deleted;
 -	long timeStamp;
--	PairingHeap<Constraint*> *in;
--	PairingHeap<Constraint*> *out;
+-	std::unique_ptr<PairingHeap<Constraint*>> in;
+-	std::unique_ptr<PairingHeap<Constraint*>> out;
 -private:
 -	typedef enum {NONE, LEFT, RIGHT} Direction;
 -	typedef std::pair<double, Constraint*> Pair;
@@ -118,10 +119,10 @@ index 8b969ba5a..000000000
 -	bool canFollowRight(Constraint *c, Variable *last);
 -	void populateSplitBlock(Block *b, Variable *v, Variable *u);
 -	void addVariable(Variable *v);
--	void setUpConstraintHeap(PairingHeap<Constraint*>* &h,bool in);
+-	void setUpConstraintHeap(std::unique_ptr<PairingHeap<Constraint*>> &h,bool in);
 -};
 diff --git a/lib/vpsc/blocks.cpp b/lib/vpsc/blocks.cpp
-index a41a3e016..81e4432a4 100644
+index 9ac995620..c9b93de8f 100644
 --- a/lib/vpsc/blocks.cpp
 +++ b/lib/vpsc/blocks.cpp
 @@ -20,7 +20,7 @@
@@ -134,7 +135,7 @@ index a41a3e016..81e4432a4 100644
  #include <fstream>
  using std::ios;
 diff --git a/lib/vpsc/constraint.h b/lib/vpsc/constraint.h
-index 8260de25e..d550fae6c 100644
+index 2d35d6d20..3e383280a 100644
 --- a/lib/vpsc/constraint.h
 +++ b/lib/vpsc/constraint.h
 @@ -38,7 +38,7 @@ public:
@@ -147,7 +148,7 @@ index 8260de25e..d550fae6c 100644
  	double const sl = 
  		l->left->block->timeStamp > l->timeStamp
 diff --git a/lib/vpsc/solve_VPSC.cpp b/lib/vpsc/solve_VPSC.cpp
-index 10bf69e03..df7c353ad 100644
+index c1ea8c3ea..7f204a102 100644
 --- a/lib/vpsc/solve_VPSC.cpp
 +++ b/lib/vpsc/solve_VPSC.cpp
 @@ -18,7 +18,7 @@
@@ -161,10 +162,10 @@ index 10bf69e03..df7c353ad 100644
  #include <math.h>
 diff --git a/lib/vpsc/v_block.h b/lib/vpsc/v_block.h
 new file mode 100644
-index 000000000..8b969ba5a
+index 000000000..e15a87758
 --- /dev/null
 +++ b/lib/vpsc/v_block.h
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,71 @@
 +/**
 + * \brief A block is a group of variables that must be moved together to improve
 + * the goal function without violating already active constraints.
@@ -186,22 +187,23 @@ index 000000000..8b969ba5a
 +
 +#pragma once
 +
++#include <memory>
 +#include <vector>
 +#include <iostream>
++#include <vpsc/pairingheap/PairingHeap.h>
 +struct Variable;
 +struct Constraint;
-+template <class T> class PairingHeap;
 +
 +class Block
 +{
 +	friend std::ostream& operator <<(std::ostream &os,const Block &b);
 +public:
-+	std::vector<Variable*> *vars;
++	std::vector<Variable*> vars;
 +	double posn;
 +	double weight;
 +	double wposn;
 +	Block(Variable *v=nullptr);
-+	~Block();
++	Block(const Block &) = delete;
 +	Constraint* findMinLM();
 +	Constraint* findMinLMBetween(Variable* lv, Variable* rv);
 +	Constraint* findMinInConstraint();
@@ -220,8 +222,8 @@ index 000000000..8b969ba5a
 +	double cost();
 +	bool deleted;
 +	long timeStamp;
-+	PairingHeap<Constraint*> *in;
-+	PairingHeap<Constraint*> *out;
++	std::unique_ptr<PairingHeap<Constraint*>> in;
++	std::unique_ptr<PairingHeap<Constraint*>> out;
 +private:
 +	typedef enum {NONE, LEFT, RIGHT} Direction;
 +	typedef std::pair<double, Constraint*> Pair;
@@ -233,10 +235,10 @@ index 000000000..8b969ba5a
 +	bool canFollowRight(Constraint *c, Variable *last);
 +	void populateSplitBlock(Block *b, Variable *v, Variable *u);
 +	void addVariable(Variable *v);
-+	void setUpConstraintHeap(PairingHeap<Constraint*>* &h,bool in);
++	void setUpConstraintHeap(std::unique_ptr<PairingHeap<Constraint*>> &h,bool in);
 +};
 diff --git a/lib/vpsc/variable.h b/lib/vpsc/variable.h
-index 9002043e5..db8289e1b 100644
+index bf79de4a9..9a53bc8c1 100644
 --- a/lib/vpsc/variable.h
 +++ b/lib/vpsc/variable.h
 @@ -19,7 +19,7 @@
@@ -249,5 +251,5 @@ index 9002043e5..db8289e1b 100644
  typedef std::vector<Constraint*> Constraints;
  struct Variable
 -- 
-2.30.2
+2.31.1
 
