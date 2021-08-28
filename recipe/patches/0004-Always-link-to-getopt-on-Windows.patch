@@ -1,4 +1,4 @@
-From f38d9daba605626b69bff26bea84f442718c836c Mon Sep 17 00:00:00 2001
+From 1e7bfddcde9623697e377be45df4b6617b67db2f Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
 Subject: [PATCH 4/7] Always link to getopt on Windows
@@ -10,10 +10,10 @@ Subject: [PATCH 4/7] Always link to getopt on Windows
  3 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 78081f45d..cf6850f74 100644
+index 40d152c0f..6ee6e601e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -176,7 +176,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
+@@ -185,7 +185,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
  message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
  
  include(config_checks)
@@ -23,7 +23,7 @@ index 78081f45d..cf6850f74 100644
  endif()
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index 068a7b838..a3170a9fd 100644
+index 9d1a16ff3..57a3df11e 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
 @@ -3,9 +3,9 @@
@@ -39,10 +39,10 @@ index 068a7b838..a3170a9fd 100644
      install(
          TARGETS ${name}
 diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
-index 0796c86ef..92cd7da1d 100644
+index b99ed35c7..d5da41be8 100644
 --- a/lib/gvpr/CMakeLists.txt
 +++ b/lib/gvpr/CMakeLists.txt
-@@ -59,6 +59,6 @@ target_link_libraries(gvpr
+@@ -42,6 +42,6 @@ target_link_libraries(gvpr
      vmalloc
  )
  

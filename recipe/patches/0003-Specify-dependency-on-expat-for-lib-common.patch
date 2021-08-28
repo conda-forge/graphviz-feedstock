@@ -1,4 +1,4 @@
-From a923c9b41323f9c0bebf4de3ae74ffd54e212bf9 Mon Sep 17 00:00:00 2001
+From 83c63ff430a3d8e822b17ba81d32f3e9204fab98 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:19:14 -0500
 Subject: [PATCH 3/7] Specify dependency on expat for lib/common
@@ -8,7 +8,7 @@ Subject: [PATCH 3/7] Specify dependency on expat for lib/common
  1 file changed, 1 insertion(+)
 
 diff --git a/lib/common/CMakeLists.txt b/lib/common/CMakeLists.txt
-index 3cde1e318..bf584df04 100644
+index 246e9aa82..ac42470f9 100644
 --- a/lib/common/CMakeLists.txt
 +++ b/lib/common/CMakeLists.txt
 @@ -99,6 +99,7 @@ target_include_directories(common_obj PRIVATE

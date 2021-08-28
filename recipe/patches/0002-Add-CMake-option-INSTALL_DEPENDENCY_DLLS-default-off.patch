@@ -1,4 +1,4 @@
-From 2cc884d541db37a529fe753efa19e7780c093fd0 Mon Sep 17 00:00:00 2001
+From 89d6caaf64732e0d76ae07ca3aae1b2c1335d54c Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
@@ -12,36 +12,36 @@ Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
  5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ab611fcfe..78081f45d 100644
+index b254d4ceb..40d152c0f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -14,6 +14,10 @@ option(use_sanitizers  "enables using address and undefined behavior sanitizer"
- option(use_coverage    "enables analyzing code coverage" OFF)
+@@ -17,6 +17,10 @@ option(use_coverage    "enables analyzing code coverage" OFF)
+ option(with_cxx_api    "enables building the C++ API" OFF)
  option(with_cxx_tests  "enables building the C++ tests" OFF)
  
 +if (WIN32)
-+	option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
++    option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
 +endif (WIN32)
 +
- if (enable_ltdl)
-         add_definitions(-DENABLE_LTDL)
- endif (enable_ltdl)
-@@ -231,7 +235,9 @@ if (use_coverage)
+ if (with_digcola)
+     add_definitions(-DDIGCOLA)
+ endif (with_digcola)
+@@ -240,7 +244,9 @@ if (use_coverage)
  endif()
  
  # ============================ Packaging information ===========================
 -include(InstallRequiredSystemLibraries)
 +if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
-+	include(InstallRequiredSystemLibraries)
++    include(InstallRequiredSystemLibraries)
 +endif()
  include(package_info)
  include(CPack)
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index 2d937b525..068a7b838 100644
+index e81c86cf2..9d1a16ff3 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
-@@ -395,14 +395,14 @@ endif(EXPAT_FOUND)
+@@ -381,14 +381,14 @@ tool_defaults(sccmap)
  
  # ===================== Install third party DLLs on Windows ====================
  
@@ -59,10 +59,10 @@ index 2d937b525..068a7b838 100644
          FILES ${Getopt_RUNTIME_LIBRARIES}
          DESTINATION ${BINARY_INSTALL_DIR}
 diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
-index 1b00d78a4..6cc69d00a 100644
+index 5a7c2cc21..caed070dd 100644
 --- a/lib/gvc/CMakeLists.txt
 +++ b/lib/gvc/CMakeLists.txt
-@@ -114,7 +114,7 @@ set_target_properties(gvc PROPERTIES
+@@ -122,7 +122,7 @@ set_target_properties(gvc PROPERTIES
  )
  
  # Include DLLs with this library on Windows
