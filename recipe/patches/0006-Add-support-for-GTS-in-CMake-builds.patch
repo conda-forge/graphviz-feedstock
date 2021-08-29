@@ -1,4 +1,4 @@
-From ad974e7e26b146bc3d19e56ab9f329625a56e51d Mon Sep 17 00:00:00 2001
+From e6e838850c39a194037810dc97bc0aa313d8c08f Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 6/7] Add support for GTS in CMake builds
@@ -15,17 +15,17 @@ Subject: [PATCH 6/7] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index cf6850f74..741ecde0b 100644
+index 6ee6e601e..18ac24831 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -90,6 +90,7 @@ find_package(ANN)
- find_package(Cairo)
- find_package(EXPAT)
+@@ -93,6 +93,7 @@ if(with_expat)
+ endif()
+ 
  find_package(GD)
 +find_package(GTS)
- find_package(LTDL)
- find_package(PangoCairo)
- find_package(ZLIB)
+ 
+ if(enable_ltdl)
+   find_package(LTDL)
 diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
 new file mode 100644
 index 000000000..b10b29dfc
