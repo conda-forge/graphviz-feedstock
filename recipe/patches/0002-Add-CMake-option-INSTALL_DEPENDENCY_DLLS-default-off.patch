@@ -1,7 +1,21 @@
-diff --color -Naur graphviz-2.49.1.orig/CMakeLists.txt graphviz-2.49.1/CMakeLists.txt
---- graphviz-2.49.1.orig/CMakeLists.txt	2021-09-22 21:04:13.000000000 -0300
-+++ graphviz-2.49.1/CMakeLists.txt	2021-09-23 15:50:38.286454050 -0300
-@@ -18,6 +18,10 @@
+From ac1061b118d3d300dc47f41b0186d4335754c326 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 15:17:59 -0500
+Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
+
+---
+ CMakeLists.txt              |  8 +++++++-
+ cmd/tools/CMakeLists.txt    |  4 ++--
+ lib/gvc/CMakeLists.txt      |  2 +-
+ plugin/gd/CMakeLists.txt    |  2 +-
+ plugin/pango/CMakeLists.txt | 14 +++++++-------
+ 5 files changed, 18 insertions(+), 12 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 065e96c87..3ae295add 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -18,6 +18,10 @@ option(with_cxx_api    "enables building the C++ API" OFF)
  option(with_cxx_tests  "enables building the C++ tests" OFF)
  option(use_win_pre_inst_libs "enables building using pre-installed Windows libraries" ON)
  
@@ -12,7 +26,7 @@ diff --color -Naur graphviz-2.49.1.orig/CMakeLists.txt graphviz-2.49.1/CMakeList
  if (with_digcola)
      add_definitions(-DDIGCOLA)
  endif (with_digcola)
-@@ -244,7 +248,9 @@
+@@ -244,7 +248,9 @@ if (use_coverage)
  endif()
  
  # ============================ Packaging information ===========================
@@ -23,10 +37,11 @@ diff --color -Naur graphviz-2.49.1.orig/CMakeLists.txt graphviz-2.49.1/CMakeList
  include(package_info)
  include(CPack)
  
-diff --color -Naur graphviz-2.49.1.orig/cmd/tools/CMakeLists.txt graphviz-2.49.1/cmd/tools/CMakeLists.txt
---- graphviz-2.49.1.orig/cmd/tools/CMakeLists.txt	2021-09-22 21:04:13.000000000 -0300
-+++ graphviz-2.49.1/cmd/tools/CMakeLists.txt	2021-09-23 15:51:31.408414300 -0300
-@@ -392,14 +392,14 @@
+diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
+index 8d7b88484..f7c220793 100644
+--- a/cmd/tools/CMakeLists.txt
++++ b/cmd/tools/CMakeLists.txt
+@@ -392,14 +392,14 @@ tool_defaults(sccmap)
  
  # ===================== Install third party DLLs on Windows ====================
  
@@ -43,22 +58,24 @@ diff --color -Naur graphviz-2.49.1.orig/cmd/tools/CMakeLists.txt graphviz-2.49.1
      install(
          FILES ${Getopt_RUNTIME_LIBRARIES}
          DESTINATION ${BINARY_INSTALL_DIR}
-diff --color -Naur graphviz-2.49.1.orig/lib/gvc/CMakeLists.txt graphviz-2.49.1/lib/gvc/CMakeLists.txt
---- graphviz-2.49.1.orig/lib/gvc/CMakeLists.txt	2021-09-22 21:04:13.000000000 -0300
-+++ graphviz-2.49.1/lib/gvc/CMakeLists.txt	2021-09-23 15:52:59.403366960 -0300
-@@ -134,7 +134,7 @@
+diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
+index 745841176..222ea4630 100644
+--- a/lib/gvc/CMakeLists.txt
++++ b/lib/gvc/CMakeLists.txt
+@@ -134,7 +134,7 @@ set_target_properties(gvc PROPERTIES
  )
  
  # Include DLLs with this library on Windows
 -if (WIN32 AND EXPAT_FOUND)
-+if (WIN32 AND INSTALL_DEPENDENCY_DLLS AND EXPAT_FOUND)
++if (WIN32 AND EXPAT_FOUND AND INSTALL_DEPENDENCY_DLLS)
      install(
          FILES
              ${EXPAT_RUNTIME_LIBRARIES}
-diff --color -Naur graphviz-2.49.1.orig/plugin/gd/CMakeLists.txt graphviz-2.49.1/plugin/gd/CMakeLists.txt
---- graphviz-2.49.1.orig/plugin/gd/CMakeLists.txt	2021-09-22 21:04:13.000000000 -0300
-+++ graphviz-2.49.1/plugin/gd/CMakeLists.txt	2021-09-23 15:53:50.752940336 -0300
-@@ -36,7 +36,7 @@
+diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
+index fe7ed264d..50a9224ac 100644
+--- a/plugin/gd/CMakeLists.txt
++++ b/plugin/gd/CMakeLists.txt
+@@ -36,7 +36,7 @@ install(
  )
  
  # Include DLLs with this library on Windows
@@ -67,10 +84,11 @@ diff --color -Naur graphviz-2.49.1.orig/plugin/gd/CMakeLists.txt graphviz-2.49.1
      install(
          FILES
              ${GD_RUNTIME_LIBRARIES}
-diff --color -Naur graphviz-2.49.1.orig/plugin/pango/CMakeLists.txt graphviz-2.49.1/plugin/pango/CMakeLists.txt
---- graphviz-2.49.1.orig/plugin/pango/CMakeLists.txt	2021-09-22 21:04:13.000000000 -0300
-+++ graphviz-2.49.1/plugin/pango/CMakeLists.txt	2021-09-23 15:54:38.598318541 -0300
-@@ -42,13 +42,13 @@
+diff --git a/plugin/pango/CMakeLists.txt b/plugin/pango/CMakeLists.txt
+index c423dd934..e5f5e2758 100644
+--- a/plugin/pango/CMakeLists.txt
++++ b/plugin/pango/CMakeLists.txt
+@@ -42,13 +42,13 @@ install(
  )
  
  # Include DLLs with this library on Windows
@@ -91,3 +109,6 @@ diff --color -Naur graphviz-2.49.1.orig/plugin/pango/CMakeLists.txt graphviz-2.4
  endif()
  
  # Specify library version and soversion
+-- 
+2.31.1
+
