@@ -1,4 +1,4 @@
-From 89d6caaf64732e0d76ae07ca3aae1b2c1335d54c Mon Sep 17 00:00:00 2001
+From ac1061b118d3d300dc47f41b0186d4335754c326 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
@@ -12,12 +12,12 @@ Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
  5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b254d4ceb..40d152c0f 100644
+index 065e96c87..3ae295add 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -17,6 +17,10 @@ option(use_coverage    "enables analyzing code coverage" OFF)
- option(with_cxx_api    "enables building the C++ API" OFF)
+@@ -18,6 +18,10 @@ option(with_cxx_api    "enables building the C++ API" OFF)
  option(with_cxx_tests  "enables building the C++ tests" OFF)
+ option(use_win_pre_inst_libs "enables building using pre-installed Windows libraries" ON)
  
 +if (WIN32)
 +    option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
@@ -26,7 +26,7 @@ index b254d4ceb..40d152c0f 100644
  if (with_digcola)
      add_definitions(-DDIGCOLA)
  endif (with_digcola)
-@@ -240,7 +244,9 @@ if (use_coverage)
+@@ -244,7 +248,9 @@ if (use_coverage)
  endif()
  
  # ============================ Packaging information ===========================
@@ -38,10 +38,10 @@ index b254d4ceb..40d152c0f 100644
  include(CPack)
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index e81c86cf2..9d1a16ff3 100644
+index 8d7b88484..f7c220793 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
-@@ -381,14 +381,14 @@ tool_defaults(sccmap)
+@@ -392,14 +392,14 @@ tool_defaults(sccmap)
  
  # ===================== Install third party DLLs on Windows ====================
  
@@ -59,23 +59,23 @@ index e81c86cf2..9d1a16ff3 100644
          FILES ${Getopt_RUNTIME_LIBRARIES}
          DESTINATION ${BINARY_INSTALL_DIR}
 diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
-index 5a7c2cc21..caed070dd 100644
+index 745841176..222ea4630 100644
 --- a/lib/gvc/CMakeLists.txt
 +++ b/lib/gvc/CMakeLists.txt
-@@ -122,7 +122,7 @@ set_target_properties(gvc PROPERTIES
+@@ -134,7 +134,7 @@ set_target_properties(gvc PROPERTIES
  )
  
  # Include DLLs with this library on Windows
--if (WIN32)
-+if (WIN32 AND INSTALL_DEPENDENCY_DLLS)
+-if (WIN32 AND EXPAT_FOUND)
++if (WIN32 AND EXPAT_FOUND AND INSTALL_DEPENDENCY_DLLS)
      install(
          FILES
              ${EXPAT_RUNTIME_LIBRARIES}
 diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
-index 0beeccd82..f4cc96018 100644
+index fe7ed264d..50a9224ac 100644
 --- a/plugin/gd/CMakeLists.txt
 +++ b/plugin/gd/CMakeLists.txt
-@@ -37,7 +37,7 @@ install(
+@@ -36,7 +36,7 @@ install(
  )
  
  # Include DLLs with this library on Windows
@@ -85,10 +85,10 @@ index 0beeccd82..f4cc96018 100644
          FILES
              ${GD_RUNTIME_LIBRARIES}
 diff --git a/plugin/pango/CMakeLists.txt b/plugin/pango/CMakeLists.txt
-index e2a4a3845..dbf2f041e 100644
+index c423dd934..e5f5e2758 100644
 --- a/plugin/pango/CMakeLists.txt
 +++ b/plugin/pango/CMakeLists.txt
-@@ -41,13 +41,13 @@ install(
+@@ -42,13 +42,13 @@ install(
  )
  
  # Include DLLs with this library on Windows

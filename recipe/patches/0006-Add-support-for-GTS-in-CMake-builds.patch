@@ -1,4 +1,4 @@
-From e6e838850c39a194037810dc97bc0aa313d8c08f Mon Sep 17 00:00:00 2001
+From 362ca12f92c6122b1499a2888274ae0dad875243 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 6/7] Add support for GTS in CMake builds
@@ -15,10 +15,10 @@ Subject: [PATCH 6/7] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6ee6e601e..18ac24831 100644
+index 764aab00d..cbce29854 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -93,6 +93,7 @@ if(with_expat)
+@@ -97,6 +97,7 @@ if(with_expat)
  endif()
  
  find_package(GD)
@@ -75,7 +75,7 @@ index e0ab0a71c..26a960cde 100644
  // Values
  #define BROWSER "@BROWSER@"
 diff --git a/lib/neatogen/CMakeLists.txt b/lib/neatogen/CMakeLists.txt
-index 412b71d10..64bb473e0 100644
+index a02e9f8b0..52c276118 100644
 --- a/lib/neatogen/CMakeLists.txt
 +++ b/lib/neatogen/CMakeLists.txt
 @@ -91,6 +91,10 @@ add_library(neatogen STATIC
@@ -89,7 +89,7 @@ index 412b71d10..64bb473e0 100644
  target_include_directories(neatogen PRIVATE
      ${GRAPHVIZ_LIB_DIR}
      ${GRAPHVIZ_LIB_DIR}/cdt
-@@ -99,4 +103,7 @@ target_include_directories(neatogen PRIVATE
+@@ -99,6 +103,9 @@ target_include_directories(neatogen PRIVATE
      ${GRAPHVIZ_LIB_DIR}/gvc
      ${GRAPHVIZ_LIB_DIR}/pack
      ${GRAPHVIZ_LIB_DIR}/pathplan
@@ -97,6 +97,8 @@ index 412b71d10..64bb473e0 100644
 +    ${GLIB_INCLUDE_DIR}
 +    ${GLIBCONFIG_INCLUDE_DIR}
  )
+ 
+ target_link_libraries(neatogen PRIVATE
 diff --git a/lib/neatogen/delaunay.c b/lib/neatogen/delaunay.c
 index 61f8ea6c3..266619096 100644
 --- a/lib/neatogen/delaunay.c

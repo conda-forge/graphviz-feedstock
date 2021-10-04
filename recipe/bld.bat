@@ -6,7 +6,8 @@ cmake -S%SRC_DIR% ^
       -DCMAKE_BUILD_TYPE=Release ^
       -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX%;%LIBRARY_LIB% ^
-      -DLTDL_INCLUDE_DIR=%SRC_DIR%\ltdl_compat
+      -DLTDL_INCLUDE_DIR=%SRC_DIR%\ltdl_compat ^
+      -Duse_win_pre_inst_libs=OFF
 if errorlevel 1 exit 1
 
 cmake --build build -- install
