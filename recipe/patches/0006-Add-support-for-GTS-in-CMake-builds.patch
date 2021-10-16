@@ -1,4 +1,4 @@
-From 362ca12f92c6122b1499a2888274ae0dad875243 Mon Sep 17 00:00:00 2001
+From 17770a5abe3ef4555c6ac42867f1ddcc3c847e30 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 6/7] Add support for GTS in CMake builds
@@ -15,10 +15,10 @@ Subject: [PATCH 6/7] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 764aab00d..cbce29854 100644
+index ec8265b1a..6cd454784 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -97,6 +97,7 @@ if(with_expat)
+@@ -105,6 +105,7 @@ if(with_expat)
  endif()
  
  find_package(GD)
@@ -151,5 +151,5 @@ index 9be012383..3eb0fd9ea 100644
  #else
  	graphAdjustMode(g, &am, 0);
 -- 
-2.31.1
+2.33.1
 

@@ -1,4 +1,4 @@
-From e4eed91a7756cd601ae05edb5a4f904cac3aee9b Mon Sep 17 00:00:00 2001
+From 9c6043d51c87fcb4b49608b42e5dca5857e4c189 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
 Subject: [PATCH 5/7] Remove requirement of hard coded DLLs in PATH
@@ -44,5 +44,5 @@ index 0937e41ef..69d82045b 100644
  
      set(PangoCairo_INCLUDE_DIRS
 -- 
-2.31.1
+2.33.1
 

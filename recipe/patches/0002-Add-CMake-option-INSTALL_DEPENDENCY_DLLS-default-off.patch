@@ -1,4 +1,4 @@
-From ac1061b118d3d300dc47f41b0186d4335754c326 Mon Sep 17 00:00:00 2001
+From 92b638760d1c8cc99d56f9109f2f9c13b818c0d8 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 15:17:59 -0500
 Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
@@ -12,12 +12,12 @@ Subject: [PATCH 2/7] Add CMake option: INSTALL_DEPENDENCY_DLLS (default: off)
  5 files changed, 18 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 065e96c87..3ae295add 100644
+index fc9cdc356..c991cd1c4 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -18,6 +18,10 @@ option(with_cxx_api    "enables building the C++ API" OFF)
- option(with_cxx_tests  "enables building the C++ tests" OFF)
- option(use_win_pre_inst_libs "enables building using pre-installed Windows libraries" ON)
+@@ -26,6 +26,10 @@ if (WIN32)
+     add_definitions(-DGVDLL)
+ endif()
  
 +if (WIN32)
 +    option(INSTALL_DEPENDENCY_DLLS "Install 3rd party dependencies" OFF)
@@ -26,7 +26,7 @@ index 065e96c87..3ae295add 100644
  if (with_digcola)
      add_definitions(-DDIGCOLA)
  endif (with_digcola)
-@@ -244,7 +248,9 @@ if (use_coverage)
+@@ -252,7 +256,9 @@ if (use_coverage)
  endif()
  
  # ============================ Packaging information ===========================
@@ -38,10 +38,10 @@ index 065e96c87..3ae295add 100644
  include(CPack)
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index 8d7b88484..f7c220793 100644
+index 94e79b8e0..0cdc1dee5 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
-@@ -392,14 +392,14 @@ tool_defaults(sccmap)
+@@ -360,14 +360,14 @@ tool_defaults(sccmap)
  
  # ===================== Install third party DLLs on Windows ====================
  
@@ -110,5 +110,5 @@ index c423dd934..e5f5e2758 100644
  
  # Specify library version and soversion
 -- 
-2.31.1
+2.33.1
 

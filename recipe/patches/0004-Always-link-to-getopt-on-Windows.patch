@@ -1,19 +1,19 @@
-From da439b7855701b20e8623e654e0f84023b0de5f3 Mon Sep 17 00:00:00 2001
+From 236304067263058d98b4dc26ba673c654494cdba Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
 Subject: [PATCH 4/7] Always link to getopt on Windows
 
 ---
  CMakeLists.txt           | 2 +-
- cmd/tools/CMakeLists.txt | 4 ++--
+ cmd/tools/CMakeLists.txt | 8 ++++----
  lib/gvpr/CMakeLists.txt  | 4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3ae295add..764aab00d 100644
+index c991cd1c4..ec8265b1a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -189,7 +189,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
+@@ -197,7 +197,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
  message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
  
  include(config_checks)
@@ -23,7 +23,7 @@ index 3ae295add..764aab00d 100644
  endif()
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index f7c220793..3d3c46c82 100644
+index 0cdc1dee5..929cd5f45 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
 @@ -3,9 +3,9 @@
@@ -38,11 +38,23 @@ index f7c220793..3d3c46c82 100644
  
      install(
          TARGETS ${name}
+@@ -141,9 +141,9 @@ target_include_directories(gv2gml PRIVATE
+     ${GRAPHVIZ_LIB_DIR}/pathplan
+     ${Getopt_INCLUDE_DIRS})
+ target_link_libraries(gv2gml cgraph gvc ingraphs)
+-if(NOT HAVE_GETOPT_H)
++if (WIN32 OR (NOT HAVE_GETOPT_H))
+     target_link_libraries(gv2gml ${Getopt_LINK_LIBRARIES})
+-endif(NOT HAVE_GETOPT_H)
++endif()
+ install(TARGETS gv2gml RUNTIME DESTINATION ${BINARY_INSTALL_DIR})
+ 
+ # ================================= graphml2gv =================================
 diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
-index b99ed35c7..d5da41be8 100644
+index e812381a8..2a023c2f4 100644
 --- a/lib/gvpr/CMakeLists.txt
 +++ b/lib/gvpr/CMakeLists.txt
-@@ -42,6 +42,6 @@ target_link_libraries(gvpr
+@@ -44,6 +44,6 @@ target_link_libraries(gvpr
      vmalloc
  )
  
@@ -52,5 +64,5 @@ index b99ed35c7..d5da41be8 100644
 -endif(NOT HAVE_GETOPT_H)
 +endif()
 -- 
-2.31.1
+2.33.1
 
