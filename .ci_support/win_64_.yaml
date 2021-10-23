@@ -15,13 +15,11 @@ glib:
 pango:
 - '1.48'
 perl:
-- 5.26.2
+- 5.32.1
 pin_run_as_build:
   cairo:
     max_pin: x.x
   pango:
     max_pin: x.x
-  perl:
-    max_pin: x.x.x
 target_platform:
 - win-64
