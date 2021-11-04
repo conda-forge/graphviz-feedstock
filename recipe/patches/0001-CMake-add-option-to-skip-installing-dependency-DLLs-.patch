@@ -1,0 +1,98 @@
+From e3d7e835c9ca8b19079ef6b5f536059334d55f14 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 25 Oct 2021 21:54:46 -0400
+Subject: [PATCH 1/7] CMake: add option to skip installing dependency DLLs on
+ Windows
+
+Helps packaging ecosystems like Conda which use dependencies from other
+packages, and do not always vendor 3rd party libraries during packaging
+
+tools: install expat/getopt DLLs only if install_win_dependency_dlls is ON
+libgvc: install expat DLLs only if install_win_dependency_dlls is ON
+plugin/gd: install GD DLLs only if install_win_dependency_dlls is ON
+plugin/pango: install pango/cairo DLLs only if install_win_dependency_dlls is ON
+---
+ CMakeLists.txt              | 2 ++
+ cmd/tools/CMakeLists.txt    | 6 +++---
+ lib/gvc/CMakeLists.txt      | 2 +-
+ plugin/gd/CMakeLists.txt    | 2 +-
+ plugin/pango/CMakeLists.txt | 2 +-
+ 5 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fc9cdc356..98eaaa7c5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -24,6 +24,8 @@ if (WIN32)
+     # libraries, so the GVDLL symbol can be unconditionally set until
+     # such support is introduced.
+     add_definitions(-DGVDLL)
++
++    option(install_win_dependency_dlls "Install 3rd party dependencies" ON)
+ endif()
+ 
+ if (with_digcola)
+diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
+index 94e79b8e0..4b37bc4d1 100644
+--- a/cmd/tools/CMakeLists.txt
++++ b/cmd/tools/CMakeLists.txt
+@@ -360,14 +360,14 @@ tool_defaults(sccmap)
+ 
+ # ===================== Install third party DLLs on Windows ====================
+ 
+-if (WIN32 AND EXPAT_FOUND)
++if (WIN32 AND install_win_dependency_dlls AND EXPAT_FOUND)
+     install(
+         FILES ${EXPAT_RUNTIME_LIBRARIES}
+         DESTINATION ${BINARY_INSTALL_DIR}
+     )
+-endif(WIN32 AND EXPAT_FOUND)
++endif()
+ 
+-if (WIN32)
++if (WIN32 AND install_win_dependency_dlls)
+     install(
+         FILES ${Getopt_RUNTIME_LIBRARIES}
+         DESTINATION ${BINARY_INSTALL_DIR}
+diff --git a/lib/gvc/CMakeLists.txt b/lib/gvc/CMakeLists.txt
+index 745841176..0329de559 100644
+--- a/lib/gvc/CMakeLists.txt
++++ b/lib/gvc/CMakeLists.txt
+@@ -134,7 +134,7 @@ set_target_properties(gvc PROPERTIES
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32 AND EXPAT_FOUND)
++if (WIN32 AND EXPAT_FOUND AND install_win_dependency_dlls)
+     install(
+         FILES
+             ${EXPAT_RUNTIME_LIBRARIES}
+diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
+index fe7ed264d..9f3c6c413 100644
+--- a/plugin/gd/CMakeLists.txt
++++ b/plugin/gd/CMakeLists.txt
+@@ -36,7 +36,7 @@ install(
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32)
++if (WIN32 AND install_win_dependency_dlls)
+     install(
+         FILES
+             ${GD_RUNTIME_LIBRARIES}
+diff --git a/plugin/pango/CMakeLists.txt b/plugin/pango/CMakeLists.txt
+index c423dd934..92fc10f73 100644
+--- a/plugin/pango/CMakeLists.txt
++++ b/plugin/pango/CMakeLists.txt
+@@ -42,7 +42,7 @@ install(
+ )
+ 
+ # Include DLLs with this library on Windows
+-if (WIN32)
++if (WIN32 AND install_win_dependency_dlls)
+     install(
+         FILES
+             ${Cairo_RUNTIME_LIBRARIES}
+-- 
+2.31.1
+

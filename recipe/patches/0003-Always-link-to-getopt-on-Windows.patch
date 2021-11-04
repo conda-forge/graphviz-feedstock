@@ -1,0 +1,68 @@
+From cbfb1e49dbdf2e30012171e176a9cc03aba409c2 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 17:02:21 -0500
+Subject: [PATCH 3/7] Always link to getopt on Windows
+
+---
+ CMakeLists.txt           | 2 +-
+ cmd/tools/CMakeLists.txt | 8 ++++----
+ lib/gvpr/CMakeLists.txt  | 4 ++--
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 98eaaa7c5..f8024bca0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -195,7 +195,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
+ message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
+ 
+ include(config_checks)
+-if (NOT HAVE_GETOPT_H)
++if (WIN32 OR (NOT HAVE_GETOPT_H))
+     find_package(Getopt REQUIRED)
+ endif()
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
+index 4b37bc4d1..1eaced574 100644
+--- a/cmd/tools/CMakeLists.txt
++++ b/cmd/tools/CMakeLists.txt
+@@ -3,9 +3,9 @@
+ # - installation of executable
+ # - installation of manpage
+ function(tool_defaults name)
+-    if(NOT HAVE_GETOPT_H)
++    if (WIN32 OR (NOT HAVE_GETOPT_H))
+         target_link_libraries(${name} ${Getopt_LINK_LIBRARIES})
+-    endif(NOT HAVE_GETOPT_H)
++    endif()
+ 
+     install(
+         TARGETS ${name}
+@@ -141,9 +141,9 @@ target_include_directories(gv2gml PRIVATE
+     ${GRAPHVIZ_LIB_DIR}/pathplan
+     ${Getopt_INCLUDE_DIRS})
+ target_link_libraries(gv2gml cgraph gvc ingraphs)
+-if(NOT HAVE_GETOPT_H)
++if (WIN32 OR (NOT HAVE_GETOPT_H))
+     target_link_libraries(gv2gml ${Getopt_LINK_LIBRARIES})
+-endif(NOT HAVE_GETOPT_H)
++endif()
+ install(TARGETS gv2gml RUNTIME DESTINATION ${BINARY_INSTALL_DIR})
+ 
+ # ================================= graphml2gv =================================
+diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
+index e812381a8..2a023c2f4 100644
+--- a/lib/gvpr/CMakeLists.txt
++++ b/lib/gvpr/CMakeLists.txt
+@@ -44,6 +44,6 @@ target_link_libraries(gvpr
+     vmalloc
+ )
+ 
+-if(NOT HAVE_GETOPT_H)
++if (WIN32 OR (NOT HAVE_GETOPT_H))
+     target_link_libraries(gvpr ${Getopt_LINK_LIBRARIES})
+-endif(NOT HAVE_GETOPT_H)
++endif()
+-- 
+2.31.1
+
