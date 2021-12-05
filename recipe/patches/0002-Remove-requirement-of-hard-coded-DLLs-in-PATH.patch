@@ -1,0 +1,48 @@
+From 6ebaa14330841b6f08efc326d3c95b82e3c9d0b3 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 18:07:41 -0500
+Subject: [PATCH 2/4] Remove requirement of hard coded DLLs in PATH
+
+---
+ cmake/FindCairo.cmake      | 5 -----
+ cmake/FindPangoCairo.cmake | 8 --------
+ 2 files changed, 13 deletions(-)
+
+diff --git a/cmake/FindCairo.cmake b/cmake/FindCairo.cmake
+index a44f8682f..a2286edf9 100644
+--- a/cmake/FindCairo.cmake
++++ b/cmake/FindCairo.cmake
+@@ -14,11 +14,6 @@ if(WIN32)
+         Cairo_INCLUDE_DIR
+ 
+         Cairo_LIBRARY
+-
+-        Cairo_RUNTIME_LIBRARY
+-        EXPAT_RUNTIME_LIBRARY
+-        FONTCONFIG_RUNTIME_LIBRARY
+-        PIXMAN_RUNTIME_LIBRARY
+     )
+ 
+     set(Cairo_INCLUDE_DIRS ${Cairo_INCLUDE_DIR})
+diff --git a/cmake/FindPangoCairo.cmake b/cmake/FindPangoCairo.cmake
+index 96e692c8b..11eb31f84 100644
+--- a/cmake/FindPangoCairo.cmake
++++ b/cmake/FindPangoCairo.cmake
+@@ -27,14 +27,6 @@ if(WIN32)
+         GOBJECT_LIBRARY
+         PANGO_LIBRARY
+         PangoCairo_LIBRARY
+-
+-        GLIB_RUNTIME_LIBRARY
+-        GOBJECT_RUNTIME_LIBRARY
+-        HARFBUZZ_RUNTIME_LIBRARY
+-        PANGO_RUNTIME_LIBRARY
+-        PangoCairo_RUNTIME_LIBRARY
+-        PANGOFT_RUNTIME_LIBRARY
+-        PANGOWIN_RUNTIME_LIBRARY
+     )
+ 
+     set(PangoCairo_INCLUDE_DIRS
+-- 
+2.31.1
+

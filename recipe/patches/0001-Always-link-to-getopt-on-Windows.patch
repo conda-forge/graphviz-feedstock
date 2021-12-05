@@ -1,0 +1,61 @@
+From 48fb50fefc0e441a4b3eb7453c14e4618505fd35 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 15 Feb 2021 17:02:21 -0500
+Subject: [PATCH 1/4] Always link to getopt on Windows
+
+---
+ CMakeLists.txt           | 2 +-
+ cmd/tools/CMakeLists.txt | 4 ++--
+ lib/gvpr/CMakeLists.txt  | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 025052bc8..4f09eedad 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -196,7 +196,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h DESTINATION ${HEADE
+ message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
+ 
+ include(config_checks)
+-if(NOT HAVE_GETOPT_H)
++if(WIN32 OR (NOT HAVE_GETOPT_H))
+     find_package(Getopt REQUIRED)
+ endif()
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
+index 95128229b..3c713191f 100644
+--- a/cmd/tools/CMakeLists.txt
++++ b/cmd/tools/CMakeLists.txt
+@@ -3,7 +3,7 @@
+ # - installation of executable
+ # - installation of manpage
+ function(tool_defaults name)
+-    if(NOT HAVE_GETOPT_H)
++    if(WIN32 OR (NOT HAVE_GETOPT_H))
+         target_link_libraries(${name} ${Getopt_LINK_LIBRARIES})
+     endif()
+ 
+@@ -141,7 +141,7 @@ target_include_directories(gv2gml PRIVATE
+     ${GRAPHVIZ_LIB_DIR}/pathplan
+     ${Getopt_INCLUDE_DIRS})
+ target_link_libraries(gv2gml cgraph gvc ingraphs)
+-if(NOT HAVE_GETOPT_H)
++if(WIN32 OR (NOT HAVE_GETOPT_H))
+     target_link_libraries(gv2gml ${Getopt_LINK_LIBRARIES})
+ endif()
+ install(TARGETS gv2gml RUNTIME DESTINATION ${BINARY_INSTALL_DIR})
+diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
+index 3972918e4..a6f74f979 100644
+--- a/lib/gvpr/CMakeLists.txt
++++ b/lib/gvpr/CMakeLists.txt
+@@ -44,6 +44,6 @@ target_link_libraries(gvpr
+     vmalloc
+ )
+ 
+-if(NOT HAVE_GETOPT_H)
++if(WIN32 OR (NOT HAVE_GETOPT_H))
+     target_link_libraries(gvpr ${Getopt_LINK_LIBRARIES})
+ endif()
+-- 
+2.31.1
+
