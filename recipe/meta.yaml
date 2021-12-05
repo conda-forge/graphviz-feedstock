@@ -8,16 +8,10 @@ source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
     sha256: afa48581f764a35e148909cc96a0308ec2356b5225b64af12492f3392f20ef1c
     patches:
-      # https://gitlab.com/graphviz/graphviz/-/merge_requests/2252
-      - patches/0001-CMake-add-option-to-skip-installing-dependency-DLLs-.patch
-      # https://gitlab.com/graphviz/graphviz/-/merge_requests/2251
-      - patches/0002-common-CMake-specify-include-directory-of-expat.patch
-      - patches/0003-Always-link-to-getopt-on-Windows.patch
-      - patches/0004-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
-      - patches/0005-Add-support-for-GTS-in-CMake-builds.patch
-      - patches/0006-Fix-logic-for-finding-harfbuzz.patch
-      # https://gitlab.com/graphviz/graphviz/-/merge_requests/2231
-      - patches/0007-Prefer-dl_iterate_phdr-3-over-proc-self-maps.patch
+      - patches/0001-Always-link-to-getopt-on-Windows.patch
+      - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
+      - patches/0003-Add-support-for-GTS-in-CMake-builds.patch
+      - patches/0004-Fix-logic-for-finding-harfbuzz.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd

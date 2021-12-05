@@ -1,0 +1,76 @@
+From ec0dad4cb9df225c1c8c6f8db99cbe7c5e105104 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Tue, 16 Feb 2021 18:38:18 -0500
+Subject: [PATCH 3/4] Add support for GTS in CMake builds
+
+---
+ CMakeLists.txt              | 1 +
+ cmake/config_checks.cmake   | 1 +
+ config-cmake.h.in           | 1 +
+ lib/neatogen/CMakeLists.txt | 7 +++++++
+ 4 files changed, 10 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4f09eedad..d0cefc794 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -104,6 +104,7 @@ if(with_expat)
+ endif()
+ 
+ find_package(GD)
++find_package(GTS)
+ 
+ if(enable_ltdl)
+   find_package(LTDL)
+diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
+index 28cb2fc48..fb636d3c1 100644
+--- a/cmake/config_checks.cmake
++++ b/cmake/config_checks.cmake
+@@ -42,6 +42,7 @@ check_type_size( intptr_t    INTPTR_T    )
+ set( HAVE_ANN       ${ANN_FOUND}        )
+ set( HAVE_EXPAT     ${EXPAT_FOUND}      )
+ set( HAVE_LIBGD     ${GD_FOUND}         )
++set( HAVE_GTS       ${GTS_FOUND}        )
+ set( HAVE_ZLIB      ${ZLIB_FOUND}       )
+ 
+ if(LTDL_FOUND)
+diff --git a/config-cmake.h.in b/config-cmake.h.in
+index 0272b8b23..4885352bf 100644
+--- a/config-cmake.h.in
++++ b/config-cmake.h.in
+@@ -40,6 +40,7 @@ typedef int ssize_t;
+ #cmakedefine HAVE_EXPAT
+ #cmakedefine HAVE_LIBGD
+ #cmakedefine HAVE_ZLIB
++#cmakedefine HAVE_GTS
+ 
+ // Values
+ #define BROWSER "@BROWSER@"
+diff --git a/lib/neatogen/CMakeLists.txt b/lib/neatogen/CMakeLists.txt
+index bfbb861e6..57cd43494 100644
+--- a/lib/neatogen/CMakeLists.txt
++++ b/lib/neatogen/CMakeLists.txt
+@@ -91,6 +91,10 @@ add_library(neatogen STATIC
+     ${sources}
+ )
+ 
++target_link_libraries(neatogen PRIVATE
++    ${GTS_LIBRARY}
++    ${GLIB_LIBRARY})
++
+ target_include_directories(neatogen PRIVATE
+     ${GRAPHVIZ_LIB_DIR}
+     ${GRAPHVIZ_LIB_DIR}/cdt
+@@ -99,6 +103,9 @@ target_include_directories(neatogen PRIVATE
+     ${GRAPHVIZ_LIB_DIR}/gvc
+     ${GRAPHVIZ_LIB_DIR}/pack
+     ${GRAPHVIZ_LIB_DIR}/pathplan
++    ${GTS_INCLUDE_DIR}
++    ${GLIB_INCLUDE_DIR}
++    ${GLIBCONFIG_INCLUDE_DIR}
+ )
+ 
+ target_link_libraries(neatogen PRIVATE
+-- 
+2.31.1
+

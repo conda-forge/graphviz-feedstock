@@ -1,0 +1,62 @@
+From 7f5f1cb7bbc42dc0d6cdc6f1fc5ee6c36459dc91 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 10 May 2021 20:19:04 -0400
+Subject: [PATCH 4/4] Fix logic for finding harfbuzz
+
+Pango >=1.44.1 changed the way harfbuzz is included
+
+xref: https://github.com/GNOME/pango/commit/a7b17aa2
+---
+ cmake/FindPangoCairo.cmake | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/cmake/FindPangoCairo.cmake b/cmake/FindPangoCairo.cmake
+index 11eb31f84..0f463d9b1 100644
+--- a/cmake/FindPangoCairo.cmake
++++ b/cmake/FindPangoCairo.cmake
+@@ -4,11 +4,13 @@ if(WIN32)
+     find_path(PangoCairo_INCLUDE_DIR pango/pangocairo.h PATH_SUFFIXES pango-1.0)
+     find_path(GLIB_INCLUDE_DIR glib.h PATH_SUFFIXES glib-2.0)
+     find_path(GLIBCONFIG_INCLUDE_DIR glibconfig.h PATH_SUFFIXES glib-2.0/include)
++    find_path(HARFBUZZ_INCLUDE_DIR hb.h PATH_SUFFIXES harfbuzz)
+ 
+     find_library(GLIB_LIBRARY NAMES glib-2.0)
+     find_library(GOBJECT_LIBRARY NAMES gobject-2.0)
+     find_library(PANGO_LIBRARY NAMES pango-1.0)
+     find_library(PangoCairo_LIBRARY NAMES pangocairo-1.0)
++    find_library(HARFBUZZ_LIBRARY NAMES harfbuzz)
+ 
+     find_program(GLIB_RUNTIME_LIBRARY NAMES glib-2.dll)
+     find_program(GOBJECT_RUNTIME_LIBRARY NAMES gobject-2.dll)
+@@ -22,17 +24,20 @@ if(WIN32)
+         GLIB_INCLUDE_DIR
+         GLIBCONFIG_INCLUDE_DIR
+         PangoCairo_INCLUDE_DIR
++        HARFBUZZ_INCLUDE_DIR
+ 
+         GLIB_LIBRARY
+         GOBJECT_LIBRARY
+         PANGO_LIBRARY
+         PangoCairo_LIBRARY
++        HARFBUZZ_LIBRARY
+     )
+ 
+     set(PangoCairo_INCLUDE_DIRS
+         ${GLIB_INCLUDE_DIR}
+         ${GLIBCONFIG_INCLUDE_DIR}
+         ${PangoCairo_INCLUDE_DIR}
++        ${HARFBUZZ_INCLUDE_DIR}
+     )
+ 
+     set(PangoCairo_LIBRARIES
+@@ -47,6 +52,7 @@ if(WIN32)
+         ${GOBJECT_LIBRARY}
+         ${PANGO_LIBRARY}
+         ${PangoCairo_LIBRARY}
++        ${HARFBUZZ_LIBRARY}
+     )
+ 
+     set(PangoCairo_RUNTIME_LIBRARIES
+-- 
+2.31.1
+
