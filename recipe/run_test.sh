@@ -3,7 +3,7 @@ set -ex
 
 dot -c
 dot -V
-echo | dot -v
+dot -v < /dev/null
 fdp -V
 sfdp -V
 neato -?
