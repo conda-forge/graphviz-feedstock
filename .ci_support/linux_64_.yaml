@@ -31,7 +31,7 @@ librsvg:
 libwebp_base:
 - '1'
 pango:
-- '1.48'
+- '1.50'
 pin_run_as_build:
   cairo:
     max_pin: x.x
