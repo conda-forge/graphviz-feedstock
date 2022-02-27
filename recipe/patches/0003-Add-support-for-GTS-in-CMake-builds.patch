@@ -1,14 +1,53 @@
-From 3669d4ec0894dadbfc9e855478f58a9c0d4928bb Mon Sep 17 00:00:00 2001
+From 2c425fbb23b366f19514d99f50551d4983ede9a5 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 3/3] Add support for GTS in CMake builds
 
 ---
- cmake/config_checks.cmake   | 1 +
- config-cmake.h.in           | 1 +
- lib/neatogen/CMakeLists.txt | 7 +++++++
- 3 files changed, 9 insertions(+)
+ CMakeLists.txt              |  1 +
+ cmake/FindGTS.cmake         | 18 ++++++++++++++++++
+ cmake/config_checks.cmake   |  1 +
+ config-cmake.h.in           |  1 +
+ lib/neatogen/CMakeLists.txt |  7 +++++++
+ 5 files changed, 28 insertions(+)
+ create mode 100644 cmake/FindGTS.cmake
 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 19c8f0418..a042878ea 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -120,6 +120,7 @@ if(with_expat)
+ endif()
+ 
+ find_package(GD)
++find_package(GTS)
+ 
+ if(enable_ltdl)
+   find_package(LTDL)
+diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
+new file mode 100644
+index 000000000..b10b29dfc
+--- /dev/null
++++ b/cmake/FindGTS.cmake
+@@ -0,0 +1,18 @@
++find_path(GTS_INCLUDE_DIR gts.h)
++find_library(GTS_LIBRARY NAMES gts)
++find_program(GTS_RUNTIME_LIBRARY gts.dll)
++
++include(FindPackageHandleStandardArgs)
++if (WIN32)
++    find_package_handle_standard_args(GTS DEFAULT_MSG
++                                      GTS_LIBRARY GTS_INCLUDE_DIR GTS_RUNTIME_LIBRARY)
++else()
++    find_package_handle_standard_args(GTS DEFAULT_MSG
++                                      GTS_LIBRARY GTS_INCLUDE_DIR)
++endif()
++
++mark_as_advanced(GTS_INCLUDE_DIR GTS_LIBRARY GTS_RUNTIME_LIBRARY)
++
++set(GTS_INCLUDE_DIRS ${GTS_INCLUDE_DIR})
++set(GTS_LIBRARIES ${GTS_LIBRARY})
++set(GTS_RUNTIME_LIBRARIES ${GTS_RUNTIME_LIBRARY})
 diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
 index fc51a68f7..11948af0e 100644
 --- a/cmake/config_checks.cmake
