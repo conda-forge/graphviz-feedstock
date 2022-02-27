@@ -1,4 +1,4 @@
-{% set version = "2.50.0" %}
+{% set version = "3.0.0" %}
 
 package:
   name: graphviz
@@ -6,19 +6,18 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: afa48581f764a35e148909cc96a0308ec2356b5225b64af12492f3392f20ef1c
+    sha256: 59931082a3638139e06c296b96e860a9d338432af06f7f57a6ad8da5cbf465c7
     patches:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Add-support-for-GTS-in-CMake-builds.patch
-      - patches/0004-Fix-logic-for-finding-harfbuzz.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
     folder: ltdl_compat
 
 build:
-  number: 2
+  number: 0
   detect_binary_files_with_prefix: true  # [unix]
 
 requirements:
