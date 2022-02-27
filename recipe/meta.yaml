@@ -11,7 +11,6 @@ source:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Add-support-for-GTS-in-CMake-builds.patch
-      - patches/0004-Fix-logic-for-finding-harfbuzz.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
