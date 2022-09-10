@@ -1,5 +1,5 @@
 c_compiler:
-- vs2017
+- vs2019
 cairo:
 - '1.16'
 channel_sources:
@@ -7,7 +7,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- vs2019
 expat:
 - '2'
 glib:
