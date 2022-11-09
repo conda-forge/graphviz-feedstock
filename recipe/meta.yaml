@@ -1,4 +1,4 @@
-{% set version = "6.0.1" %}
+{% set version = "7.0.1" %}
 
 package:
   name: graphviz
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: 92a5cabb71c2610ffb713f0da7ee595fa143f3fae5eaff172927dd27355d9775
+    sha256: fbf07c96122902f1dca28dd74677e2e5cd76734b5f7b946e7d0ee5bbe7306af8
     patches:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
