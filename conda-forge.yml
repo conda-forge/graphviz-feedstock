@@ -1,8 +1,8 @@
 bot:
   abi_migration_branches:
-    - 4.0.x
-    - 3.0.x
-    - 2.50.x
+  - 4.0.x
+  - 3.0.x
+  - 2.50.x
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
@@ -16,3 +16,5 @@ test_on_native_only: true
 github:
   branch_name: main
   tooling_branch_name: main
+conda_build:
+  pkg_format: '2'
