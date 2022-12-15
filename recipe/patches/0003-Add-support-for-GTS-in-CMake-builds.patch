@@ -1,4 +1,4 @@
-From 03b25699ff1382c9f947da424fd54309bf154b3a Mon Sep 17 00:00:00 2001
+From 839cfa0d7fda12e0ce89ff5333c1a45741246da5 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 16 Feb 2021 18:38:18 -0500
 Subject: [PATCH 3/3] Add support for GTS in CMake builds
@@ -13,7 +13,7 @@ Subject: [PATCH 3/3] Add support for GTS in CMake builds
  create mode 100644 cmake/FindGTS.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 16d254634..9371b46ed 100644
+index d33978800..9e1f55ec9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -113,6 +113,7 @@ if(with_expat)
@@ -49,22 +49,22 @@ index 000000000..b10b29dfc
 +set(GTS_LIBRARIES ${GTS_LIBRARY})
 +set(GTS_RUNTIME_LIBRARIES ${GTS_RUNTIME_LIBRARY})
 diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
-index b9d9f1783..96f095163 100644
+index 8046df3e3..d633d0749 100644
 --- a/cmake/config_checks.cmake
 +++ b/cmake/config_checks.cmake
-@@ -39,6 +39,7 @@ check_type_size( intptr_t    INTPTR_T    )
- set( HAVE_ANN       ${ANN_FOUND}        )
- set( HAVE_EXPAT     ${EXPAT_FOUND}      )
+@@ -32,6 +32,7 @@ if(with_expat AND EXPAT_FOUND)
+   set(HAVE_EXPAT 1)
+ endif()
  set( HAVE_LIBGD     ${GD_FOUND}         )
 +set( HAVE_GTS       ${GTS_FOUND}        )
- set( HAVE_ZLIB      ${ZLIB_FOUND}       )
- set( HAVE_SVG_2_36  ${SVG_2_36_FOUND}   )
- 
+ if(with_zlib AND ZLIB_FOUND)
+   set(HAVE_ZLIB 1)
+ endif()
 diff --git a/config-cmake.h.in b/config-cmake.h.in
-index 485450354..1c96602b4 100644
+index c850d221b..6017b42b1 100644
 --- a/config-cmake.h.in
 +++ b/config-cmake.h.in
-@@ -48,6 +48,7 @@ typedef int ssize_t;
+@@ -39,6 +39,7 @@ typedef SSIZE_T ssize_t;
  #cmakedefine HAVE_GD_FREETYPE
  #cmakedefine HAVE_GD_GIF
  #cmakedefine HAVE_ZLIB
@@ -73,10 +73,10 @@ index 485450354..1c96602b4 100644
  // Values
  #define BROWSER "@BROWSER@"
 diff --git a/lib/neatogen/CMakeLists.txt b/lib/neatogen/CMakeLists.txt
-index d597c457a..b533d4c47 100644
+index 129e65faf..f4acd64f7 100644
 --- a/lib/neatogen/CMakeLists.txt
 +++ b/lib/neatogen/CMakeLists.txt
-@@ -92,6 +92,11 @@ add_library(neatogen STATIC
+@@ -90,6 +90,11 @@ add_library(neatogen STATIC
    ${SOURCES}
  )
  
@@ -88,7 +88,7 @@ index d597c457a..b533d4c47 100644
  target_include_directories(neatogen PRIVATE
    ..
    ../cdt
-@@ -100,6 +105,9 @@ target_include_directories(neatogen PRIVATE
+@@ -98,6 +103,9 @@ target_include_directories(neatogen PRIVATE
    ../gvc
    ../pack
    ../pathplan
@@ -99,5 +99,5 @@ index d597c457a..b533d4c47 100644
  
  target_link_libraries(neatogen PRIVATE
 -- 
-2.31.1
+2.33.1
 

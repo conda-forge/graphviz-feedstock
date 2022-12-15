@@ -1,4 +1,4 @@
-From ea13be764580ce5d7505c5753e41e2f063808525 Mon Sep 17 00:00:00 2001
+From ebb37f3377f6f3844a0c9f397b00e4e8600b7f64 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
 Subject: [PATCH 2/3] Remove requirement of hard coded DLLs in PATH
@@ -9,7 +9,7 @@ Subject: [PATCH 2/3] Remove requirement of hard coded DLLs in PATH
  2 files changed, 13 deletions(-)
 
 diff --git a/cmake/FindCAIRO.cmake b/cmake/FindCAIRO.cmake
-index 5d706b614..bf944a64e 100644
+index a92916eb9..77e4895eb 100644
 --- a/cmake/FindCAIRO.cmake
 +++ b/cmake/FindCAIRO.cmake
 @@ -15,11 +15,6 @@ if(WIN32)
@@ -25,7 +25,7 @@ index 5d706b614..bf944a64e 100644
  
    set(CAIRO_INCLUDE_DIRS ${CAIRO_INCLUDE_DIR})
 diff --git a/cmake/FindPANGOCAIRO.cmake b/cmake/FindPANGOCAIRO.cmake
-index e045e8ff6..7f3574a87 100644
+index b92e5bea9..76e8ede19 100644
 --- a/cmake/FindPANGOCAIRO.cmake
 +++ b/cmake/FindPANGOCAIRO.cmake
 @@ -35,14 +35,6 @@ if(WIN32)
@@ -44,5 +44,5 @@ index e045e8ff6..7f3574a87 100644
  
    set(PANGOCAIRO_INCLUDE_DIRS
 -- 
-2.31.1
+2.33.1
 
