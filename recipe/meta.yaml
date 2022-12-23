@@ -62,7 +62,7 @@ requirements:
     # --enable-ltdl
     - libtool                                             # [unix]
     # --with-webp=yes
-    - libwebp-base                                        # [unix]
+    - libwebp-base
     # --with-pangocairo=yes
     - pango
     # default requirement
@@ -81,7 +81,7 @@ requirements:
     - libglib
     - librsvg                                             # [unix]
     - libtool                                             # [unix]
-    - libwebp-base                                        # [unix]
+    - libwebp-base
     - pango
     - zlib                                                # [unix]
     - fonts-conda-ecosystem                               # [unix]
