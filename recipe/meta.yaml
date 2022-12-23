@@ -32,7 +32,7 @@ requirements:
     - libtool                                             # [unix]
     - automake                                            # [unix]
     - autoconf                                            # [unix]
-    - cmake                                               # [win]
+    - cmake 3.25.0                                        # [win]
     - ninja                                               # [win]
     - python >=3
     - m2-gawk                                             # [win]
