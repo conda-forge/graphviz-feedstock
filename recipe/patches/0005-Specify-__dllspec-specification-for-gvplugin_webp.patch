@@ -1,0 +1,29 @@
+From 4ffea3e81d90d6cd72a3f143a6b268263e9b0f1d Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Fri, 30 Dec 2022 22:52:09 +0000
+Subject: [PATCH 5/5] Specify __dllspec specification for gvplugin_webp
+
+This ensures that the import library is created on Windows
+---
+ plugin/webp/gvplugin_webp.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/plugin/webp/gvplugin_webp.c b/plugin/webp/gvplugin_webp.c
+index 3b3ea115c..91883b84b 100644
+--- a/plugin/webp/gvplugin_webp.c
++++ b/plugin/webp/gvplugin_webp.c
+@@ -19,4 +19,10 @@ static gvplugin_api_t apis[] = {
+     {(api_t)0, 0},
+ };
+ 
+-gvplugin_library_t gvplugin_webp_LTX_library = { "webp", apis };
++#ifdef GVDLL
++#define GVPLUGIN_WEBP_API __declspec(dllexport)
++#else
++#define GVPLUGIN_WEBP_API
++#endif
++
++GVPLUGIN_WEBP_API gvplugin_library_t gvplugin_webp_LTX_library = { "webp", apis };
+-- 
+2.33.1
+

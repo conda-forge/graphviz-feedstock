@@ -1,4 +1,4 @@
-{% set version = "6.0.2" %}
+{% set version = "7.0.5" %}
 
 package:
   name: graphviz
@@ -6,11 +6,15 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: a9b823af1f1648f1c325050c45b401c38bde86519e8c1ade16284a8f68bed3ff
+    sha256: 8ec9ada2159ef530defba608ad9b9fa569b58d44f4781a34eee5c2601c3e5b61
     patches:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Add-support-for-GTS-in-CMake-builds.patch
+      - patches/0004-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
+      - patches/0005-Specify-__dllspec-specification-for-gvplugin_webp.patch
+      - patches/0006-Fix-dependencies-for-gvplugin_webp.patch
+      - patches/0007-Fix-dependencies-for-gvplugin_gd.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
@@ -62,7 +66,7 @@ requirements:
     # --enable-ltdl
     - libtool                                             # [unix]
     # --with-webp=yes
-    - libwebp-base                                        # [unix]
+    - libwebp-base
     # --with-pangocairo=yes
     - pango
     # default requirement
@@ -81,7 +85,7 @@ requirements:
     - libglib
     - librsvg                                             # [unix]
     - libtool                                             # [unix]
-    - libwebp-base                                        # [unix]
+    - libwebp-base
     - pango
     - zlib                                                # [unix]
     - fonts-conda-ecosystem                               # [unix]
