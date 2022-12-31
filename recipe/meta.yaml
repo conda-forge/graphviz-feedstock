@@ -14,6 +14,7 @@ source:
       - patches/0004-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
       - patches/0005-Specify-__dllspec-specification-for-gvplugin_webp.patch
       - patches/0006-Fix-dependencies-for-gvplugin_webp.patch
+      - patches/0007-Fix-dependencies-for-gvplugin_gd.patch
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
     sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
