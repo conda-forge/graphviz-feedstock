@@ -12,6 +12,8 @@ expat:
 - '2'
 glib:
 - '2'
+libwebp_base:
+- '1'
 pango:
 - '1.50'
 perl:
