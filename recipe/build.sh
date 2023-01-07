@@ -23,6 +23,7 @@ fi
             --without-x \
             --without-qt \
             --without-gtk \
+            --with-ann=no \
             --with-gts=yes \
             --with-gdk=yes \
             --with-rsvg=yes \
