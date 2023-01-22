@@ -1,0 +1,75 @@
+From 7bcfc900e4f0a0d8c241fe65c7c4702946961b00 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Fri, 30 Dec 2022 20:47:22 +0000
+Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
+
+The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
+xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
+---
+ CMakeLists.txt             |  2 ++
+ cmd/dot/CMakeLists.txt     |  8 +++-----
+ plugin/webp/CMakeLists.txt | 11 ++---------
+ 3 files changed, 7 insertions(+), 14 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bfc6668cd..0e2ca4406 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -114,6 +114,8 @@ endif()
+ 
+ find_package(GD)
+ find_package(GTS)
++find_package(Threads REQUIRED)
++find_package(WEBP)
+ 
+ if(enable_ltdl)
+   find_package(LTDL)
+diff --git a/cmd/dot/CMakeLists.txt b/cmd/dot/CMakeLists.txt
+index d2ea43515..fa19cec2c 100644
+--- a/cmd/dot/CMakeLists.txt
++++ b/cmd/dot/CMakeLists.txt
+@@ -87,11 +87,9 @@ endif()
+ 
+ if(PANGOCAIRO_FOUND)
+   target_link_libraries(dot_builtins PRIVATE gvplugin_pango)
+-  if(PkgConfig_FOUND)
+-    pkg_check_modules(WEBP libwebp)
+-    if(WEBP_FOUND)
+-      target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
+-    endif()
++  find_package(WEBP)
++  if(WEBP_FOUND)
++    target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
+   endif()
+ endif()
+ 
+diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
+index ee4e52005..8de0b7357 100644
+--- a/plugin/webp/CMakeLists.txt
++++ b/plugin/webp/CMakeLists.txt
+@@ -1,7 +1,4 @@
+-find_package(PkgConfig)
+-if(PkgConfig_FOUND)
+-  pkg_check_modules(WEBP libwebp)
+-endif()
++find_package(WEBP)
+ 
+ if(WEBP_FOUND)
+ 
+@@ -20,12 +17,8 @@ if(WEBP_FOUND)
+     ../../lib/pathplan
+   )
+ 
+-  target_include_directories(gvplugin_webp SYSTEM PRIVATE
+-    ${WEBP_INCLUDE_DIRS}
+-  )
+-
+   target_link_libraries(gvplugin_webp
+-    ${WEBP_LINK_LIBRARIES}
++    WebP::webp
+   )
+ 
+   install(
+-- 
+2.38.1
+
