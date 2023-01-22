@@ -1,0 +1,25 @@
+From 84e20346961e5572604d5a9a531814809d30c475 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sun, 22 Jan 2023 13:00:34 +0000
+Subject: [PATCH 6/6] GTS Support: s/GTS_LIBRARIES/GTS_LINK_LIBRARIES/g
+
+---
+ cmake/FindGTS.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
+index 3fda06b3d..93a32dc35 100644
+--- a/cmake/FindGTS.cmake
++++ b/cmake/FindGTS.cmake
+@@ -26,7 +26,7 @@ if(WIN32)
+     ${GLIBCONFIG_INCLUDE_DIR}
+   )
+ 
+-  set(GTS_LIBRARIES
++  set(GTS_LINK_LIBRARIES
+     ${GTS_LIBRARY}
+     ${GLIB_LIBRARY}
+   )
+-- 
+2.38.1
+

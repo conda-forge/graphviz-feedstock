@@ -1,0 +1,87 @@
+From bcccab9f55c218b38d8e54b0ee8ed37394b6d3c0 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sat, 31 Dec 2022 00:30:34 +0000
+Subject: [PATCH 4/6] Fix dependencies for gvplugin_webp
+
+---
+ cmake/config_checks.cmake      |  2 ++
+ config-cmake.h.in              |  2 ++
+ plugin/webp/CMakeLists.txt     |  8 ++++++++
+ plugin/webp/gvloadimage_webp.c | 11 -----------
+ 4 files changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/cmake/config_checks.cmake b/cmake/config_checks.cmake
+index d633d0749..4371afbc4 100644
+--- a/cmake/config_checks.cmake
++++ b/cmake/config_checks.cmake
+@@ -33,9 +33,11 @@ if(with_expat AND EXPAT_FOUND)
+ endif()
+ set( HAVE_LIBGD     ${GD_FOUND}         )
+ set( HAVE_GTS       ${GTS_FOUND}        )
++set( HAVE_WEBP      ${WEBP_FOUND}       )
+ if(with_zlib AND ZLIB_FOUND)
+   set(HAVE_ZLIB 1)
+ endif()
++set( HAVE_PANGOCAIRO ${PANGOCAIRO_FOUND})
+ 
+ if(LTDL_FOUND)
+   set(ENABLE_LTDL 1)
+diff --git a/config-cmake.h.in b/config-cmake.h.in
+index 6017b42b1..5a5b31e9a 100644
+--- a/config-cmake.h.in
++++ b/config-cmake.h.in
+@@ -40,6 +40,8 @@ typedef SSIZE_T ssize_t;
+ #cmakedefine HAVE_GD_GIF
+ #cmakedefine HAVE_ZLIB
+ #cmakedefine HAVE_GTS
++#cmakedefine HAVE_WEBP
++#cmakedefine HAVE_PANGOCAIRO
+ 
+ // Values
+ #define BROWSER "@BROWSER@"
+diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
+index 8de0b7357..d3940c1be 100644
+--- a/plugin/webp/CMakeLists.txt
++++ b/plugin/webp/CMakeLists.txt
+@@ -17,8 +17,16 @@ if(WEBP_FOUND)
+     ../../lib/pathplan
+   )
+ 
++  target_include_directories(gvplugin_webp SYSTEM PRIVATE
++    ${CAIRO_INCLUDE_DIRS}/cairo
++    ${PANGOCAIRO_INCLUDE_DIRS}
++  )
++
+   target_link_libraries(gvplugin_webp
++    gvc
+     WebP::webp
++    ${CAIRO_LINK_LIBRARIES}
++    ${PANGOCAIRO_LINK_LIBRARIES}
+   )
+ 
+   install(
+diff --git a/plugin/webp/gvloadimage_webp.c b/plugin/webp/gvloadimage_webp.c
+index fda48488c..b0c974891 100644
+--- a/plugin/webp/gvloadimage_webp.c
++++ b/plugin/webp/gvloadimage_webp.c
+@@ -23,17 +23,6 @@
+ #include <cairo.h>
+ #include <webp/decode.h>
+ 
+-#ifdef _WIN32 //*dependencies
+-    #pragma comment( lib, "gvc.lib" )
+-    #pragma comment( lib, "glib-2.0.lib" )
+-    #pragma comment( lib, "pango-1.0.lib" )
+-    #pragma comment( lib, "pangocairo-1.0.lib" )
+-    #pragma comment( lib, "libcairo-2.lib" )
+-    #pragma comment( lib, "gobject-2.0.lib" )
+-    #pragma comment( lib, "graph.lib" )
+-    #pragma comment( lib, "webp.lib" )
+-#endif
+-
+ static const char* const kStatusMessages[] = {
+     "OK", "OUT_OF_MEMORY", "INVALID_PARAM", "BITSTREAM_ERROR",
+     "UNSUPPORTED_FEATURE", "SUSPENDED", "USER_ABORT", "NOT_ENOUGH_DATA"
+-- 
+2.38.1
+
