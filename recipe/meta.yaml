@@ -22,6 +22,8 @@ source:
 build:
   number: 0
   detect_binary_files_with_prefix: true  # [unix]
+  run_exports:
+    - {{ pin_subpackage('graphviz', max_pin='x') }}
 
 requirements:
   build:
