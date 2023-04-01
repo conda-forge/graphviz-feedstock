@@ -7,6 +7,7 @@ dot -v < /dev/null
 fdp -V
 sfdp -V
 neato -?
+gvpack -v < /dev/null
 
 dot -T? || true
 
