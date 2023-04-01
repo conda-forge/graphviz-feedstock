@@ -20,6 +20,7 @@ fi
             --disable-perl \
             --disable-tcl \
             --enable-ltdl \
+            --enable-static \
             --without-x \
             --without-qt \
             --without-gtk \
@@ -46,7 +47,14 @@ make
 # make check
 make install
 
+mv $PREFIX/bin/gvpack_static $PREFIX/bin/gvpack
+rm $PREFIX/bin/dot_static $PREFIX/bin/gvpr_static
+# Plugin issue in dot on static builds? tiff / pdf do not work if using static dot
+#mv $PREFIX/bin/dot_static $PREFIX/bin/dot
+#mv $PREFIX/bin/gvpr_static $PREFIX/bin/gvpr
+
 # Configure plugins
 if [ $CONDA_BUILD_CROSS_COMPILATION != 1 ]; then
     $PREFIX/bin/dot -c
 fi
+
