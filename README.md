@@ -1,11 +1,11 @@
-About graphviz
-==============
+About graphviz-feedstock
+========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/graphviz-feedstock/blob/main/LICENSE.txt)
 
 Home: http://www.graphviz.org/
 
 Package license: EPL-1.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/graphviz-feedstock/blob/main/LICENSE.txt)
 
 Summary: Open Source graph visualization software.
 
