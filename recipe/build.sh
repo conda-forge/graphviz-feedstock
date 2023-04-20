@@ -11,12 +11,12 @@ declare -a _xtra_config_flags
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
     _xtra_config_flags+=(--with-quartz)
+else
+    export CFLAGS="-Wall -g -pipe -O2 -fPIC"
+    export CXXLAGS="${CFLAGS}"
+    export CPPFLAGS="-I${PREFIX}/include"
+    export LDFLAGS="-L${PREFIX}/lib"
 fi
-
-export CFLAGS="-Wall -g -pipe -O2 -fPIC"
-export CXXLAGS="${CFLAGS}"
-export CPPFLAGS="-I${PREFIX}/include"
-export LDFLAGS="-L${PREFIX}/lib"
 
 ./configure --prefix=$PREFIX \
             --disable-debug \
