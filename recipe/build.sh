@@ -13,6 +13,11 @@ if [[ ${target_platform} =~ .*osx.* ]]; then
     _xtra_config_flags+=(--with-quartz)
 fi
 
+export CFLAGS="-Wall -g -m${ARCH} -pipe -O2 -fPIC"
+export CXXLAGS="${CFLAGS}"
+export CPPFLAGS="-I${PREFIX}/include"
+export LDFLAGS="-L${PREFIX}/lib"
+
 ./configure --prefix=$PREFIX \
             --disable-debug \
             --disable-java \
