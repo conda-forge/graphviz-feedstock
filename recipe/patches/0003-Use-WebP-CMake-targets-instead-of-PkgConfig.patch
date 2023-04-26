@@ -1,7 +1,7 @@
-From 7bcfc900e4f0a0d8c241fe65c7c4702946961b00 Mon Sep 17 00:00:00 2001
+From d4674bb9ec7d5e015571fbab93c65541d939cca3 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
-Subject: [PATCH 3/6] Use WebP CMake targets instead of PkgConfig
+Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
 
 The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
 xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
@@ -44,7 +44,7 @@ index d2ea43515..fa19cec2c 100644
  endif()
  
 diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
-index ee4e52005..8de0b7357 100644
+index 7cfc1fa2b..712befd9a 100644
 --- a/plugin/webp/CMakeLists.txt
 +++ b/plugin/webp/CMakeLists.txt
 @@ -1,7 +1,4 @@
@@ -69,7 +69,7 @@ index ee4e52005..8de0b7357 100644
 +    WebP::webp
    )
  
-   install(
+   if(CAIRO_FOUND)
 -- 
-2.38.1
+2.40.0
 

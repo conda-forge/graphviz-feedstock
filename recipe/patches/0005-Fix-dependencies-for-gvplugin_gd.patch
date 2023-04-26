@@ -1,14 +1,14 @@
-From 8f12e3a7d3f9965dcf98436c6cb805b7ce018272 Mon Sep 17 00:00:00 2001
+From ba64ec816ef5ea18b206dfc4acf59ab2a2a24663 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sat, 31 Dec 2022 00:57:18 +0000
-Subject: [PATCH 5/6] Fix dependencies for gvplugin_gd
+Subject: [PATCH 5/5] Fix dependencies for gvplugin_gd
 
 ---
  plugin/gd/CMakeLists.txt | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
-index fbf9b6d01..f3203286e 100644
+index 9eacc82d6..317dcbaa2 100644
 --- a/plugin/gd/CMakeLists.txt
 +++ b/plugin/gd/CMakeLists.txt
 @@ -24,6 +24,8 @@ if(GD_FOUND)
@@ -30,5 +30,5 @@ index fbf9b6d01..f3203286e 100644
    )
  
 -- 
-2.38.1
+2.40.0
 
