@@ -1,4 +1,4 @@
-From d4674bb9ec7d5e015571fbab93c65541d939cca3 Mon Sep 17 00:00:00 2001
+From 6c51059b2669a8645ddb6fb1774e395e5c8293ab Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
 Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
@@ -12,12 +12,12 @@ xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
  3 files changed, 7 insertions(+), 14 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bfc6668cd..0e2ca4406 100644
+index 8c4040526..ad5d2a465 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -114,6 +114,8 @@ endif()
- 
+@@ -115,6 +115,8 @@ endif()
  find_package(GD)
+ find_package(GS)
  find_package(GTS)
 +find_package(Threads REQUIRED)
 +find_package(WEBP)
@@ -71,5 +71,5 @@ index 7cfc1fa2b..712befd9a 100644
  
    if(CAIRO_FOUND)
 -- 
-2.40.0
+2.41.0
 
