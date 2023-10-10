@@ -1,62 +1,19 @@
-From 6c51059b2669a8645ddb6fb1774e395e5c8293ab Mon Sep 17 00:00:00 2001
+From 2be9815187d6d3c078657ae1e17c7395fe72a7d0 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
-Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
+Subject: [PATCH 3/4] Use WebP CMake targets instead of PkgConfig
 
 The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
 xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
 ---
- CMakeLists.txt             |  2 ++
- cmd/dot/CMakeLists.txt     |  8 +++-----
- plugin/webp/CMakeLists.txt | 11 ++---------
- 3 files changed, 7 insertions(+), 14 deletions(-)
+ plugin/webp/CMakeLists.txt | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8c4040526..ad5d2a465 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -115,6 +115,8 @@ endif()
- find_package(GD)
- find_package(GS)
- find_package(GTS)
-+find_package(Threads REQUIRED)
-+find_package(WEBP)
- 
- if(enable_ltdl)
-   find_package(LTDL)
-diff --git a/cmd/dot/CMakeLists.txt b/cmd/dot/CMakeLists.txt
-index d2ea43515..fa19cec2c 100644
---- a/cmd/dot/CMakeLists.txt
-+++ b/cmd/dot/CMakeLists.txt
-@@ -87,11 +87,9 @@ endif()
- 
- if(PANGOCAIRO_FOUND)
-   target_link_libraries(dot_builtins PRIVATE gvplugin_pango)
--  if(PkgConfig_FOUND)
--    pkg_check_modules(WEBP libwebp)
--    if(WEBP_FOUND)
--      target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
--    endif()
-+  find_package(WEBP)
-+  if(WEBP_FOUND)
-+    target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
-   endif()
- endif()
- 
 diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
-index 7cfc1fa2b..712befd9a 100644
+index 21913a8f0..390364d65 100644
 --- a/plugin/webp/CMakeLists.txt
 +++ b/plugin/webp/CMakeLists.txt
-@@ -1,7 +1,4 @@
--find_package(PkgConfig)
--if(PkgConfig_FOUND)
--  pkg_check_modules(WEBP libwebp)
--endif()
-+find_package(WEBP)
- 
- if(WEBP_FOUND)
- 
-@@ -20,12 +17,8 @@ if(WEBP_FOUND)
+@@ -15,13 +15,9 @@ if(WEBP_FOUND)
      ../../lib/pathplan
    )
  
@@ -65,11 +22,12 @@ index 7cfc1fa2b..712befd9a 100644
 -  )
 -
    target_link_libraries(gvplugin_webp
+     gvc
 -    ${WEBP_LINK_LIBRARIES}
 +    WebP::webp
    )
  
    if(CAIRO_FOUND)
 -- 
-2.41.0
+2.33.1
 
