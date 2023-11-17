@@ -79,7 +79,7 @@ index 21913a8f0..d65a2d0dd 100644
    if(CAIRO_FOUND)
      target_include_directories(gvplugin_webp SYSTEM PRIVATE
 -      ${CAIRO_INCLUDE_DIRS}
-+      ${CAIRO_INCLUDE_DIRS}/cairo
++      ${CAIRO_INCLUDE_DIRS}
      )
      target_link_libraries(gvplugin_webp
        ${CAIRO_LINK_LIBRARIES}
