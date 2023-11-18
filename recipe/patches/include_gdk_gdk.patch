@@ -1,0 +1,13 @@
+diff --git a/plugin/gdk/gvloadimage_gdk.c b/plugin/gdk/gvloadimage_gdk.c
+index 84c6a6a28..b87cc40e5 100644
+--- a/plugin/gdk/gvloadimage_gdk.c
++++ b/plugin/gdk/gvloadimage_gdk.c
+@@ -19,7 +19,7 @@
+ #ifdef HAVE_PANGOCAIRO
+ #include <cairo.h>
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+-#include <gdk/gdkcairo.h>
++#include <gdk/gdk.h>
+ 
+ #ifdef _MSC_VER //*dependencies
+     #pragma comment( lib, "gvc.lib" )
