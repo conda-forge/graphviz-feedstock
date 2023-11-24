@@ -19,8 +19,7 @@ source:
     folder: ltdl_compat
 
 build:
-  number: 0
-  detect_binary_files_with_prefix: true  # [unix]
+  number: 1
   run_exports:
     - {{ pin_subpackage('graphviz', max_pin='x') }}
 
@@ -63,8 +62,6 @@ requirements:
     - libgd
     # --with-rsvg=yes
     - librsvg                                             # [unix]
-    # --enable-ltdl
-    - libtool                                             # [unix]
     # --with-webp=yes
     - libwebp-base
     # --with-pangocairo=yes
@@ -73,26 +70,8 @@ requirements:
     - zlib                                                # [unix]
     # Windows only deps
     - getopt-win32                                        # [win]
-
   run:
-    # A few satisfy needs via run_exports, rest rely on pin_run_as_build
-    # Add all of them anyway ¯\_(ツ)_/¯
-    - cairo
-    - expat                                               # [unix]
-    - gts
-    - gtk2                                                # [unix]
-    - libgd
-    - libglib
-    - librsvg                                             # [unix]
-    - libtool                                             # [unix]
-    - libwebp-base
-    - pango
-    - zlib                                                # [unix]
     - fonts-conda-ecosystem                               # [unix]
-    # Not linked in directly, likely interface deps? add 'em anyway!
-    - gdk-pixbuf                                          # [unix]
-    - fontconfig                                          # [unix]
-    - freetype                                            # [unix]
 
 test:
   files:
