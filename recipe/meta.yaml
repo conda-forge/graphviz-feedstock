@@ -45,10 +45,6 @@ requirements:
     - cairo
     # --with-expat=yes
     - expat
-    # --with-freetype2
-    - freetype                                            # [unix]
-    # --with-fontconfig=yes
-    - fontconfig                                          # [unix]
     # --with-gts=yes
     - gts
     # --with-gdk-pixbuf=yes
