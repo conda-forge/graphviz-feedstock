@@ -35,12 +35,13 @@ fi
             --with-gdk-pixbuf=yes \
             "${_xtra_config_flags[@]}"
 
+
 if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
     sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' $SRC_DIR/lib/gvpr/Makefile.am
     sed -i.bak '/dot$(EXEEXT) -c/d' $SRC_DIR/cmd/dot/Makefile.am
 fi
 
-make
+make -j${CPU_COUNT}
 # This is failing for rtest.
 # Doesn't do anything for the rest
 # make check
