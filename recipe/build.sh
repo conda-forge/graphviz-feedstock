@@ -25,7 +25,6 @@ fi
             --without-gtk \
             --with-ann=no \
             --with-gts=yes \
-            --with-gdk=yes \
             --with-rsvg=yes \
             --with-expat=yes \
             --with-libgd=yes \
