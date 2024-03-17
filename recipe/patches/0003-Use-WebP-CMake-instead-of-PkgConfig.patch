@@ -1,0 +1,92 @@
+From db22ffa8a5f90d1a0e3c46dc500a7355317ccd6d Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sun, 17 Mar 2024 19:03:31 -0400
+Subject: [PATCH 3/4] Use WebP CMake instead of PkgConfig
+
+Originally written by: Nehal J Wani <nehaljw.kkd1@gmail.com>
+---
+ CMakeLists.txt                 |  4 ++--
+ plugin/webp/CMakeLists.txt     |  6 +-----
+ plugin/webp/gvloadimage_webp.c | 13 +------------
+ 3 files changed, 4 insertions(+), 19 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a84a221b5..4f5d4815b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -159,6 +159,8 @@ endif()
+ find_package(GD)
+ find_package(GS)
+ find_package(GTS)
++find_package(Threads REQUIRED)
++find_package(WEBP)
+ 
+ if(NOT enable_ltdl STREQUAL "OFF")
+   find_package(LTDL)
+@@ -188,7 +190,6 @@ if(PkgConfig_FOUND)
+   pkg_check_modules(LASI lasi)
+   pkg_check_modules(POPPLER poppler-glib)
+   pkg_check_modules(RSVG librsvg-2.0)
+-  pkg_check_modules(WEBP libwebp)
+   pkg_check_modules(X11 x11)
+   pkg_check_modules(XRENDER xrender)
+ else()
+@@ -197,7 +198,6 @@ else()
+   set(LASI_FOUND 0)
+   set(POPPLER_FOUND 0)
+   set(RSVG_FOUND 0)
+-  set(WEBP_FOUND 0)
+   set(X11_FOUND 0)
+   set(XRENDER_FOUND 0)
+ endif()
+diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
+index 21913a8f0..390364d65 100644
+--- a/plugin/webp/CMakeLists.txt
++++ b/plugin/webp/CMakeLists.txt
+@@ -15,13 +15,9 @@ if(WEBP_FOUND)
+     ../../lib/pathplan
+   )
+ 
+-  target_include_directories(gvplugin_webp SYSTEM PRIVATE
+-    ${WEBP_INCLUDE_DIRS}
+-  )
+-
+   target_link_libraries(gvplugin_webp
+     gvc
+-    ${WEBP_LINK_LIBRARIES}
++    WebP::webp
+   )
+ 
+   if(CAIRO_FOUND)
+diff --git a/plugin/webp/gvloadimage_webp.c b/plugin/webp/gvloadimage_webp.c
+index c98355610..91013d318 100644
+--- a/plugin/webp/gvloadimage_webp.c
++++ b/plugin/webp/gvloadimage_webp.c
+@@ -1,5 +1,5 @@
+ /*************************************************************************
+- * Copyright (c) 2011 AT&T Intellectual Property 
++ * Copyright (c) 2011 AT&T Intellectual Property
+  * All rights reserved. This program and the accompanying materials
+  * are made available under the terms of the Eclipse Public License v1.0
+  * which accompanies this distribution, and is available at
+@@ -23,17 +23,6 @@
+ #include <cairo.h>
+ #include <webp/decode.h>
+ 
+-#ifdef _MSC_VER //*dependencies
+-    #pragma comment( lib, "gvc.lib" )
+-    #pragma comment( lib, "glib-2.0.lib" )
+-    #pragma comment( lib, "pango-1.0.lib" )
+-    #pragma comment( lib, "pangocairo-1.0.lib" )
+-    #pragma comment( lib, "libcairo-2.lib" )
+-    #pragma comment( lib, "gobject-2.0.lib" )
+-    #pragma comment( lib, "graph.lib" )
+-    #pragma comment( lib, "webp.lib" )
+-#endif
+-
+ static const char* const kStatusMessages[] = {
+     "OK", "OUT_OF_MEMORY", "INVALID_PARAM", "BITSTREAM_ERROR",
+     "UNSUPPORTED_FEATURE", "SUSPENDED", "USER_ABORT", "NOT_ENOUGH_DATA"
+-- 
+2.43.2
+
