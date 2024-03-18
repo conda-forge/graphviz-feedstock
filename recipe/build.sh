@@ -32,6 +32,7 @@ fi
             --with-fontconfig=yes \
             --with-pangocairo=yes \
             --with-gdk-pixbuf=yes \
+            --with-gdk=yes \
             "${_xtra_config_flags[@]}"
 
 

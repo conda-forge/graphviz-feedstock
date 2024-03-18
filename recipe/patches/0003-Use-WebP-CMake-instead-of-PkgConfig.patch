@@ -1,7 +1,7 @@
 From db22ffa8a5f90d1a0e3c46dc500a7355317ccd6d Mon Sep 17 00:00:00 2001
 From: Mark Harfouche <mark.harfouche@gmail.com>
 Date: Sun, 17 Mar 2024 19:03:31 -0400
-Subject: [PATCH 3/4] Use WebP CMake instead of PkgConfig
+Subject: [PATCH 3/5] Use WebP CMake instead of PkgConfig
 
 Originally written by: Nehal J Wani <nehaljw.kkd1@gmail.com>
 ---

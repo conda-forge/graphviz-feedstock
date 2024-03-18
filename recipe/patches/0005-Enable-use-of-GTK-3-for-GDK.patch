@@ -1,0 +1,39 @@
+From c39260d43d3511b0154461c16210897fd94360ea Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sun, 17 Mar 2024 20:32:36 -0400
+Subject: [PATCH 5/5] Enable use of GTK-3 for GDK
+
+---
+ configure.ac                 | 2 +-
+ plugin/gdk/gvloadimage_gdk.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4494ef6ce..f4b9b096e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1512,7 +1512,7 @@ AC_ARG_WITH(gdk,
+ if test "$with_gdk" != "yes"; then
+   use_gdk="No (disabled)"
+ else
+-  PKG_CHECK_MODULES(GDK, [gdk-2.0],[
++  PKG_CHECK_MODULES(GDK, [gdk-3.0],[
+     use_gdk="Yes"
+     AC_SUBST([GDK_CFLAGS])
+     AC_SUBST([GDK_LIBS])
+diff --git a/plugin/gdk/gvloadimage_gdk.c b/plugin/gdk/gvloadimage_gdk.c
+index 84c6a6a28..b87cc40e5 100644
+--- a/plugin/gdk/gvloadimage_gdk.c
++++ b/plugin/gdk/gvloadimage_gdk.c
+@@ -19,7 +19,7 @@
+ #ifdef HAVE_PANGOCAIRO
+ #include <cairo.h>
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+-#include <gdk/gdkcairo.h>
++#include <gdk/gdk.h>
+ 
+ #ifdef _MSC_VER //*dependencies
+     #pragma comment( lib, "gvc.lib" )
+-- 
+2.43.2
+

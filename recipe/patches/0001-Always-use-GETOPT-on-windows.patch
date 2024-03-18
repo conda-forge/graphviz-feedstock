@@ -1,7 +1,7 @@
 From dc314eba6bdc2930c3fc2e181efcfa5258ea713a Mon Sep 17 00:00:00 2001
 From: Mark Harfouche <mark.harfouche@gmail.com>
 Date: Sun, 17 Mar 2024 18:59:22 -0400
-Subject: [PATCH 1/4] Always use GETOPT on windows
+Subject: [PATCH 1/5] Always use GETOPT on windows
 
 Originally written by: Nehal J Wani <nehaljw.kkd1@gmail.com>
 ---

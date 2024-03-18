@@ -12,6 +12,8 @@ source:
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Use-WebP-CMake-instead-of-PkgConfig.patch
       - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
+      # https://gitlab.com/graphviz/graphviz/-/issues/1848#note_1687603044
+      - patches/0005-Enable-use-of-GTK-3-for-GDK.patch
 
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
@@ -49,6 +51,7 @@ requirements:
     - gts
     # --with-gdk-pixbuf=yes
     - gdk-pixbuf                                          # [unix]
+    - gtk3                                                # [unix]
     # pangocairo requires glib
     - glib
     - libglib
