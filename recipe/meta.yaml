@@ -52,6 +52,7 @@ requirements:
     # --with-gdk-pixbuf=yes
     - gdk-pixbuf                                          # [unix]
     - gtk3                                                # [unix]
+    - xorg-xineramaproto                                  # [linux]
     # pangocairo requires glib
     - glib
     - libglib
