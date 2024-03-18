@@ -1,4 +1,4 @@
-From c39260d43d3511b0154461c16210897fd94360ea Mon Sep 17 00:00:00 2001
+From e9d15b1f2ae483ef32253101b9dbe4c370389118 Mon Sep 17 00:00:00 2001
 From: Mark Harfouche <mark.harfouche@gmail.com>
 Date: Sun, 17 Mar 2024 20:32:36 -0400
 Subject: [PATCH 5/5] Enable use of GTK-3 for GDK

@@ -1,4 +1,4 @@
-From db22ffa8a5f90d1a0e3c46dc500a7355317ccd6d Mon Sep 17 00:00:00 2001
+From a02658f3f97c60109c2ac9937f717ab7e2868025 Mon Sep 17 00:00:00 2001
 From: Mark Harfouche <mark.harfouche@gmail.com>
 Date: Sun, 17 Mar 2024 19:03:31 -0400
 Subject: [PATCH 3/5] Use WebP CMake instead of PkgConfig
@@ -11,7 +11,7 @@ Originally written by: Nehal J Wani <nehaljw.kkd1@gmail.com>
  3 files changed, 4 insertions(+), 19 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a84a221b5..4f5d4815b 100644
+index 85a458d41..d0e1d8de3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -159,6 +159,8 @@ endif()
