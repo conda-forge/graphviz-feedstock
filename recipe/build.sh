@@ -10,6 +10,7 @@ declare -a _xtra_config_flags
 
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
+    export LD="${CC}"
     _xtra_config_flags+=(--with-quartz)
 fi
 
