@@ -10,6 +10,7 @@ declare -a _xtra_config_flags
 
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
+    export LD="${CC}"
     _xtra_config_flags+=(--with-quartz)
 fi
 
@@ -25,7 +26,6 @@ fi
             --without-gtk \
             --with-ann=no \
             --with-gts=yes \
-            --with-gdk=yes \
             --with-rsvg=yes \
             --with-expat=yes \
             --with-libgd=yes \
@@ -33,6 +33,7 @@ fi
             --with-fontconfig=yes \
             --with-pangocairo=yes \
             --with-gdk-pixbuf=yes \
+            --with-gdk=yes \
             "${_xtra_config_flags[@]}"
 
 

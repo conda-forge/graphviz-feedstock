@@ -1,7 +1,7 @@
-From 9946bb33536ac332700dee0dae69019ee8a6c1b5 Mon Sep 17 00:00:00 2001
+From f93cb275a7c005af25e2cd0c6d680f13df0462d5 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sat, 31 Dec 2022 00:57:18 +0000
-Subject: [PATCH 4/4] Fix dependencies for gvplugin_gd
+Subject: [PATCH 4/5] Fix dependencies for gvplugin_gd
 
 ---
  plugin/gd/CMakeLists.txt | 4 ++++
@@ -30,5 +30,5 @@ index 9eacc82d6..317dcbaa2 100644
    )
  
 -- 
-2.33.1
+2.43.2
 
