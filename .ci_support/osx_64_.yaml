@@ -4,6 +4,10 @@ c_compiler:
 - clang
 c_compiler_version:
 - '16'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '10.9'
 cairo:
 - '1'
 channel_sources:
@@ -15,10 +19,6 @@ cxx_compiler:
 cxx_compiler_version:
 - '16'
 expat:
-- '2'
-fontconfig:
-- '2'
-freetype:
 - '2'
 gdk_pixbuf:
 - '2'
