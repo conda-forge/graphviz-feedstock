@@ -1,4 +1,4 @@
-{% set version = "9.0.0" %}
+{% set version = "11.0.0" %}
 
 package:
   name: graphviz
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: 504d19b5d0e5398a57e9d9de42393f90b9e79aff0969b4ebc3b891ccb39602ed
+    sha256: d374f7d98a1ae985510a82dddd887e8058aa37e5f95b4ce0aa58416d2b22714b
     patches:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
@@ -19,13 +19,14 @@ source:
     folder: ltdl_compat
 
 build:
-  number: 1
+  number: 0
   run_exports:
     - {{ pin_subpackage('graphviz', max_pin='x') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - pkg-config                                          # [unix]
     - make                                                # [unix]
