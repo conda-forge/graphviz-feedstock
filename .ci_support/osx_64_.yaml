@@ -3,9 +3,13 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '13'
+- '16'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '10.9'
 cairo:
-- '1.16'
+- '1'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,12 +17,8 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '16'
 expat:
-- '2'
-fontconfig:
-- '2.13'
-freetype:
 - '2'
 gdk_pixbuf:
 - '2'
@@ -32,19 +32,6 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 pango:
 - '1.50'
-pin_run_as_build:
-  cairo:
-    max_pin: x.x
-  fontconfig:
-    max_pin: x
-  freetype:
-    max_pin: x
-  librsvg:
-    max_pin: x
-  pango:
-    max_pin: x.x
-  zlib:
-    max_pin: x.x
 target_platform:
 - osx-64
 zip_keys:
