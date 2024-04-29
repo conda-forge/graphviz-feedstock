@@ -9,3 +9,5 @@ test: native_and_emulated
 test_on_native_only: true
 conda_build:
   pkg_format: '2'
+  error_overdepending: true
+  error_overlinking: true
