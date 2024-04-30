@@ -8,3 +8,5 @@ provider:
 test: native_and_emulated
 conda_build:
   pkg_format: '2'
+  error_overdepending: true
+  error_overlinking: true
