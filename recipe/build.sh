@@ -10,6 +10,8 @@ declare -a _xtra_config_flags
 
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
+    # xcodebuild uses ld instead of clang and fails
+    export LD="${CC_FOR_BUILD}"
     _xtra_config_flags+=(--with-quartz)
 fi
 
