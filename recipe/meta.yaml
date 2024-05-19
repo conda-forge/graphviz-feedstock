@@ -1,4 +1,4 @@
-{% set version = "10.0.1" %}
+{% set version = "11.0.0" %}
 
 package:
   name: graphviz
@@ -6,13 +6,12 @@ package:
 
 source:
   - url: https://gitlab.com/graphviz/graphviz/-/archive/{{ version }}/graphviz-{{ version }}.tar.gz
-    sha256: 28f452ef1cb12288c8758a62f8c3fcfefdb91b251f7aae61d0d703f851bde931
+    sha256: d374f7d98a1ae985510a82dddd887e8058aa37e5f95b4ce0aa58416d2b22714b
     patches:
       - patches/0001-Always-link-to-getopt-on-Windows.patch
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
       - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
-      - patches/0005-Relax-constraint-on-MACOSX_DEPLOYMENT_TARGET.patch
 
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
