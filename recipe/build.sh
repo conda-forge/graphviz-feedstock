@@ -7,6 +7,7 @@ set -x
 find $PREFIX -name '*.la' -delete
 
 declare -a _xtra_config_flags
+declare -a _xtra_make_args
 
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export OBJC="${CC}"
@@ -41,9 +42,10 @@ fi
 if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
     sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' $SRC_DIR/lib/gvpr/Makefile.am
     sed -i.bak '/dot$(EXEEXT) -c/d' $SRC_DIR/cmd/dot/Makefile.am
+    _xtra_make_args+=(ARCH=arm64)
 fi
 
-make -j${CPU_COUNT}
+make -j${CPU_COUNT} "${_xtra_make_args[@]}"
 # This is failing for rtest.
 # Doesn't do anything for the rest
 # make check
