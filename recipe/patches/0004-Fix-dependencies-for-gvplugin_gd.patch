@@ -1,4 +1,4 @@
-From 43c84dd525ef6633516e6aa3f21bf4d97c66dd66 Mon Sep 17 00:00:00 2001
+From 15054c6bfa9fae638cd2eab04e17da0fa9477a22 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sat, 31 Dec 2022 00:57:18 +0000
 Subject: [PATCH 4/4] Fix dependencies for gvplugin_gd
@@ -8,7 +8,7 @@ Subject: [PATCH 4/4] Fix dependencies for gvplugin_gd
  1 file changed, 4 insertions(+)
 
 diff --git a/plugin/gd/CMakeLists.txt b/plugin/gd/CMakeLists.txt
-index 9eacc82d6..317dcbaa2 100644
+index 55229d716..41a0a0a79 100644
 --- a/plugin/gd/CMakeLists.txt
 +++ b/plugin/gd/CMakeLists.txt
 @@ -24,6 +24,8 @@ if(GD_FOUND)
