@@ -1,5 +1,7 @@
 c_compiler:
 - vs2019
+c_stdlib:
+- vs
 cairo:
 - '1'
 channel_sources:
@@ -20,3 +22,5 @@ perl:
 - 5.32.1
 target_platform:
 - win-64
+zlib:
+- '1.2'
