@@ -1,0 +1,26 @@
+diff --git a/configure.ac b/configure.ac
+index 1f291fddc..0908b1277 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1602,7 +1602,7 @@ AC_ARG_WITH(gdk,
+ if test "x$with_gdk" != "xyes"; then
+   use_gdk="No (disabled)"
+ else
+-  PKG_CHECK_MODULES(GDK, [gdk-2.0],[
++  PKG_CHECK_MODULES(GDK, [gdk-3.0],[
+     use_gdk="Yes"
+     AC_SUBST([GDK_CFLAGS])
+     AC_SUBST([GDK_LIBS])
+diff --git a/plugin/gdk/CMakeLists.txt b/plugin/gdk/CMakeLists.txt
+index 67181c926..c86cf6681 100644
+--- a/plugin/gdk/CMakeLists.txt
++++ b/plugin/gdk/CMakeLists.txt
+@@ -1,7 +1,7 @@
+ find_package(PANGOCAIRO)
+ find_package(PkgConfig)
+ if(PkgConfig_FOUND)
+-  pkg_check_modules(GDK gdk-2.0)
++  pkg_check_modules(GDK gdk-3.0)
+   pkg_check_modules(GDK_PIXBUF gdk-pixbuf-2.0)
+ endif()
+ 
