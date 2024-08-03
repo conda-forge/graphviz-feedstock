@@ -1,0 +1,23 @@
+From 83444d393c339040c77bbd330566e21febd99389 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Sat, 3 Aug 2024 14:46:51 +1100
+Subject: [PATCH 5/5] don't bother building prune
+
+it fails for reasons that don't seem to make sense
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 42e4fa568..746ecdafa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -429,7 +429,7 @@ include(CTest)
+ 
+ # ======================= Specify subdirectories to build ======================
+ add_subdirectory(contrib/diffimg)
+-add_subdirectory(contrib/prune)
++# add_subdirectory(contrib/prune)
+ add_subdirectory(graphs)
+ add_subdirectory(lib)
+ add_subdirectory(plugin)
