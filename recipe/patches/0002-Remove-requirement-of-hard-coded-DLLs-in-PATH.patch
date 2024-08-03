@@ -1,7 +1,7 @@
 From c091695d07ee9c3efb14a5e90a5c0629c96cd23a Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
-Subject: [PATCH 2/5] Remove requirement of hard coded DLLs in PATH
+Subject: [PATCH 2/6] Remove requirement of hard coded DLLs in PATH
 
 ---
  cmake/FindCAIRO.cmake      | 5 -----
