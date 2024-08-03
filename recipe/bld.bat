@@ -9,7 +9,7 @@ cmake -S%SRC_DIR% ^
       -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX%;%LIBRARY_LIB% ^
       -DLTDL_INCLUDE_DIR=%SRC_DIR%\ltdl_compat ^
       -Dwith_gvedit=OFF ^
-      -Dwith_tclpkg=OFF ^
+      -Denable_tcl=OFF ^
       -Duse_win_pre_inst_libs=OFF ^
       -Dinstall_win_dependency_dlls=OFF
 if errorlevel 1 exit 1
