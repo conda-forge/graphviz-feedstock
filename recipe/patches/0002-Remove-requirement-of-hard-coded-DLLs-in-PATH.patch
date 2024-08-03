@@ -1,7 +1,7 @@
-From ddbb8ca664929b2770dc290abe12f59e51e5e208 Mon Sep 17 00:00:00 2001
+From c091695d07ee9c3efb14a5e90a5c0629c96cd23a Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
-Subject: [PATCH 2/4] Remove requirement of hard coded DLLs in PATH
+Subject: [PATCH 2/6] Remove requirement of hard coded DLLs in PATH
 
 ---
  cmake/FindCAIRO.cmake      | 5 -----
@@ -58,6 +58,3 @@ index b92e5bea9..76e8ede19 100644
    )
  
    set(PANGOCAIRO_INCLUDE_DIRS
--- 
-2.45.1
-

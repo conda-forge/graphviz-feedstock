@@ -1,7 +1,7 @@
-From efe74c47c9f4b971e73cf97b5bb727e56c18db0d Mon Sep 17 00:00:00 2001
+From 6ada7961594bc6c35a4e158b5a7b52c1220abc41 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
-Subject: [PATCH 1/4] Always link to getopt on Windows
+Subject: [PATCH 1/6] Always link to getopt on Windows
 
 ---
  CMakeLists.txt               | 2 +-
@@ -130,6 +130,3 @@ index 29dcb5ee3..408c7c45e 100644
 +if(WIN32 OR (NOT HAVE_GETOPT_H))
    target_link_libraries(gvpr PRIVATE ${GETOPT_LINK_LIBRARIES})
  endif()
--- 
-2.45.1
-
