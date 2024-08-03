@@ -29,6 +29,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
+    - bison                                               # [unix]
+    - winflexbison                                        # [win]
     - cmake
     - ninja
     - python >=3
