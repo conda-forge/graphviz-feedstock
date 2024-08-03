@@ -1,7 +1,7 @@
 From 28504b441721cce091a97445905fdded787a3e1d Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
-Subject: [PATCH 1/5] Always link to getopt on Windows
+Subject: [PATCH 1/6] Always link to getopt on Windows
 
 ---
  CMakeLists.txt               | 2 +-
