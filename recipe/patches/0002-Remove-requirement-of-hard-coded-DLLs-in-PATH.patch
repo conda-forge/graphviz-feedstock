@@ -1,22 +1,22 @@
-From f525bf79bf2afa25e1524ebc8a9f50c1505f848c Mon Sep 17 00:00:00 2001
+From e9b957358df80371e595c50030a157ede824d881 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
 Subject: [PATCH 2/4] Remove requirement of hard coded DLLs in PATH
 
 ---
- cmake/FindCAIRO.cmake      | 5 -----
- cmake/FindGTS.cmake        | 3 ---
- cmake/FindPANGOCAIRO.cmake | 8 --------
- 3 files changed, 16 deletions(-)
+ cmake/FindCAIRO.cmake      | 15 ---------------
+ cmake/FindGTS.cmake        |  6 ------
+ cmake/FindPANGOCAIRO.cmake | 18 ------------------
+ 3 files changed, 39 deletions(-)
 
 diff --git a/cmake/FindCAIRO.cmake b/cmake/FindCAIRO.cmake
-index 65bb42f7a..77dc94867 100644
+index a6fdf8e3c..73e2aac94 100644
 --- a/cmake/FindCAIRO.cmake
 +++ b/cmake/FindCAIRO.cmake
-@@ -18,11 +18,6 @@ if(WIN32)
-     CAIRO_INCLUDE_DIR
+@@ -12,11 +12,6 @@ if(MINGW)
+     CAIRO_INCLUDE_DIRS
  
-     CAIRO_LIBRARY
+     CAIRO_LIBRARIES
 -
 -    CAIRO_RUNTIME_LIBRARY
 -    EXPAT_RUNTIME_LIBRARY
@@ -24,31 +24,75 @@ index 65bb42f7a..77dc94867 100644
 -    PIXMAN_RUNTIME_LIBRARY
    )
  
-   set(CAIRO_INCLUDE_DIRS ${CAIRO_INCLUDE_DIR})
-diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
-index 8e544e98f..a319905b7 100644
---- a/cmake/FindGTS.cmake
-+++ b/cmake/FindGTS.cmake
-@@ -18,9 +18,6 @@ if(WIN32)
+   set(CAIRO_RUNTIME_LIBRARIES
+@@ -41,16 +36,6 @@ elseif(WIN32)
+     CAIRO_INCLUDE_DIRS
  
-     GTS_LIBRARY
-     GLIB_LIBRARY
+     CAIRO_LIBRARIES
 -
--    GTS_RUNTIME_LIBRARY
--    GLIB_RUNTIME_LIBRARY
+-    BZ2_RUNTIME_LIBRARY
+-    BROTLIDEC_RUNTIME_LIBRARY
+-    BROTLICOMMON_RUNTIME_LIBRARY
+-    CAIRO_RUNTIME_LIBRARY
+-    EXPAT_RUNTIME_LIBRARY
+-    FONTCONFIG_RUNTIME_LIBRARY
+-    FREETYPE_RUNTIME_LIBRARY
+-    LIBPNG_RUNTIME_LIBRARY
+-    PIXMAN_RUNTIME_LIBRARY
    )
  
-   set(GTS_INCLUDE_DIRS
+   set(CAIRO_RUNTIME_LIBRARIES
+diff --git a/cmake/FindGTS.cmake b/cmake/FindGTS.cmake
+index bc1d5ea35..cc24e45a6 100644
+--- a/cmake/FindGTS.cmake
++++ b/cmake/FindGTS.cmake
+@@ -12,9 +12,6 @@ if(MINGW)
+     GTS_INCLUDE_DIRS
+ 
+     GTS_LINK_LIBRARIES
+-
+-    GTS_RUNTIME_LIBRARY
+-    GLIB_RUNTIME_LIBRARIES
+   )
+ 
+   set(GTS_RUNTIME_LIBRARIES
+@@ -30,9 +27,6 @@ elseif(WIN32)
+     GTS_INCLUDE_DIRS
+ 
+     GTS_LINK_LIBRARIES
+-
+-    GTS_RUNTIME_LIBRARY
+-    GLIB_RUNTIME_LIBRARIES
+   )
+ 
+   set(GTS_RUNTIME_LIBRARIES
 diff --git a/cmake/FindPANGOCAIRO.cmake b/cmake/FindPANGOCAIRO.cmake
-index b92e5bea9..76e8ede19 100644
+index d185f0bf7..99e4e6223 100644
 --- a/cmake/FindPANGOCAIRO.cmake
 +++ b/cmake/FindPANGOCAIRO.cmake
-@@ -35,14 +35,6 @@ if(WIN32)
-     PANGO_LIBRARY
-     PANGOCAIRO_LIBRARY
-     HARFBUZZ_LIBRARY
+@@ -17,14 +17,6 @@ if(MINGW)
+     PANGOCAIRO_INCLUDE_DIRS
+ 
+     PANGOCAIRO_LIBRARIES
 -
--    GLIB_RUNTIME_LIBRARY
+-    GLIB_RUNTIME_LIBRARIES
+-    GOBJECT_RUNTIME_LIBRARY
+-    HARFBUZZ_RUNTIME_LIBRARY
+-    PANGO_RUNTIME_LIBRARY
+-    PANGOCAIRO_RUNTIME_LIBRARY
+-    PANGOFT_RUNTIME_LIBRARY
+-    PANGOWIN_RUNTIME_LIBRARY
+   )
+   set(PANGOCAIRO_RUNTIME_LIBRARIES
+     ${GLIB_RUNTIME_LIBRARIES}
+@@ -52,16 +44,6 @@ elseif(WIN32)
+   find_package_handle_standard_args(PANGOCAIRO DEFAULT_MSG
+     PANGOCAIRO_INCLUDE_DIRS
+     PANGOCAIRO_LIBRARIES
+-    FFI_RUNTIME_LIBRARY
+-    FRIBIDI_RUNTIME_LIBRARY
+-    GIO_RUNTIME_LIBRARY
+-    GMODULE_RUNTIME_LIBRARY
 -    GOBJECT_RUNTIME_LIBRARY
 -    HARFBUZZ_RUNTIME_LIBRARY
 -    PANGO_RUNTIME_LIBRARY
@@ -57,7 +101,7 @@ index b92e5bea9..76e8ede19 100644
 -    PANGOWIN_RUNTIME_LIBRARY
    )
  
-   set(PANGOCAIRO_INCLUDE_DIRS
+   set(PANGOCAIRO_RUNTIME_LIBRARIES
 -- 
 2.45.2
 
