@@ -1,31 +1,30 @@
-From ece2af3a433ffc31df3ca220d4b1c88833313f60 Mon Sep 17 00:00:00 2001
+From 88d5e46d53042139f417aac658afadd72e194b7e Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
-Subject: [PATCH 3/4] Use WebP CMake targets instead of PkgConfig
+Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
 
 The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
 xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
 ---
- CMakeLists.txt                 |  4 ++--
- cmd/dot/CMakeLists.txt         |  8 +++-----
- plugin/webp/CMakeLists.txt     |  8 +++-----
- plugin/webp/gvloadimage_webp.c | 11 -----------
- 4 files changed, 8 insertions(+), 23 deletions(-)
+ CMakeLists.txt               | 4 ++--
+ plugin/gdk/gvloadimage_gdk.c | 9 ---------
+ plugin/webp/CMakeLists.txt   | 8 +++-----
+ 3 files changed, 5 insertions(+), 16 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 59b9194b7..42e4fa568 100644
+index 76ddfbca8..33b9ef88f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -161,6 +161,8 @@ endif()
- find_package(GD)
- find_package(GS)
+@@ -168,6 +168,8 @@ if(NOT WITH_EXPAT STREQUAL "OFF")
+ endif()
+ 
  find_package(GTS)
 +find_package(Threads REQUIRED)
 +find_package(WEBP)
  
- if(NOT enable_ltdl STREQUAL "OFF")
-   find_package(LTDL)
-@@ -190,7 +192,6 @@ if(PkgConfig_FOUND)
+ if(NOT WITH_SMYRNA STREQUAL "OFF")
+   find_package(Freetype)
+@@ -226,7 +228,6 @@ if(PkgConfig_FOUND)
    pkg_check_modules(LASI lasi)
    pkg_check_modules(POPPLER poppler-glib)
    pkg_check_modules(RSVG librsvg-2.0)
@@ -33,7 +32,7 @@ index 59b9194b7..42e4fa568 100644
    pkg_check_modules(X11 x11)
    pkg_check_modules(XRENDER xrender)
  else()
-@@ -199,7 +200,6 @@ else()
+@@ -235,7 +236,6 @@ else()
    set(LASI_FOUND 0)
    set(POPPLER_FOUND 0)
    set(RSVG_FOUND 0)
@@ -41,29 +40,28 @@ index 59b9194b7..42e4fa568 100644
    set(X11_FOUND 0)
    set(XRENDER_FOUND 0)
  endif()
-diff --git a/cmd/dot/CMakeLists.txt b/cmd/dot/CMakeLists.txt
-index 550b2bde7..88edc9173 100644
---- a/cmd/dot/CMakeLists.txt
-+++ b/cmd/dot/CMakeLists.txt
-@@ -93,13 +93,11 @@ if(BUILD_SHARED_LIBS)
-     endif()
-   endif()
+diff --git a/plugin/gdk/gvloadimage_gdk.c b/plugin/gdk/gvloadimage_gdk.c
+index d76f02498..e8b98b803 100644
+--- a/plugin/gdk/gvloadimage_gdk.c
++++ b/plugin/gdk/gvloadimage_gdk.c
+@@ -22,15 +22,6 @@
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+ #include <gdk/gdk.h>
  
-+  find_package(WEBP)
-   if(PANGOCAIRO_FOUND)
-     target_link_libraries(dot_builtins PRIVATE gvplugin_pango)
--    if(PkgConfig_FOUND)
--      pkg_check_modules(WEBP libwebp)
--      if(WEBP_FOUND)
--        target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
--      endif()
-+    if(WEBP_FOUND)
-+      target_link_libraries(dot_builtins PRIVATE gvplugin_webp)
-     endif()
-   endif()
- 
+-#ifdef _MSC_VER //*dependencies
+-    #pragma comment( lib, "gvc.lib" )
+-    #pragma comment( lib, "glib-2.0.lib" )
+-    #pragma comment( lib, "cairo.lib" )
+-    #pragma comment( lib, "gobject-2.0.lib" )
+-    #pragma comment( lib, "graph.lib" )
+-    #pragma comment( lib, "gdk-pixbuf.lib" )
+-#endif
+-
+ typedef enum {
+     FORMAT_BMP_CAIRO,
+     FORMAT_JPEG_CAIRO,
 diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
-index 0cfb18c79..a603ff846 100644
+index 4149a24f0..94cfaec0d 100644
 --- a/plugin/webp/CMakeLists.txt
 +++ b/plugin/webp/CMakeLists.txt
 @@ -1,3 +1,5 @@
@@ -87,28 +85,6 @@ index 0cfb18c79..a603ff846 100644
    )
  
    if(CAIRO_FOUND)
-diff --git a/plugin/webp/gvloadimage_webp.c b/plugin/webp/gvloadimage_webp.c
-index 13c00268e..a42154fb2 100644
---- a/plugin/webp/gvloadimage_webp.c
-+++ b/plugin/webp/gvloadimage_webp.c
-@@ -23,17 +23,6 @@
- #include <cairo.h>
- #include <webp/decode.h>
- 
--#ifdef _MSC_VER //*dependencies
--    #pragma comment( lib, "gvc.lib" )
--    #pragma comment( lib, "glib-2.0.lib" )
--    #pragma comment( lib, "pango-1.0.lib" )
--    #pragma comment( lib, "pangocairo-1.0.lib" )
--    #pragma comment( lib, "libcairo-2.lib" )
--    #pragma comment( lib, "gobject-2.0.lib" )
--    #pragma comment( lib, "graph.lib" )
--    #pragma comment( lib, "webp.lib" )
--#endif
--
- static const char* const kStatusMessages[] = {
-     "OK", "OUT_OF_MEMORY", "INVALID_PARAM", "BITSTREAM_ERROR",
-     "UNSUPPORTED_FEATURE", "SUSPENDED", "USER_ABORT", "NOT_ENOUGH_DATA"
 -- 
-2.45.2
+2.47.1
 

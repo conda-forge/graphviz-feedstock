@@ -12,6 +12,7 @@ source:
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
       - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
+      - patches/0005-Don-t-rely-on-pkgconfig-for-GTS-on-Windows.patch
 
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
@@ -44,6 +45,7 @@ requirements:
     - m2-flex                                             # [win]
     - m2-bison                                            # [win]
     - perl                                                # [win]
+    - pkgconf                                             # [win]
   host:
     # --with-pangocairo=yes
     - cairo
