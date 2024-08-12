@@ -33,7 +33,7 @@ libwebp_base:
 macos_machine:
 - arm64-apple-darwin20.0.0
 pango:
-- '1.50'
+- '1'
 target_platform:
 - osx-arm64
 zip_keys:
