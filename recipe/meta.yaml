@@ -35,6 +35,7 @@ requirements:
     - winflexbison                                        # [win]
     - cmake
     - ninja
+    - pkg-config
     - python >=3
   host:
     # necessary for PDF support
@@ -49,6 +50,7 @@ requirements:
     - expat
     - libtool                                             # [unix]
     - libwebp-base                                        # [osx]
+    - xorg-libx11                                         # [linux]
     - zlib
     # Windows only deps
     - getopt-win32                                        # [win]
