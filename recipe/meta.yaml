@@ -31,7 +31,6 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
-    - libtool                                             # [unix]
     - bison                                               # [unix]
     - winflexbison                                        # [win]
     - cmake
@@ -43,6 +42,7 @@ requirements:
     - cairo
     # default requirement
     - expat
+    - libtool                                             # [unix]
     - zlib
     # Windows only deps
     - getopt-win32                                        # [win]
