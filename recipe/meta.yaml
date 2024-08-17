@@ -41,9 +41,8 @@ requirements:
     # necessary for PDF support
     - cairo
     - gts
-    # pangocairo requires glib
-    - glib                                                # [win]
-    - libglib                                             # [win]
+    - glib
+    - libglib
     - pango                                               # [win]
     # necessary for png support
     - libgd                                               # [unix]
