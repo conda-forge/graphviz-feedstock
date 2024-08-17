@@ -42,9 +42,13 @@ requirements:
     # necessary for PDF support
     - cairo
     # default requirement
+    - expat
     - zlib
     # Windows only deps
     - getopt-win32                                        # [win]
+  run:
+    # has no run-export
+    - libtool                                             # [unix]
 
 test:
   files:
