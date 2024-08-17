@@ -40,6 +40,8 @@ requirements:
   host:
     # necessary for png support
     - gts
+    - glib
+    - libglib
     - libgd                                               # [unix]
     # default requirement
     - expat
