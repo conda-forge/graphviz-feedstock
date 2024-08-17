@@ -42,12 +42,11 @@ requirements:
     - gts
     - glib
     - libglib
-    - libgd                                               # [unix]
+    - libgd
     # default requirement
     - expat
-    - libtool                                             # [unix]
+    - libtool                                             # [osx]
     - libwebp-base                                        # [osx]
-    - xorg-libx11                                         # [linux]
     - zlib
     # Windows only deps
     - getopt-win32                                        # [win]
