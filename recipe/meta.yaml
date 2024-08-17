@@ -38,13 +38,8 @@ requirements:
     - pkg-config
     - python >=3
   host:
-    # necessary for PDF support
-    - cairo
-    - gts
-    - glib
-    - libglib
-    - pango
     # necessary for png support
+    - gts
     - libgd                                               # [unix]
     # default requirement
     - expat
