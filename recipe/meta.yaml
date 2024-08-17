@@ -42,10 +42,10 @@ requirements:
     - gts
     - glib
     - libglib
-    - libgd
+    - libgd                                               # [unix]
     # default requirement
     - expat
-    - libtool                                             # [osx]
+    - libtool                                             # [unix]
     - libwebp-base                                        # [osx]
     - zlib
     # Windows only deps
