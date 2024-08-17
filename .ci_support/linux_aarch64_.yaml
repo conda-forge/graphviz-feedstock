@@ -8,8 +8,6 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cairo:
-- '1'
 cdt_arch:
 - aarch64
 cdt_name:
@@ -24,18 +22,6 @@ cxx_compiler_version:
 - '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
-expat:
-- '2'
-gdk_pixbuf:
-- '2'
-glib:
-- '2'
-librsvg:
-- '2'
-libwebp_base:
-- '1'
-pango:
-- '1.50'
 target_platform:
 - linux-aarch64
 zip_keys:
