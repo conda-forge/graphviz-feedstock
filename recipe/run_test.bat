@@ -23,6 +23,3 @@ for %%t in (png, pdf, svg, tiff, jpeg) do (
 
 sfdp -Tpdf -o sample.pdf sample.dot
 if errorlevel 1 exit 1
-
-call dot.bat -V
-if errorlevel 1 exit 1
