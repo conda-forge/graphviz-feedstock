@@ -5,6 +5,7 @@ mkdir build
 cd build
 
 cmake -G Ninja \
+    -Denable_tcl=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     ..

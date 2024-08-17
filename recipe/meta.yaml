@@ -31,12 +31,17 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
+    - libtool                                             # [unix]
     - bison                                               # [unix]
     - winflexbison                                        # [win]
     - cmake
     - ninja
+    - pkg-config
     - python >=3
   host:
+    # necessary for PDF support
+    - cairo
+    # default requirement
     - zlib
     # Windows only deps
     - getopt-win32                                        # [win]
