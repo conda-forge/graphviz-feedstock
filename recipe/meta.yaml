@@ -40,6 +40,10 @@ requirements:
   host:
     # necessary for PDF support
     - cairo
+    # pangocairo requires glib
+    - glib
+    - libglib
+    - pango
     # default requirement
     - expat
     - libtool                                             # [unix]
