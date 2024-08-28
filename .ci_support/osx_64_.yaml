@@ -10,8 +10,6 @@ c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
 - '10.13'
-cairo:
-- '1'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -20,20 +18,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '16'
-expat:
-- '2'
-gdk_pixbuf:
-- '2'
-glib:
-- '2'
-librsvg:
-- '2'
-libwebp_base:
-- '1'
 macos_machine:
 - x86_64-apple-darwin13.4.0
-pango:
-- '1.50'
 target_platform:
 - osx-64
 zip_keys:

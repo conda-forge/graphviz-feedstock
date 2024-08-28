@@ -1,0 +1,19 @@
+From 8a0c0c2b7fb6bc749d3bf4ef68a99cab7bfb5804 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Sat, 3 Aug 2024 16:01:19 +1100
+Subject: [PATCH 6/6] opt into newer CMake defaults
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 746ecdafa..2c1f329ea 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.14.1 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.30.0 FATAL_ERROR)
+ project(Graphviz)
+ 
+ include(FeatureSummary)
