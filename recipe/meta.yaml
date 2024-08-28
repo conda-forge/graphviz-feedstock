@@ -12,7 +12,7 @@ source:
       - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
       - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
       - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
-      - patches/0005-don-t-bother-building-prune.patch
+      # - patches/0005-don-t-bother-building-prune.patch
       # - patches/0006-opt-into-newer-CMake-defaults.patch
 
     # Prefer header only compat layer, even though m2-libtool might work
