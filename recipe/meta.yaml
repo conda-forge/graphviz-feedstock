@@ -13,7 +13,7 @@ source:
       - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
       - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
       - patches/0005-don-t-bother-building-prune.patch
-      - patches/0006-opt-into-newer-CMake-defaults.patch
+      # - patches/0006-opt-into-newer-CMake-defaults.patch
 
     # Prefer header only compat layer, even though m2-libtool might work
   - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
