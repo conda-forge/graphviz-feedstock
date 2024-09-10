@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '12'
+- '13'
 c_stdlib:
 - sysroot
 c_stdlib_version:
@@ -17,7 +17,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '12'
+- '13'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 expat:
@@ -31,7 +31,7 @@ librsvg:
 libwebp_base:
 - '1'
 pango:
-- '1.50'
+- '1'
 target_platform:
 - linux-ppc64le
 zip_keys:
