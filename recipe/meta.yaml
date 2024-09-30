@@ -27,7 +27,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
     - pkg-config                                          # [unix]
     - make                                                # [unix]
     - bison                                               # [unix]
@@ -50,8 +50,10 @@ requirements:
     - gts
     # --with-gdk-pixbuf=yes
     - gdk-pixbuf                                          # [unix]
+    # Upstream has no evidence of any users of the GTK3 portions
+    # https://gitlab.com/graphviz/graphviz/-/issues/1848#note_2008708136
     # --with-gdk=yes
-    - gtk2                                                # [unix]
+    # - gtk3                                              # [unix]
     # pangocairo requires glib
     - glib
     - libglib
