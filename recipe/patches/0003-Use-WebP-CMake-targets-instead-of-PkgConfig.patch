@@ -1,7 +1,7 @@
-From ece2af3a433ffc31df3ca220d4b1c88833313f60 Mon Sep 17 00:00:00 2001
+From 9f248168966dc5c333962b6dcab46ca7835fdb20 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
-Subject: [PATCH 3/4] Use WebP CMake targets instead of PkgConfig
+Subject: [PATCH 3/6] Use WebP CMake targets instead of PkgConfig
 
 The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
 xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
@@ -109,6 +109,3 @@ index 13c00268e..a42154fb2 100644
  static const char* const kStatusMessages[] = {
      "OK", "OUT_OF_MEMORY", "INVALID_PARAM", "BITSTREAM_ERROR",
      "UNSUPPORTED_FEATURE", "SUSPENDED", "USER_ABORT", "NOT_ENOUGH_DATA"
--- 
-2.45.2
-
