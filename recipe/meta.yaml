@@ -22,6 +22,9 @@ build:
   number: 0
   run_exports:
     - {{ pin_subpackage('graphviz', max_pin='x') }}
+  # gkd-pixbuf -> libtiff -> liblzma (not a direct dep)
+  ignore_run_exports:                                     # [unix]
+    - liblzma                                             # [unix]
 
 requirements:
   build:
@@ -50,6 +53,8 @@ requirements:
     - gts
     # --with-gdk-pixbuf=yes
     - gdk-pixbuf                                          # [unix]
+    # Only to satisfy pkg-config --cflags "gdk-pixbuf-2.0"
+    - liblzma-devel                                       # [unix]
     # --with-gdk=yes
     - gtk3                                                # [unix]
     # pangocairo requires glib
@@ -63,6 +68,7 @@ requirements:
     - libwebp-base
     # --with-pangocairo=yes
     - pango
+    - xorg-xorgproto                                      # [unix]
     # default requirement
     - zlib
     # Windows only deps
