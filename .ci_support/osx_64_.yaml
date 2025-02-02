@@ -28,6 +28,8 @@ glib:
 - '2'
 graphviz:
 - '12'
+liblzma_devel:
+- '5'
 librsvg:
 - '2'
 libwebp_base:
