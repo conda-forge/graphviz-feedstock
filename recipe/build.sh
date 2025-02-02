@@ -1,22 +1,25 @@
 #!/bin/bash
 set -x
 
+# https://github.com/conda-forge/xorg-libxfixes-feedstock/issues/13
+export PKG_CONFIG_PATH=$PREFIX/share/pkgconfig:$PKG_CONFIG_PATH
+
 ./autogen.sh
 
 # remove libtool files
-find $PREFIX -name '*.la' -delete
+find "$PREFIX" -name '*.la' -delete
 
 declare -a _xtra_config_flags
 declare -a _xtra_make_args
 
-if [[ ${target_platform} =~ .*osx.* ]]; then
+if [[ "${target_platform}" =~ .*osx.* ]]; then
     export OBJC="${CC}"
     # xcodebuild uses ld instead of clang and fails
     export LD="${CC_FOR_BUILD}"
     _xtra_config_flags+=(--with-quartz)
 fi
 
-./configure --prefix=$PREFIX \
+./configure --prefix="$PREFIX" \
             --disable-debug \
             --disable-java \
             --disable-php \
@@ -26,6 +29,7 @@ fi
             --without-x \
             --without-qt \
             --without-gtk \
+            --enable-ruby=no \
             --with-ann=no \
             --with-gts=yes \
             --with-gdk=yes \
@@ -39,19 +43,19 @@ fi
             "${_xtra_config_flags[@]}"
 
 
-if [ $CONDA_BUILD_CROSS_COMPILATION = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
-    sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' $SRC_DIR/lib/gvpr/Makefile.am
-    sed -i.bak '/dot$(EXEEXT) -c/d' $SRC_DIR/cmd/dot/Makefile.am
+if [ "$CONDA_BUILD_CROSS_COMPILATION" = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
+    sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' "$SRC_DIR"/lib/gvpr/Makefile.am
+    # shellcheck disable=SC2016
+    sed -i.bak '/dot$(EXEEXT) -c/d' "$SRC_DIR"/cmd/dot/Makefile.am
     _xtra_make_args+=(ARCH=arm64)
 fi
-
-make -j${CPU_COUNT} "${_xtra_make_args[@]}"
+make -j"${CPU_COUNT}" "${_xtra_make_args[@]}"
 # This is failing for rtest.
 # Doesn't do anything for the rest
 # make check
 make install
 
 # Configure plugins
-if [ $CONDA_BUILD_CROSS_COMPILATION != 1 ]; then
-    $PREFIX/bin/dot -c
+if [ "$CONDA_BUILD_CROSS_COMPILATION" != 1 ]; then
+    "$PREFIX"/bin/dot -c
 fi

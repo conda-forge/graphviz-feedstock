@@ -14,10 +14,12 @@ expat:
 - '2'
 glib:
 - '2'
+graphviz:
+- '12'
 libwebp_base:
 - '1'
 pango:
-- '1.50'
+- '1'
 perl:
 - 5.32.1
 target_platform:
