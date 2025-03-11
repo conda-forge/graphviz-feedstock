@@ -107,6 +107,7 @@ tests:
     files:
       recipe:
         - sample.dot
+        - run_test.${{ 'sh' if unix else 'bat' }}
 
 about:
   license: EPL-1.0
