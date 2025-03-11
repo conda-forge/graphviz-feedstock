@@ -14,8 +14,6 @@ expat:
 - '2'
 glib:
 - '2'
-graphviz:
-- '12'
 libwebp_base:
 - '1'
 pango:

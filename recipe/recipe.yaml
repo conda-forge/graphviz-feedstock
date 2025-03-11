@@ -1,0 +1,130 @@
+schema_version: 1
+
+context:
+  version: 12.2.1
+
+package:
+  name: graphviz
+  version: ${{ version }}
+
+source:
+  - url: https://gitlab.com/graphviz/graphviz/-/archive/${{ version }}/graphviz-${{ version }}.tar.gz
+    sha256: 91d444b4dabdaf5bfa7c6fcc3a1ee5d41e588af6079ebc030f0acb79e48a56ea
+    patches:
+      - patches/0001-Always-link-to-getopt-on-Windows.patch
+      - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
+      - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
+      - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
+      - patches/0005-Don-t-rely-on-pkgconfig-for-GTS-on-Windows.patch
+  # Prefer header only compat layer, even though m2-libtool might work
+  - url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
+    sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
+    target_directory: ltdl_compat
+
+build:
+  # gkd-pixbuf -> libtiff -> liblzma (not a direct dep)
+  number: 2
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+    - if: unix
+      then: pkg-config
+    - if: unix
+      then: make
+    - if: unix
+      then: bison
+    - if: unix
+      then: libtool
+    - if: unix
+      then: automake
+    - if: unix
+      then: autoconf
+    - if: win
+      then: cmake
+    - if: win
+      then: ninja
+    - python >=3
+    - if: win
+      then: m2-gawk
+    - if: win
+      then: m2-flex
+    - if: win
+      then: m2-bison
+    - if: win
+      then: perl
+    - if: win
+      then: pkgconf
+  host:
+    # --with-pangocairo=yes
+    - cairo
+    # --with-expat=yes
+    - expat
+    # --with-gts=yes
+    - gts
+    # --with-gdk-pixbuf=yes
+    - if: unix
+      then: gdk-pixbuf
+    # Only to satisfy pkg-config --cflags "gdk-pixbuf-2.0"
+    - if: unix
+      then: liblzma-devel
+    # --with-gdk=yes
+    - if: unix
+      then: gtk3
+    # pangocairo requires glib
+    - glib
+    - libglib
+    # --with-libgd=yes
+    - libgd
+    # --with-rsvg=yes
+    - if: unix
+      then: librsvg
+    # --with-webp=yes
+    - libwebp-base
+    # --with-pangocairo=yes
+    - pango
+    - if: unix
+      then: xorg-xorgproto
+    # default requirement
+    - zlib
+    # Windows only deps
+    - if: win
+      then: getopt-win32
+  run:
+    - if: unix
+      then: fonts-conda-ecosystem
+  run_exports:
+    - ${{ pin_subpackage('graphviz', upper_bound='x') }}
+  ignore_run_exports:
+    from_package:
+      - if: unix
+        then: liblzma-devel
+
+tests:
+  - script: run_test.${{ 'sh' if unix else 'bat' }}
+    files:
+      recipe:
+        - sample.dot
+        - run_test.${{ 'sh' if unix else 'bat' }}
+
+about:
+  license: EPL-1.0
+  license_file: COPYING
+  summary: Open Source graph visualization software.
+  description: |
+    Graphviz is an open source graph visualization software. Graph visualization
+    is a way of representing structural information as diagrams of abstract
+    graphs and networks.
+  homepage: http://www.graphviz.org/
+  repository: https://gitlab.com/graphviz/graphviz/
+  documentation: https://graphviz.gitlab.io/documentation/
+
+extra:
+  recipe-maintainers:
+    - jakirkham
+    - ccordoba12
+    - ocefpaf
+    - johanneskoester
+    - nehaljwani
