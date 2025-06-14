@@ -1,4 +1,4 @@
-From 022b3dccae37be37b40c1ddd1e54220f4eb4d6b5 Mon Sep 17 00:00:00 2001
+From e2a621df29edc32ac2b4a9d39f2a2826e46eb943 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
 Subject: [PATCH 2/5] Remove requirement of hard coded DLLs in PATH
@@ -139,5 +139,5 @@ index d185f0bf7..99e4e6223 100644
  
    set(PANGOCAIRO_RUNTIME_LIBRARIES
 -- 
-2.47.1
+2.49.0
 
