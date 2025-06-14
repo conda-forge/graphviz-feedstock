@@ -1,4 +1,4 @@
-From 88d5e46d53042139f417aac658afadd72e194b7e Mon Sep 17 00:00:00 2001
+From 68fe3bfbbd38eaa6c20ffaca3ea766606ab7b3f7 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 30 Dec 2022 20:47:22 +0000
 Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
@@ -6,16 +6,15 @@ Subject: [PATCH 3/5] Use WebP CMake targets instead of PkgConfig
 The pkgconfig module ends up with 'webp' instead of '/path/to/libwebp.lib'
 xref: https://gitlab.kitware.com/cmake/cmake/-/commit/955d6245
 ---
- CMakeLists.txt               | 4 ++--
- plugin/gdk/gvloadimage_gdk.c | 9 ---------
- plugin/webp/CMakeLists.txt   | 8 +++-----
- 3 files changed, 5 insertions(+), 16 deletions(-)
+ CMakeLists.txt             | 4 ++--
+ plugin/webp/CMakeLists.txt | 8 +++-----
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 76ddfbca8..33b9ef88f 100644
+index 80d5321ed..d061fecf9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -168,6 +168,8 @@ if(NOT WITH_EXPAT STREQUAL "OFF")
+@@ -167,6 +167,8 @@ if(NOT WITH_EXPAT STREQUAL "OFF")
  endif()
  
  find_package(GTS)
@@ -40,26 +39,6 @@ index 76ddfbca8..33b9ef88f 100644
    set(X11_FOUND 0)
    set(XRENDER_FOUND 0)
  endif()
-diff --git a/plugin/gdk/gvloadimage_gdk.c b/plugin/gdk/gvloadimage_gdk.c
-index d76f02498..e8b98b803 100644
---- a/plugin/gdk/gvloadimage_gdk.c
-+++ b/plugin/gdk/gvloadimage_gdk.c
-@@ -22,15 +22,6 @@
- #include <gdk-pixbuf/gdk-pixbuf.h>
- #include <gdk/gdk.h>
- 
--#ifdef _MSC_VER //*dependencies
--    #pragma comment( lib, "gvc.lib" )
--    #pragma comment( lib, "glib-2.0.lib" )
--    #pragma comment( lib, "cairo.lib" )
--    #pragma comment( lib, "gobject-2.0.lib" )
--    #pragma comment( lib, "graph.lib" )
--    #pragma comment( lib, "gdk-pixbuf.lib" )
--#endif
--
- typedef enum {
-     FORMAT_BMP_CAIRO,
-     FORMAT_JPEG_CAIRO,
 diff --git a/plugin/webp/CMakeLists.txt b/plugin/webp/CMakeLists.txt
 index 4149a24f0..94cfaec0d 100644
 --- a/plugin/webp/CMakeLists.txt
@@ -86,5 +65,5 @@ index 4149a24f0..94cfaec0d 100644
  
    if(CAIRO_FOUND)
 -- 
-2.47.1
+2.49.0
 

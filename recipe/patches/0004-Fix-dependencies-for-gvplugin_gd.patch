@@ -1,4 +1,4 @@
-From a4883161918d1d1582c31ac0bb74c9a0be4f0638 Mon Sep 17 00:00:00 2001
+From f65c1cf19a9244dd18222b2b67d026a9f0379831 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sat, 31 Dec 2022 00:57:18 +0000
 Subject: [PATCH 4/5] Fix dependencies for gvplugin_gd
@@ -30,5 +30,5 @@ index d7ab21f2e..2781d1d65 100644
    )
  
 -- 
-2.47.1
+2.49.0
 
