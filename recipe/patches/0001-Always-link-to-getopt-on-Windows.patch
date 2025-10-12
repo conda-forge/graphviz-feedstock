@@ -1,4 +1,4 @@
-From 4cfdffb651e35547b81e5e7bc160dcb9a34b0065 Mon Sep 17 00:00:00 2001
+From 1771212237d1b43bf856c2930c63e197a32f2477 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
 Subject: [PATCH 1/5] Always link to getopt on Windows
@@ -14,18 +14,18 @@ Subject: [PATCH 1/5] Always link to getopt on Windows
  7 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 0f1d2245f..80d5321ed 100644
+index 5d2f3b263..ae1e3fe8d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -592,7 +592,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h
- message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION_FULL}")
+@@ -734,7 +734,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h
+ message(STATUS "Graphviz version: ${GRAPHVIZ_VERSION}")
  
  include(config_checks)
 -if(NOT HAVE_GETOPT_H)
 +if(WIN32 OR (NOT HAVE_GETOPT_H))
-   find_package(GETOPT REQUIRED)
+   find_package(GETOPT)
+   set_package_properties(GETOPT PROPERTIES TYPE REQUIRED)
  endif()
- include_directories(${CMAKE_CURRENT_BINARY_DIR})
 diff --git a/cmd/edgepaint/CMakeLists.txt b/cmd/edgepaint/CMakeLists.txt
 index ad8196e4a..dcd13ed5b 100644
 --- a/cmd/edgepaint/CMakeLists.txt
@@ -40,7 +40,7 @@ index ad8196e4a..dcd13ed5b 100644
    endif()
  
 diff --git a/cmd/gvmap/CMakeLists.txt b/cmd/gvmap/CMakeLists.txt
-index c8c604c25..ddcb9c3c3 100644
+index 5c64e200a..0a2ac1189 100644
 --- a/cmd/gvmap/CMakeLists.txt
 +++ b/cmd/gvmap/CMakeLists.txt
 @@ -14,7 +14,7 @@ if(with_sfdp)
@@ -84,7 +84,7 @@ index d8f0ba01b..276a9e6f4 100644
    endif()
  
 diff --git a/cmd/tools/CMakeLists.txt b/cmd/tools/CMakeLists.txt
-index 0bf74be0d..58071bd0e 100644
+index c35d5ba73..10a184c69 100644
 --- a/cmd/tools/CMakeLists.txt
 +++ b/cmd/tools/CMakeLists.txt
 @@ -3,7 +3,7 @@
@@ -96,7 +96,7 @@ index 0bf74be0d..58071bd0e 100644
      target_link_libraries(${name} PRIVATE ${GETOPT_LINK_LIBRARIES})
    endif()
  
-@@ -99,7 +99,7 @@ target_include_directories(gc_bin PRIVATE
+@@ -100,7 +100,7 @@ target_include_directories(gc_bin PRIVATE
  if(GETOPT_FOUND)
    target_include_directories(gc_bin SYSTEM PRIVATE ${GETOPT_INCLUDE_DIRS})
  endif()
@@ -105,7 +105,7 @@ index 0bf74be0d..58071bd0e 100644
    target_link_libraries(gc_bin PRIVATE ${GETOPT_LINK_LIBRARIES})
  endif()
  
-@@ -227,7 +227,7 @@ if(GETOPT_FOUND)
+@@ -230,7 +230,7 @@ if(GETOPT_FOUND)
    )
  endif()
  target_link_libraries(gv2gml PRIVATE cgraph gvc util)
@@ -115,7 +115,7 @@ index 0bf74be0d..58071bd0e 100644
  endif()
  install(TARGETS gv2gml RUNTIME DESTINATION ${BINARY_INSTALL_DIR})
 diff --git a/contrib/prune/CMakeLists.txt b/contrib/prune/CMakeLists.txt
-index c7b1a828b..15e06efef 100644
+index 6c175f66d..ada3b2595 100644
 --- a/contrib/prune/CMakeLists.txt
 +++ b/contrib/prune/CMakeLists.txt
 @@ -20,7 +20,7 @@ if(GETOPT_FOUND)
@@ -128,12 +128,12 @@ index c7b1a828b..15e06efef 100644
  endif()
  
 diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
-index 79932ce85..dcaf981e3 100644
+index c030ba10a..a1019b178 100644
 --- a/lib/gvpr/CMakeLists.txt
 +++ b/lib/gvpr/CMakeLists.txt
-@@ -64,7 +64,7 @@ if(CMAKE_VERSION VERSION_LESS "3.21.0")
-   add_dependencies(gvpr ast expr sfio vmalloc)
- endif()
+@@ -53,7 +53,7 @@ target_link_libraries(gvpr PRIVATE
+   $<TARGET_OBJECTS:sfio>
+ )
  
 -if(NOT HAVE_GETOPT_H)
 +if(WIN32 OR (NOT HAVE_GETOPT_H))
@@ -141,5 +141,5 @@ index 79932ce85..dcaf981e3 100644
  endif()
  
 -- 
-2.49.0
+2.50.0
 

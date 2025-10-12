@@ -1,4 +1,4 @@
-From 2dd097af33a3a5f901aa6d04adbf89bd225eb5a8 Mon Sep 17 00:00:00 2001
+From 4a529623cf44d2f9caf1420bfbc7c2dfc0576607 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 2 Feb 2025 18:04:50 +0000
 Subject: [PATCH 5/5] Don't rely on pkgconfig for GTS on Windows
@@ -58,5 +58,5 @@ index cc24e45a6..aa0248055 100644
  else()
    find_package_handle_standard_args(GTS DEFAULT_MSG
 -- 
-2.49.0
+2.50.0
 

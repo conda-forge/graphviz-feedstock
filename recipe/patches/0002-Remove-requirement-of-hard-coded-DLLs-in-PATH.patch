@@ -1,4 +1,4 @@
-From e2a621df29edc32ac2b4a9d39f2a2826e46eb943 Mon Sep 17 00:00:00 2001
+From f3c8d8ffad9e58a566c42a9f4e8943395e2679ce Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 18:07:41 -0500
 Subject: [PATCH 2/5] Remove requirement of hard coded DLLs in PATH
@@ -45,7 +45,7 @@ index a6fdf8e3c..73e2aac94 100644
  
    set(CAIRO_RUNTIME_LIBRARIES
 diff --git a/cmake/FindGD.cmake b/cmake/FindGD.cmake
-index 92220a7e1..7f6beb748 100644
+index 49d372c37..9f481ec7f 100644
 --- a/cmake/FindGD.cmake
 +++ b/cmake/FindGD.cmake
 @@ -19,13 +19,7 @@ if(WIN32)
@@ -139,5 +139,5 @@ index d185f0bf7..99e4e6223 100644
  
    set(PANGOCAIRO_RUNTIME_LIBRARIES
 -- 
-2.49.0
+2.50.0
 
