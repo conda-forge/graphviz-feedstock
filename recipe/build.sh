@@ -9,6 +9,9 @@ export PKG_CONFIG_PATH=$PREFIX/share/pkgconfig:$PKG_CONFIG_PATH
 # remove libtool files
 find "$PREFIX" -name '*.la' -delete
 
+# https://github.com/conda-forge/conda-forge.github.io/issues/1880
+sed -i.bak '/Requires.private:/d' $PREFIX/lib/pkgconfig/librsvg*.pc
+
 declare -a _xtra_config_flags
 declare -a _xtra_make_args
 
