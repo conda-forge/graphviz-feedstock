@@ -25,7 +25,7 @@ gdk_pixbuf:
 glib:
 - '2'
 graphviz:
-- '13'
+- '14'
 liblzma_devel:
 - '5'
 librsvg:
