@@ -1,4 +1,4 @@
-From cf416063b67b774389798cf83fd0bfa80c4fa6cd Mon Sep 17 00:00:00 2001
+From 764eac7bfd8d9468b488de972f71558011ec4d31 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 15 Feb 2021 17:02:21 -0500
 Subject: [PATCH 1/5] Always link to getopt on Windows
@@ -14,7 +14,7 @@ Subject: [PATCH 1/5] Always link to getopt on Windows
  7 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1ea6465f4..24234d2d0 100644
+index b02632b1f..0ff370c5c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -757,7 +757,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/graphviz_version.h
@@ -128,7 +128,7 @@ index 6c175f66d..ada3b2595 100644
  endif()
  
 diff --git a/lib/gvpr/CMakeLists.txt b/lib/gvpr/CMakeLists.txt
-index ca9e6dbab..183093c76 100644
+index 35fccf805..87b3bc3ae 100644
 --- a/lib/gvpr/CMakeLists.txt
 +++ b/lib/gvpr/CMakeLists.txt
 @@ -53,7 +53,7 @@ target_link_libraries(gvpr PRIVATE

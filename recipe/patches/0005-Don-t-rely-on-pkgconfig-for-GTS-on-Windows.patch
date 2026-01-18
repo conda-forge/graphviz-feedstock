@@ -1,4 +1,4 @@
-From 4e87196f08db7585b8e47ea54792da7f8c62d8e9 Mon Sep 17 00:00:00 2001
+From 7f201550b813812b66066b706a59bdaed4f4a009 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 2 Feb 2025 18:04:50 +0000
 Subject: [PATCH 5/5] Don't rely on pkgconfig for GTS on Windows
