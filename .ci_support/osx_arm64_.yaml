@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 c_compiler:
 - clang
 c_compiler_version:
-- '16'
+- '19'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -17,7 +17,15 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '19'
+expat:
+- '2'
+glib:
+- '2'
+graphviz:
+- '14'
+libwebp_base:
+- '1'
 macos_machine:
 - arm64-apple-darwin20.0.0
 target_platform:
