@@ -2,8 +2,6 @@ c_compiler:
 - vs2022
 c_stdlib:
 - vs
-cairo:
-- '1'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -16,12 +14,6 @@ glib:
 - '2'
 graphviz:
 - '14'
-libwebp_base:
-- '1'
-pango:
-- '1'
-perl:
-- 5.32.1
 target_platform:
 - win-64
 zlib:
