@@ -43,6 +43,7 @@ fi
             --with-fontconfig=yes \
             --with-pangocairo=yes \
             --with-gdk-pixbuf=yes \
+            PYTHON3=$BUILD_PREFIX/bin/python \
             "${_xtra_config_flags[@]}"
 
 
