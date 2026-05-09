@@ -20,7 +20,7 @@ source:
     folder: ltdl_compat
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('graphviz', max_pin='x') }}
   # gkd-pixbuf -> libtiff -> liblzma (not a direct dep)
