@@ -1,7 +1,8 @@
 #!/bin/bash
 set -ex
 
-dot -c
+# the package ships the plugin configuration (dot -c at build time)
+test -f "${PREFIX}/lib/graphviz/config8"
 dot -V
 dot -v < /dev/null
 fdp -V

@@ -18,6 +18,10 @@ if errorlevel 1 exit 1
 cmake --build build -- install
 if errorlevel 1 exit 1
 
+:: Register the plugins (config8), so that no post-link step is needed
+"%LIBRARY_BIN%\dot.exe" -c
+if errorlevel 1 exit 1
+
 
 :: Reinstall into a temporary directory to gather names of execs
 set _gz_installdir=%SRC_DIR%\install

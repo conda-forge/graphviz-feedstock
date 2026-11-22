@@ -1,64 +1,65 @@
 #!/bin/bash
-set -x
+set -ex
 
-# https://github.com/conda-forge/xorg-libxfixes-feedstock/issues/13
-export PKG_CONFIG_PATH=$PREFIX/share/pkgconfig:$PKG_CONFIG_PATH
-
-./autogen.sh
-
-# remove libtool files
-find "$PREFIX" -name '*.la' -delete
-
-# https://github.com/conda-forge/conda-forge.github.io/issues/1880
-sed -i.bak '/Requires.private:/d' $PREFIX/lib/pkgconfig/librsvg*.pc
-
-declare -a _xtra_config_flags
-declare -a _xtra_make_args
-
-if [[ "${target_platform}" =~ .*osx.* ]]; then
-    export OBJC="${CC}"
-    # xcodebuild uses ld instead of clang and fails
-    export LD="${CC_FOR_BUILD}"
-    _xtra_config_flags+=(--with-quartz)
+declare -a _xtra_cmake_args
+if [[ "${target_platform}" == osx-* ]]; then
+    _xtra_cmake_args+=(
+        -DWITH_QUARTZ=ON
+        # the plugins are installed as @rpath/libgvplugin_*.dylib in lib/graphviz, and gvpack
+        # links one of them directly
+        "-DCMAKE_INSTALL_RPATH=@loader_path;@loader_path/../lib/graphviz"
+    )
+else
+    _xtra_cmake_args+=(
+        -DWITH_QUARTZ=OFF
+        # gvpack links a plugin (lib/graphviz) directly
+        "-DCMAKE_INSTALL_RPATH=\$ORIGIN/../lib/graphviz"
+    )
 fi
 
-./configure --prefix="$PREFIX" \
-            --disable-debug \
-            --disable-java \
-            --disable-php \
-            --disable-perl \
-            --disable-tcl \
-            --enable-ltdl \
-            --without-x \
-            --without-qt \
-            --without-gtk \
-            --enable-ruby=no \
-            --with-ann=no \
-            --with-gts=yes \
-            --with-gdk=yes \
-            --with-rsvg=yes \
-            --with-expat=yes \
-            --with-libgd=yes \
-            --with-freetype2=yes \
-            --with-fontconfig=yes \
-            --with-pangocairo=yes \
-            --with-gdk-pixbuf=yes \
-            "${_xtra_config_flags[@]}"
+cmake -S . -B build -G Ninja \
+    ${CMAKE_ARGS} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_SHARED_LIBS=ON \
+    -DENABLE_LTDL=ON \
+    -DWITH_EXPAT=ON \
+    -DWITH_ZLIB=ON \
+    -DWITH_GDK=ON \
+    -DWITH_RSVG=ON \
+    -DWITH_WEBP=ON \
+    -DWITH_X=OFF \
+    -DWITH_GTK=OFF \
+    -DWITH_GVEDIT=OFF \
+    -DWITH_SMYRNA=OFF \
+    -DWITH_POPPLER=OFF \
+    -DWITH_GHOSTSCRIPT=OFF \
+    -DENABLE_TCL=OFF \
+    -DENABLE_SWIG=OFF \
+    -DENABLE_SHARP=OFF \
+    -DENABLE_D=OFF \
+    -DENABLE_GO=OFF \
+    -DENABLE_GUILE=OFF \
+    -DENABLE_JAVA=OFF \
+    -DENABLE_JAVASCRIPT=OFF \
+    -DENABLE_LUA=OFF \
+    -DENABLE_PERL=OFF \
+    -DENABLE_PHP=OFF \
+    -DENABLE_PYTHON=OFF \
+    -DENABLE_R=OFF \
+    -DENABLE_RUBY=OFF \
+    "${_xtra_cmake_args[@]}"
 
+cmake --build build --parallel "${CPU_COUNT}"
+cmake --install build
 
-if [ "$CONDA_BUILD_CROSS_COMPILATION" = 1 ] && [ "${target_platform}" = "osx-arm64" ]; then
-    sed -i.bak 's/HOSTCC/CC_FOR_BUILD/g' "$SRC_DIR"/lib/gvpr/Makefile.am
-    # shellcheck disable=SC2016
-    sed -i.bak '/dot$(EXEEXT) -c/d' "$SRC_DIR"/cmd/dot/Makefile.am
-    _xtra_make_args+=(ARCH=arm64)
-fi
-make -j"${CPU_COUNT}" "${_xtra_make_args[@]}"
-# This is failing for rtest.
-# Doesn't do anything for the rest
-# make check
-make install
-
-# Configure plugins
-if [ "$CONDA_BUILD_CROSS_COMPILATION" != 1 ]; then
-    "$PREFIX"/bin/dot -c
+# Register the plugins (lib/graphviz/config8), so that no post-link step is needed. This runs
+# the freshly built dot: through the emulator conda-forge provides when cross-compiling
+# (linux-ppc64le), with the cross compiler's sysroot for the target's glibc.
+if [[ "${build_platform}" == "${target_platform}" ]]; then
+    "${PREFIX}/bin/dot" -c
+else
+    QEMU_LD_PREFIX="${QEMU_LD_PREFIX:-${BUILD_PREFIX}/${HOST}/sysroot}" \
+        ${CROSSCOMPILING_EMULATOR} "${PREFIX}/bin/dot" -c
 fi

@@ -1,5 +1,7 @@
 c_compiler:
-- vs2022
+- vs
+c_compiler_version:
+- '2022'
 c_stdlib:
 - vs
 cairo:
@@ -9,13 +11,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2022
+- vs
+cxx_compiler_version:
+- '2022'
 expat:
 - '2'
 glib:
 - '2'
-graphviz:
-- '14'
 libwebp_base:
 - '1'
 pango:
