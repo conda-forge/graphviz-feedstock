@@ -1,0 +1,149 @@
+schema_version: 1
+
+context:
+  version: 15.0.0
+
+package:
+  name: graphviz
+  version: ${{ version }}
+
+source:
+  - url: https://gitlab.com/graphviz/graphviz/-/archive/${{ version }}/graphviz-${{ version }}.tar.gz
+    sha256: dfa5be5c311f760aa9c88273c8f8101bb11f50b0de8b29bbd54acff3adc2d563
+    patches:
+      - patches/0001-Always-link-to-getopt-on-Windows.patch
+      - patches/0002-Remove-requirement-of-hard-coded-DLLs-in-PATH.patch
+      - patches/0003-Use-WebP-CMake-targets-instead-of-PkgConfig.patch
+      - patches/0004-Fix-dependencies-for-gvplugin_gd.patch
+      - patches/0005-Don-t-rely-on-pkgconfig-for-GTS-on-Windows.patch
+  - if: win
+    then:
+      # Prefer header only compat layer, even though m2-libtool might work
+      url: https://gitlab.com/graphviz/graphviz-windows-dependencies/-/raw/c7eafb3c/x64/include/ltdl.h
+      sha256: a3cf376bca2965634ba05926d4065a46331e71c487d84a4c6aceb795e9458bfd
+      target_directory: ltdl_compat
+
+build:
+  number: 0
+  dynamic_linking:
+    overdepending_behavior: error
+    overlinking_behavior: error
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - cmake
+    - ninja
+    - pkgconf
+    - python >=3
+    - if: unix
+      then:
+        - bison
+        - flex
+    - if: win
+      then:
+        - m2-gawk
+        - m2-flex
+        - m2-bison
+        - perl
+  host:
+    - cairo
+    - expat
+    - gts
+    - glib
+    - libglib
+    - libgd
+    - libwebp-base
+    - pango
+    - zlib
+    - if: unix
+      then:
+        - gdk-pixbuf
+        - gtk3
+        - librsvg
+        # only for pkg-config: librsvg-2.0.pc lists libxml-2.0 in Requires.private
+        - libxml2-devel
+        # on-demand plugin loading
+        - libltdl
+    - if: win
+      then:
+        - getopt-win32
+  run:
+    - if: unix
+      then:
+        - fonts-conda-ecosystem
+  run_exports:
+    - ${{ pin_subpackage('graphviz', upper_bound='x') }}
+  ignore_run_exports:
+    from_package:
+      - if: unix
+        then: libxml2-devel
+
+tests:
+  - package_contents:
+      bin:
+        - dot
+        - neato
+        - sfdp
+        - gvpr
+      lib:
+        - cdt
+        - cgraph
+        - gvc
+        - pathplan
+        - xdot
+      include:
+        - graphviz/gvc.h
+        - graphviz/cgraph.h
+      files:
+        - if: unix
+          then:
+            - lib/pkgconfig/libgvc.pc
+            - lib/graphviz/libgvplugin_core.*
+            - lib/graphviz/libgvplugin_dot_layout.*
+            - lib/graphviz/libgvplugin_gd.*
+            - lib/graphviz/libgvplugin_gdk.*
+            - lib/graphviz/libgvplugin_kitty.*
+            - lib/graphviz/libgvplugin_neato_layout.*
+            - lib/graphviz/libgvplugin_pango.*
+            - lib/graphviz/libgvplugin_rsvg.*
+            - lib/graphviz/libgvplugin_webp.*
+        - if: osx
+          then:
+            - lib/graphviz/libgvplugin_quartz.*
+        # plugin configuration written by `dot -c` at build time (cross-compiled builds leave it
+        # to post-link.sh), so that environments created without post-link scripts (pixi) work
+        - if: unix and build_platform == target_platform
+          then:
+            - lib/graphviz/config8
+        - if: win
+          then:
+            - Library/bin/config8
+            - Scripts/dot.bat
+  - script:
+      file: run_test
+    files:
+      recipe:
+        - sample.dot
+
+about:
+  homepage: https://www.graphviz.org/
+  license: EPL-1.0
+  license_file: COPYING
+  summary: Open Source graph visualization software.
+  description: |
+    Graphviz is an open source graph visualization software. Graph visualization
+    is a way of representing structural information as diagrams of abstract
+    graphs and networks.
+  documentation: https://graphviz.gitlab.io/documentation/
+  repository: https://gitlab.com/graphviz/graphviz/
+
+extra:
+  recipe-maintainers:
+    - jakirkham
+    - ccordoba12
+    - ocefpaf
+    - johanneskoester
+    - nehaljwani

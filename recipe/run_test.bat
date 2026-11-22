@@ -1,6 +1,3 @@
-dot -c
-if errorlevel 1 exit 1
-
 dot -V
 if errorlevel 1 exit 1
 
