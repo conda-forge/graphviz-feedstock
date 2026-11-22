@@ -54,10 +54,12 @@ cmake -S . -B build -G Ninja \
 cmake --build build --parallel "${CPU_COUNT}"
 cmake --install build
 
-# Register the plugins (lib/graphviz/config8). This runs the freshly built dot, so it needs a
-# native build; cross-compiled builds (linux-ppc64le) register them at install time instead.
+# Register the plugins (lib/graphviz/config8), so that no post-link step is needed. This runs
+# the freshly built dot: through the emulator conda-forge provides when cross-compiling
+# (linux-ppc64le), with the cross compiler's sysroot for the target's glibc.
 if [[ "${build_platform}" == "${target_platform}" ]]; then
     "${PREFIX}/bin/dot" -c
 else
-    install -m 755 "${RECIPE_DIR}/post-link.sh" "${PREFIX}/bin/.graphviz-post-link.sh"
+    QEMU_LD_PREFIX="${QEMU_LD_PREFIX:-${BUILD_PREFIX}/${HOST}/sysroot}" \
+        ${CROSSCOMPILING_EMULATOR} "${PREFIX}/bin/dot" -c
 fi

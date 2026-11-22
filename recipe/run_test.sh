@@ -1,9 +1,8 @@
 #!/bin/bash
 set -ex
 
-# the package ships the plugin configuration; only cross-compiled builds register them at
-# install time (post-link script)
-test -f "${PREFIX}/lib/graphviz/config8" || dot -c
+# the package ships the plugin configuration (dot -c at build time)
+test -f "${PREFIX}/lib/graphviz/config8"
 dot -V
 dot -v < /dev/null
 fdp -V

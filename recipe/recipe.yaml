@@ -25,9 +25,27 @@ source:
 
 build:
   number: 0
+  script:
+    file: build
+    env:
+      # set by conda-forge's CI when cross-compiling; dot -c runs through it
+      CROSSCOMPILING_EMULATOR: ${{ CROSSCOMPILING_EMULATOR | default('') }}
   dynamic_linking:
     overdepending_behavior: error
     overlinking_behavior: error
+    # TODO: remove; rattler-build >=0.77 (prefix-dev/rattler-build#2831) no longer attributes a
+    # library a binary links through its SONAME symlink (lib/libcgraph.so.8) to the package
+    # itself on Linux, so links between graphviz's own libraries count as overlinking
+    missing_dso_allowlist:
+      - if: linux
+        then:
+          - lib/libcdt.so.*
+          - lib/libcgraph.so.*
+          - lib/libgvc.so.*
+          - lib/libgvpr.so.*
+          - lib/libpathplan.so.*
+          - lib/libxdot.so.*
+          - lib/graphviz/libgvplugin_*.so.*
 
 requirements:
   build:
@@ -113,9 +131,9 @@ tests:
         - if: osx
           then:
             - lib/graphviz/libgvplugin_quartz.*
-        # plugin configuration written by `dot -c` at build time (cross-compiled builds leave it
-        # to post-link.sh), so that environments created without post-link scripts (pixi) work
-        - if: unix and build_platform == target_platform
+        # plugin configuration written by `dot -c` at build time, so that no post-link script
+        # is needed (environments created by pixi don't run them)
+        - if: unix
           then:
             - lib/graphviz/config8
         - if: win
